@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Labb_3_WPF"
         mc:Ignorable="d"
         Title="Bordsbokning" Height="450" Width="800">
-    <Grid>
+    <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -15,7 +15,9 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        
-        
+
+        <ListBox Grid.Column="0" x:Name="listBx" />
+        <Button x:Name="btn" Grid.Column="1" Content="Button" HorizontalAlignment="Left" Margin="132,68,0,0" VerticalAlignment="Top" Click="btn_Click"/>
+
     </Grid>
 </Window>
