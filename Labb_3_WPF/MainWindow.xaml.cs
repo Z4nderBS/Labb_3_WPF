@@ -27,19 +27,19 @@ namespace Labb_3_WPF
            
         }
 
-        private void btn_Click(object sender, RoutedEventArgs e)
-        {
-            List<Booking> bookingList = new List<Booking>();
-            bookingList.AddRange(PrebookedList());
+        //private void btn_Click(object sender, RoutedEventArgs e)
+        //{
+        //    List<Booking> bookingList = new List<Booking>();
+        //    bookingList.AddRange(PrebookedList());
 
-            foreach (var item in bookingList)
-            {
-                listBx.Items.Add(item.name);
-                listBx.Items.Add(item.table);
-                listBx.Items.Add(item.date);
-                listBx.Items.Add(item.time);
-            }
-        }
+        //    foreach (var item in bookingList)
+        //    {
+        //        listBx.Items.Add(item.name);
+        //        listBx.Items.Add(item.table);
+        //        listBx.Items.Add(item.date);
+        //        listBx.Items.Add(item.time);
+        //    }
+        //}
 
 
 

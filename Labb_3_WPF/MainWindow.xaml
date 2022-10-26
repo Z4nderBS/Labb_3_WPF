@@ -6,18 +6,53 @@
         xmlns:local="clr-namespace:Labb_3_WPF"
         mc:Ignorable="d"
         Title="Bordsbokning" Height="450" Width="800">
-    <Grid Margin="10">
+    <Grid Margin="10" Background="AntiqueWhite">
+
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="205"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <ListBox Grid.Column="0" x:Name="listBx" />
-        <Button x:Name="btn" Grid.Column="1" Content="Button" HorizontalAlignment="Left" Margin="132,68,0,0" VerticalAlignment="Top" Click="btn_Click"/>
+        <!-- Main menu -->
+        <Menu Grid.ColumnSpan="4" FontSize="20">
+            <MenuItem Header="_View">
+                <MenuItem Header="_Customers"/>
+                <MenuItem Header="_Products"/>
+            </MenuItem>
+        </Menu>
 
+        <!-- Header -->
+        <Grid Grid.Row="1" Grid.ColumnSpan="4" Background="Aqua" >
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <Image Source="images\shark2.JPG" Width="100" Margin="5,5,5,5"/>
+                <TextBlock Text="SharkEat Pizza" FontSize="30"
+                       Foreground="White" VerticalAlignment="Center"/>
+                <TextBlock Text="Version 1.0" FontSize="16"
+                       Foreground="#333333" VerticalAlignment="Bottom" Margin="10,0,0,22"/>
+            </StackPanel>
+        </Grid>
+
+
+
+        <!--Lista på bokningar-->
+        <Grid x:Name="bookedListGrid"  Grid.Column="3" Grid.Row="2" Grid.RowSpan="2" Background="CadetBlue">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <DatePicker x:Name="BookedDays" Margin="5,5, 5,5"/>
+                <Button x:Name="showListBtn" Content="Visa Bokningar" Margin="5,5,5,5"/>
+            </StackPanel>
+            <ListBox x:Name="listBx"  Margin="5,0,5,5" Grid.Row="1"/>
+        </Grid>
     </Grid>
 </Window>
