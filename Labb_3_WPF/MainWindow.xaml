@@ -33,12 +33,32 @@
         <Grid Grid.Row="1" Grid.ColumnSpan="4" Background="Aqua" >
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                 <Image Source="images\shark2.JPG" Width="100" Margin="5,5,5,5"/>
-                <TextBlock Text="SharkEat Pizza" FontSize="30"
+                <TextBlock Text="Happy Shark Seafood" FontSize="30"
                        Foreground="White" VerticalAlignment="Center"/>
                 <TextBlock Text="Version 1.0" FontSize="16"
                        Foreground="#333333" VerticalAlignment="Bottom" Margin="10,0,0,22"/>
             </StackPanel>
         </Grid>
+
+        <!--Boka bord menyn-->
+        <StackPanel Grid.Row="2" Grid.Column="1" Margin="10" Orientation="Horizontal">
+            <StackPanel Margin="0 0 30 0">
+                <Label FontSize="16">Namn:</Label>
+                <TextBox Width="320" HorizontalAlignment="Left"/>
+                <Label FontSize="16">Efternamn:</Label>
+                <TextBox Width="320" HorizontalAlignment="Left"/>
+            </StackPanel>
+            <StackPanel>
+                <Label FontSize="16" HorizontalAlignment="Center">Datum:</Label>
+                <Calendar x:Name="MainCalendar" 
+                      HorizontalAlignment="Right" Margin="10" VerticalAlignment="Center">
+                    <Calendar.BlackoutDates>
+                        <CalendarDateRange Start="01.01.2022" End="10.19.2022" />
+                        <CalendarDateRange Start="11.25.2022"/>
+                    </Calendar.BlackoutDates>
+                </Calendar>
+            </StackPanel>
+        </StackPanel>
 
 
 
@@ -54,5 +74,11 @@
             </StackPanel>
             <ListBox x:Name="listBx"  Margin="5,0,5,5" Grid.Row="1"/>
         </Grid>
+
+
+        <!-- Statusbar -->
+        <StatusBar Grid.Row="3" Grid.ColumnSpan="3">
+            <StatusBarItem FontSize="20" Content=" (c) Happy Shark Seafood"/>
+        </StatusBar>
     </Grid>
 </Window>

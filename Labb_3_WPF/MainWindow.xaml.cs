@@ -24,6 +24,7 @@ namespace Labb_3_WPF
         {
 
             InitializeComponent();
+            
            
         }
 
