@@ -10,7 +10,7 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition MinWidth="560" Width="*"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="205"/>
         </Grid.ColumnDefinitions>
@@ -47,6 +47,21 @@
                 <TextBox Width="320" HorizontalAlignment="Left"/>
                 <Label FontSize="16">Efternamn:</Label>
                 <TextBox Width="320" HorizontalAlignment="Left"/>
+                <Label FontSize="16">Tid:</Label>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="\images\Clock.png" Height="20" Margin="0,0,5,0"/>
+                    <ComboBox x:Name="TimeChoiceBox" Width="80" HorizontalAlignment="Left">
+                        <GroupBox>16.00</GroupBox>
+                        <GroupBox>17.00</GroupBox>
+                        <GroupBox>18.00</GroupBox>
+                        <GroupBox>19.00</GroupBox>
+                        <GroupBox>20.00</GroupBox>
+                        <GroupBox>21.00</GroupBox>
+                        <GroupBox>22.00</GroupBox>
+                    </ComboBox>
+                    
+                </StackPanel>
+               
             </StackPanel>
             <StackPanel>
                 <Label FontSize="16" HorizontalAlignment="Center">Datum:</Label>
@@ -59,6 +74,7 @@
                 </Calendar>
             </StackPanel>
         </StackPanel>
+               
 
 
 
