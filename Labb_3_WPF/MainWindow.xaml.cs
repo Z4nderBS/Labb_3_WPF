@@ -15,11 +15,10 @@ using System.Windows.Shapes;
 
 namespace Labb_3_WPF
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+
     public partial class MainWindow : Window
     {
+        Booking person = new People("Lars","")
         public MainWindow()
         {
             InitializeComponent();
