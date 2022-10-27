@@ -44,36 +44,36 @@
         <StackPanel Grid.Row="2" Grid.Column="1" Margin="10" Orientation="Horizontal">
             <StackPanel Margin="0 0 30 0">
                 <Label FontSize="16">Namn:</Label>
-                <TextBox Width="320" HorizontalAlignment="Left"/>
+                <TextBox x:Name="firstNameBox" Width="320" HorizontalAlignment="Left"/>
                 <Label FontSize="16">Efternamn:</Label>
-                <TextBox Width="320" HorizontalAlignment="Left"/>
+                <TextBox x:Name="lastNameBox" Width="320" HorizontalAlignment="Left"/>
                     <StackPanel>
                         <Label FontSize="16">Tid:</Label>
                         <StackPanel Orientation="Horizontal">
                             <ComboBox x:Name="TimeChoiceBox" Width="150" HorizontalAlignment="Left">
-                                <GroupBox>16.00</GroupBox>
-                                <GroupBox>17.00</GroupBox>
-                                <GroupBox>18.00</GroupBox>
-                                <GroupBox>19.00</GroupBox>
-                                <GroupBox>20.00</GroupBox>
-                                <GroupBox>21.00</GroupBox>
-                                <GroupBox>22.00</GroupBox>
+                                <GroupItem>16.00</GroupItem>
+                                <GroupItem>17.00</GroupItem>
+                                <GroupItem>18.00</GroupItem>
+                                <GroupItem>19.00</GroupItem>
+                                <GroupItem>20.00</GroupItem>
+                                <GroupItem>21.00</GroupItem>
                             </ComboBox>
                         </StackPanel>
                         <Label FontSize="16">Bord:</Label>
                         <ComboBox x:Name="TableChoiceBox" Width="150" HorizontalAlignment="Left">
-                            <GroupBox>1 (2 personer)</GroupBox>
-                            <GroupBox>2 (2 personer)</GroupBox>
-                            <GroupBox>3 (4 personer)</GroupBox>
-                            <GroupBox>4 (4 personer)</GroupBox>
-                            <GroupBox>5 (8 personer)</GroupBox>
+                            <GroupItem>1 (2 personer)</GroupItem>
+                            <GroupItem>2 (2 personer)</GroupItem>
+                            <GroupItem>3 (4 personer)</GroupItem>
+                            <GroupItem>4 (4 personer)</GroupItem>
+                            <GroupItem>5 (8 personer)</GroupItem>
                         </ComboBox>
                     </StackPanel>
                     <Button x:Name="BookingBtn" Content="Bekräfta bokning" Height="25" 
-                            Margin="20,40,20,20" Background="Aqua"/>
+                            Margin="20,40,20,20" Background="Aqua" Click="BookingBtn_Click"/>
             
                            
                 
+                             
                            
 
 

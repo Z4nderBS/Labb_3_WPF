@@ -10,10 +10,10 @@ namespace Labb_3_WPF
     {
         public string name { get; set; }
         public DateOnly date { get; set; }
-        public TimeOnly time { get; set; }
+        public double time { get; set; }
         public int table { get; set; }
 
-        public Booking(string name, DateOnly date, TimeOnly time, int table)
+        public Booking(string name, DateOnly date, double time, int table)
         {
             this.name = name;
             this.date = date;
