@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Labb_3_WPF"
         mc:Ignorable="d"
-        Title="Bordsbokning" Height="450" Width="800">
+        Title="Bordsbokning" Height="500" Width="800">
     <Grid Margin="10" Background="AntiqueWhite">
 
         <Grid.ColumnDefinitions>
@@ -24,8 +24,8 @@
         <!-- Main menu -->
         <Menu Grid.ColumnSpan="4" FontSize="20">
             <MenuItem Header="_View">
-                <MenuItem Header="_Customers"/>
-                <MenuItem Header="_Products"/>
+                <MenuItem Header="_Boka Bord"/>
+                <MenuItem Header="_Meny"/>
             </MenuItem>
         </Menu>
 
@@ -47,21 +47,37 @@
                 <TextBox Width="320" HorizontalAlignment="Left"/>
                 <Label FontSize="16">Efternamn:</Label>
                 <TextBox Width="320" HorizontalAlignment="Left"/>
-                <Label FontSize="16">Tid:</Label>
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="\images\Clock.png" Height="20" Margin="0,0,5,0"/>
-                    <ComboBox x:Name="TimeChoiceBox" Width="80" HorizontalAlignment="Left">
-                        <GroupBox>16.00</GroupBox>
-                        <GroupBox>17.00</GroupBox>
-                        <GroupBox>18.00</GroupBox>
-                        <GroupBox>19.00</GroupBox>
-                        <GroupBox>20.00</GroupBox>
-                        <GroupBox>21.00</GroupBox>
-                        <GroupBox>22.00</GroupBox>
-                    </ComboBox>
-                    
-                </StackPanel>
-               
+                    <StackPanel>
+                        <Label FontSize="16">Tid:</Label>
+                        <StackPanel Orientation="Horizontal">
+                            <ComboBox x:Name="TimeChoiceBox" Width="150" HorizontalAlignment="Left">
+                                <GroupBox>16.00</GroupBox>
+                                <GroupBox>17.00</GroupBox>
+                                <GroupBox>18.00</GroupBox>
+                                <GroupBox>19.00</GroupBox>
+                                <GroupBox>20.00</GroupBox>
+                                <GroupBox>21.00</GroupBox>
+                                <GroupBox>22.00</GroupBox>
+                            </ComboBox>
+                        </StackPanel>
+                        <Label FontSize="16">Bord:</Label>
+                        <ComboBox x:Name="TableChoiceBox" Width="150" HorizontalAlignment="Left">
+                            <GroupBox>1 (2 personer)</GroupBox>
+                            <GroupBox>2 (2 personer)</GroupBox>
+                            <GroupBox>3 (4 personer)</GroupBox>
+                            <GroupBox>4 (4 personer)</GroupBox>
+                            <GroupBox>5 (8 personer)</GroupBox>
+                            <GroupBox>6 (10 personer)</GroupBox>
+                        </ComboBox>
+                    </StackPanel>
+                    <Button x:Name="BookingBtn" Content="Bekräfta bokning" Height="25" 
+                            Margin="20,40,20,20" Background="Aqua"/>
+            
+                           
+                
+
+
+
             </StackPanel>
             <StackPanel>
                 <Label FontSize="16" HorizontalAlignment="Center">Datum:</Label>
@@ -74,7 +90,7 @@
                 </Calendar>
             </StackPanel>
         </StackPanel>
-               
+
 
 
 
