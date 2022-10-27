@@ -12,6 +12,7 @@ namespace Labb_3_WPF
         public DateOnly date { get; set; }
         public double time { get; set; }
         public int table { get; set; }
+        
 
         public Booking(string name, DateOnly date, double time, int table)
         {
@@ -19,6 +20,7 @@ namespace Labb_3_WPF
             this.date = date;
             this.time = time;
             this.table = table;
+           
         }
     }
 }
