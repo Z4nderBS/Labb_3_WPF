@@ -110,7 +110,18 @@ namespace Labb_3_WPF
 
         private void BookedDays_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            listBx.Items.Add(bookingList[0].text);
+
+            var date = BookedDays.SelectedDate.Value.Date.ToShortDateString();
+            var pickedDay = DateOnly.Parse(date);
+            foreach (var item in bookingList)
+            {
+                if (item.date == pickedDay)
+                {
+                    listBx.Items.Add(bookingList[0].text);
+                }
+            }
+
+            
         }
     }
 }
