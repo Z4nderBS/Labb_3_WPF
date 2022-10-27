@@ -44,13 +44,13 @@
         <StackPanel Grid.Row="2" Grid.Column="1" Margin="10" Orientation="Horizontal">
             <StackPanel Margin="0 0 30 0">
                 <Label FontSize="16">Namn:</Label>
-                <TextBox x:Name="firstNameBox" Width="320" HorizontalAlignment="Left"/>
+                <TextBox x:Name="firstNameBox" MinWidth="320" HorizontalAlignment="Left"/>
                 <Label FontSize="16">Efternamn:</Label>
-                <TextBox x:Name="lastNameBox" Width="320" HorizontalAlignment="Left"/>
+                <TextBox x:Name="lastNameBox" MinWidth="320" HorizontalAlignment="Left"/>
                     <StackPanel>
                         <Label FontSize="16">Tid:</Label>
                         <StackPanel Orientation="Horizontal">
-                            <ComboBox x:Name="TimeChoiceBox" Width="150" HorizontalAlignment="Left">
+                            <ComboBox x:Name="TimeChoiceBox" MinWidth="150" HorizontalAlignment="Left">
                                 <GroupItem>16.00</GroupItem>
                                 <GroupItem>17.00</GroupItem>
                                 <GroupItem>18.00</GroupItem>
@@ -60,7 +60,7 @@
                             </ComboBox>
                         </StackPanel>
                         <Label FontSize="16">Bord:</Label>
-                        <ComboBox x:Name="TableChoiceBox" Width="150" HorizontalAlignment="Left">
+                        <ComboBox x:Name="TableChoiceBox" MinWidth="150" HorizontalAlignment="Left">
                             <GroupItem>1 (2 personer)</GroupItem>
                             <GroupItem>2 (2 personer)</GroupItem>
                             <GroupItem>3 (4 personer)</GroupItem>
@@ -84,8 +84,8 @@
                 <Calendar x:Name="MainCalendar" 
                       HorizontalAlignment="Right" Margin="10" VerticalAlignment="Center">
                     <Calendar.BlackoutDates>
-                        <CalendarDateRange Start="01.01.2022" End="10.19.2022" />
-                        <CalendarDateRange Start="11.25.2022"/>
+                        <CalendarDateRange Start="01.01.2022" End="11.13.2022" />
+                        <CalendarDateRange Start="11.21.2022"/>
                     </Calendar.BlackoutDates>
                 </Calendar>
 
@@ -104,7 +104,7 @@
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal">
                 <Label Content=" Visa Bokningar" VerticalAlignment="Center"/>
-                <DatePicker x:Name="BookedDays" Margin="5,5, 5,5" />
+                <DatePicker x:Name="BookedDays" Margin="5,5, 5,5" SelectedDateChanged="BookedDays_SelectedDateChanged" />
             </StackPanel>
             <ListBox x:Name="listBx"  Margin="5,0,5,5" Grid.Row="1">
                 <Button x:Name="cancelBtn"  Content="Avboka" Margin="5,5,5,5" /> 

@@ -1,4 +1,5 @@
 ﻿
 
 [] ska endast gå att boka bord från 16.00-22. 
-[] ska bara Gå att boka bord från dagens datum till sista November.
+[] ska bara Gå att boka bord från dagens datum(eller 15 november) till sista November .
+[] gör en Lista med datatypen DateOnly.

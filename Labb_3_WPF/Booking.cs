@@ -12,15 +12,15 @@ namespace Labb_3_WPF
         public DateOnly date { get; set; }
         public double time { get; set; }
         public int table { get; set; }
-        
+        public string text { get; set; }
 
-        public Booking(string name, DateOnly date, double time, int table)
+        public Booking(string name, DateOnly date, double time, int table, string text)
         {
             this.name = name;
             this.date = date;
             this.time = time;
             this.table = table;
-           
+            this.text = text;
         }
     }
 }

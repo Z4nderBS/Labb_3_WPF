@@ -20,28 +20,28 @@ namespace Labb_3_WPF
     public partial class MainWindow : Window
     {
         public List<Booking> bookingList = new List<Booking>();
-      
+
 
         public MainWindow()
         {
-            
+
             InitializeComponent();
-          
-           
+
+
         }
 
 
         public static bool CheckInputs(string förNamn, string efterNamn, string tid, string bord)
         {
             string missingText = "";
-           
+
             List<string> missingInputs = new List<string>();
-      
+
             if (förNamn == "") { missingInputs.Add($"Namn: {förNamn}"); }
             if (efterNamn == "") { missingInputs.Add($"Efternamn: {efterNamn}"); }
             if (tid == "") { missingInputs.Add($"Tid: {tid}"); }
             if (bord == "") { missingInputs.Add($"Bord: {bord}"); }
-                   
+
             if (missingInputs.Count > 0)
             {
                 for (int i = 0; i < missingInputs.Count; i++)
@@ -55,9 +55,9 @@ namespace Labb_3_WPF
             {
                 return true;
             }
-       
 
-        
+
+
 
         }
 
@@ -69,33 +69,26 @@ namespace Labb_3_WPF
                 var efterNamn = lastNameBox.Text;
                 var namn = $"{förNamn} {efterNamn}";
                 var kalenderDatum = MainCalendar.SelectedDate.Value.Date.ToShortDateString();
-                DateOnly datum = DateOnly.Parse(kalenderDatum); 
+                DateOnly datum = DateOnly.Parse(kalenderDatum);
                 var tid = TimeChoiceBox.Text.ToString();
                 var bord = TableChoiceBox.Text.ToString();
 
 
-              
+
 
                 if (CheckInputs(förNamn, efterNamn, tid, bord) == true)
                 {
-                    string text = $"" +
-                          $"------------------------------------\n" +
-                          $"Namn: {namn}\n" +
-                          $"Datum : {kalenderDatum}\n" +
-                          $"Klockan: {tid}\n" +
-                          $"Bord: {bord}\n" +
-                          $"-----------------------------------";
-
-
                     // sparar första siffrar i bord boxen
                     string bordSiffra = bord.Remove(1, bord.Length - 1);
                     string newTid = tid.Replace('.', ',');
                     double RightTid = double.Parse(newTid);
 
+                    string text = $"Bord: {bord}, Namn: {namn}, Datum: {kalenderDatum}, Klockan: {tid}";
 
 
-                    listBx.Items.Add(text);
-                    Booking bokning = new Booking(namn, datum, RightTid, int.Parse(bordSiffra));
+
+                    //listBx.Items.Add(text);
+                    Booking bokning = new Booking(namn, datum, RightTid, int.Parse(bordSiffra),text);
                     bookingList.Add(bokning);
 
                     firstNameBox.Text = "";
@@ -103,44 +96,40 @@ namespace Labb_3_WPF
                     TimeChoiceBox.Text = "";
                     TableChoiceBox.Text = "";
 
-
                 }
-                
-
-               
-            
-
-
-
-
-
-
-               
-
-            
-
             }
             catch (Exception)
             {
-                MessageBox.Show("Välj ett Datum");
-                
+                MessageBox.Show("Välj ett tillgängligt Datum");
+
             }
-         
-          
         }
+                    
 
 
 
-
-        //public static List<Booking> PrebookedList()
-        //{
-
-
-        //    Booking booking1 = new Booking("Alex", new DateOnly(2022, 09, 25), 22.00, 5);
-        //    Booking booking2 = new Booking("Wilma", new DateOnly(2022, 09, 24), 21.00, 5);
-
-        //    bookingList.Add(booking1);
-        //    return bookingList;
-        //}
+        private void BookedDays_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            listBx.Items.Add(bookingList[0].text);
+        }
     }
 }
+
+
+
+//public static List<Booking> PrebookedList()
+//{
+
+
+//    Booking booking1 = new Booking("Alex", new DateOnly(2022, 09, 25), 22.00, 5);
+//    Booking booking2 = new Booking("Wilma", new DateOnly(2022, 09, 24), 21.00, 5);
+
+//    bookingList.Add(booking1);
+//    return bookingList;
+//}
+
+
+
+
+
+
