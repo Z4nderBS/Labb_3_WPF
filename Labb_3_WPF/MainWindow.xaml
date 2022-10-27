@@ -23,7 +23,7 @@
 
         <!-- Main menu -->
         <Menu Grid.ColumnSpan="4" FontSize="20">
-            <MenuItem Header="_View">
+            <MenuItem Header="_Visa">
                 <MenuItem Header="_Boka Bord"/>
                 <MenuItem Header="_Meny"/>
             </MenuItem>
@@ -67,7 +67,6 @@
                             <GroupBox>3 (4 personer)</GroupBox>
                             <GroupBox>4 (4 personer)</GroupBox>
                             <GroupBox>5 (8 personer)</GroupBox>
-                            <GroupBox>6 (10 personer)</GroupBox>
                         </ComboBox>
                     </StackPanel>
                     <Button x:Name="BookingBtn" Content="Bekräfta bokning" Height="25" 
@@ -75,6 +74,7 @@
             
                            
                 
+                           
 
 
 
@@ -88,6 +88,8 @@
                         <CalendarDateRange Start="11.25.2022"/>
                     </Calendar.BlackoutDates>
                 </Calendar>
+
+               
             </StackPanel>
         </StackPanel>
 
@@ -101,8 +103,9 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal">
-                <DatePicker x:Name="BookedDays" Margin="5,5, 5,5"/>
-                <Button x:Name="showListBtn" Content="Visa Bokningar" Margin="5,5,5,5"/>
+                <DatePicker x:Name="BookedDays" Margin="5,5, 5,5" Width="30"/>
+                <Button x:Name="showListBtn" Content="Bokningar" Margin="30,5,20,5"/>
+                <Button x:Name="cancelBtn"  Content="Avboka" Margin="5,5,5,5"/>
             </StackPanel>
             <ListBox x:Name="listBx"  Margin="5,0,5,5" Grid.Row="1"/>
         </Grid>
