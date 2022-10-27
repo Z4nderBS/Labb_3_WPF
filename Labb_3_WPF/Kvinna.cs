@@ -11,15 +11,15 @@ namespace Labb_3_WPF
     {
         public string gender { get; set; }
         public string namn { get; set; }
-        public int age { get; set; }
         public int phoneNumber { get; set; }
+     
 
-        public Man(string namn, int age, int phoneNumber)
+        public Kvinna(string namn, int phoneNumber)
         {
             gender = "Kvinna";
             this.namn = namn;
-            this.age = age;
             this.phoneNumber = phoneNumber;
+            
         }
     }
 }
