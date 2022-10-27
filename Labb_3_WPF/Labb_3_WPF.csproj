@@ -10,6 +10,7 @@
   <ItemGroup>
     <None Remove="images\Clock.png" />
     <None Remove="images\shark2.JPG" />
+    <None Remove="images\Sharkwater.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +18,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="images\shark2.JPG">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\Sharkwater.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

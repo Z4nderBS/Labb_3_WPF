@@ -32,7 +32,7 @@
         <!-- Header -->
         <Grid Grid.Row="1" Grid.ColumnSpan="4" Background="Aqua" >
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                <Image Source="images\shark2.JPG" Width="100" Margin="5,5,5,5"/>
+                <Image Source="\images\Sharkwater.png" Width="100" Margin="3"/>
                 <TextBlock Text="Happy Shark Seafood" FontSize="30"
                        Foreground="White" VerticalAlignment="Center"/>
                 <TextBlock Text="Version 1.0" FontSize="16"
