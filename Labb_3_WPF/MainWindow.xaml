@@ -12,7 +12,7 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition MinWidth="560" Width="*"/>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="205"/>
+            <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -103,12 +103,16 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal">
-                <DatePicker x:Name="BookedDays" Margin="5,5, 5,5" Width="30"/>
-                <Button x:Name="showListBtn" Content="Bokningar" Margin="30,5,20,5"/>
-                <Button x:Name="cancelBtn"  Content="Avboka" Margin="5,5,5,5"/>
+                <Label Content=" Visa Bokningar" VerticalAlignment="Center"/>
+                <DatePicker x:Name="BookedDays" Margin="5,5, 5,5" />
             </StackPanel>
-            <ListBox x:Name="listBx"  Margin="5,0,5,5" Grid.Row="1"/>
+            <ListBox x:Name="listBx"  Margin="5,0,5,5" Grid.Row="1">
+                <Button x:Name="cancelBtn"  Content="Avboka" Margin="5,5,5,5" /> 
+            </ListBox>
         </Grid>
+            
+                
+               
 
 
         <!-- Statusbar -->

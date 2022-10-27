@@ -97,7 +97,13 @@ namespace Labb_3_WPF
                     listBx.Items.Add(text);
                     Booking bokning = new Booking(namn, datum, RightTid, int.Parse(bordSiffra));
                     bookingList.Add(bokning);
-                    
+
+                    firstNameBox.Text = "";
+                    lastNameBox.Text = "";
+                    TimeChoiceBox.Text = "";
+                    TableChoiceBox.Text = "";
+
+
                 }
                 
 
