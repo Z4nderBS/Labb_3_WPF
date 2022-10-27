@@ -55,23 +55,77 @@ namespace Labb_3_WPF
             return bookingList;
         }
 
+        public static bool CheckInputs(string förNamn, string efterNamn, string tid, string bord)
+        {
+            string missingText = "";
+            List<string> inputs = new List<string>();
+            List<string> missingInputs = new List<string>();
+            //inputs.Add(förNamn);
+            //inputs.Add(efterNamn);
+            //inputs.Add(tid);
+            //inputs.Add(bord);
+            if (förNamn == "") { missingInputs.Add($"Namn: {förNamn}"); }
+            if (efterNamn == "") { missingInputs.Add($"Efternamn: {efterNamn}"); }
+            if (tid == "") { missingInputs.Add($"Tid: {tid}"); }
+            if (bord == "") { missingInputs.Add($"Bord: {bord}"); }
+                   
+            if (missingInputs.Count > 0)
+            {
+                for (int i = 0; i < missingInputs.Count; i++)
+                {
+                    missingText += $"{missingInputs[i]} Saknas\n";
+                }
+                MessageBox.Show($"Du har ej fyllt i alla rutor!\n{missingText}");
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+       
+
+        
+
+        }
+
         private void BookingBtn_Click(object sender, RoutedEventArgs e)
         {
-            var namn = $"{firstNameBox.Text} {lastNameBox.Text}";
-            var kalenderDatum = MainCalendar.SelectedDate.Value;
-            var datum = kalenderDatum.ToShortDateString();
-            var tid = TimeChoiceBox.Text.ToString();
-            var bord = TableChoiceBox.Text.ToString(); 
+            try
+            {
+                var förNamn = firstNameBox.Text;
+                var efterNamn = lastNameBox.Text;
+                var namn = $"{förNamn} {efterNamn}";
+                var kalenderDatum = MainCalendar.SelectedDate.Value;
+                var datum = kalenderDatum.ToShortDateString();
+                var tid = TimeChoiceBox.Text.ToString();
+                var bord = TableChoiceBox.Text.ToString();
 
-            string text = $"" +
-                $"------------------------------------\n" +
-                $"Namn: {namn}\n" +
-                $"Datum : {datum}\n" +
-                $"Klockan: {tid}\n" +
-                $"Bord: {bord}\n" +
-                $"-----------------------------------";
+                string text = $"" +
+                           $"------------------------------------\n" +
+                           $"Namn: {namn}\n" +
+                           $"Datum : {datum}\n" +
+                           $"Klockan: {tid}\n" +
+                           $"Bord: {bord}\n" +
+                           $"-----------------------------------";
 
-            listBx.Items.Add(text);
+                if (CheckInputs(förNamn, efterNamn, tid, bord) == true)
+                {
+                    listBx.Items.Add(text);
+                }
+                
+
+               
+            
+            
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Välj ett Datum");
+                
+            }
+         
+          
         }
     }
 }
