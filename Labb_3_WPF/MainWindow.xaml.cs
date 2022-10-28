@@ -31,7 +31,7 @@ namespace Labb_3_WPF
         }
 
 
-        public static bool CheckInputs(string förNamn, string efterNamn, string tid, string bord)
+        public static bool CheckInputs(string förNamn, string efterNamn, string tid, string kön, string telefonNr)
         {
             string missingText = "";
 
@@ -39,8 +39,9 @@ namespace Labb_3_WPF
 
             if (förNamn == "") { missingInputs.Add($"Namn: {förNamn}"); }
             if (efterNamn == "") { missingInputs.Add($"Efternamn: {efterNamn}"); }
+            if (telefonNr == "") { missingInputs.Add($"Telefon nummer: {telefonNr}"); }
             if (tid == "") { missingInputs.Add($"Tid: {tid}"); }
-            if (bord == "") { missingInputs.Add($"Bord: {bord}"); }
+            if (kön == "") { missingInputs.Add($"Bord: {kön}"); }
 
             if (missingInputs.Count > 0)
             {
@@ -68,33 +69,37 @@ namespace Labb_3_WPF
                 var förNamn = firstNameBox.Text;
                 var efterNamn = lastNameBox.Text;
                 var namn = $"{förNamn} {efterNamn}";
+                var teleNr = phoneBox.Text;
                 var kalenderDatum = MainCalendar.SelectedDate.Value.Date.ToShortDateString();
                 DateOnly datum = DateOnly.Parse(kalenderDatum);
                 var tid = TimeChoiceBox.Text.ToString();
-                var bord = TableChoiceBox.Text.ToString();
+                var kön = genderChoiceBox.Text.ToString();
 
 
 
 
-                if (CheckInputs(förNamn, efterNamn, tid, bord) == true)
+                if (CheckInputs(förNamn, efterNamn, tid, kön, teleNr) == true)
                 {
                     // sparar första siffrar i bord boxen
-                    string bordSiffra = bord.Remove(1, bord.Length - 1);
+                    
                     string newTid = tid.Replace('.', ',');
                     double RightTid = double.Parse(newTid);
+                    int teleIntNr;
+                    int.TryParse(teleNr, out teleIntNr);
 
-                    string text = $"Bord: {bord}, Namn: {namn}, Datum: {kalenderDatum}, Klockan: {tid}";
-
+                    string text = $"Namn: {namn}, Kön: {kön}, Telefonnummer: {teleNr}, Datum: {kalenderDatum}, Klockan: {tid}";
+                    // gör en metod som kan lägga in variabler och gör det till en print text för lsitboxen
 
 
                     //listBx.Items.Add(text);
-                    Booking bokning = new Booking(namn, datum, RightTid, int.Parse(bordSiffra),text);
+                    Booking bokning = new Booking(namn, kön, datum, RightTid, teleIntNr ,text);
                     bookingList.Add(bokning);
 
                     firstNameBox.Text = "";
                     lastNameBox.Text = "";
                     TimeChoiceBox.Text = "";
-                    TableChoiceBox.Text = "";
+                    genderChoiceBox.Text = "";
+                    phoneBox.Text = " ";
 
                 }
             }

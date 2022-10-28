@@ -11,16 +11,19 @@ namespace Labb_3_WPF
         public string name { get; set; }
         public DateOnly date { get; set; }
         public double time { get; set; }
-        public int table { get; set; }
+        public int phoneNr { get; set; }
         public string text { get; set; }
+        public string kön { get; set; }
 
-        public Booking(string name, DateOnly date, double time, int table, string text)
+        public Booking(string name, string kön, DateOnly date, double time, int phoneNr, string text)
         {
             this.name = name;
+            this.kön = kön;
             this.date = date;
             this.time = time;
-            this.table = table;
+            this.phoneNr = phoneNr;
             this.text = text;
+           
         }
     }
 }

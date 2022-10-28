@@ -62,7 +62,7 @@
                         <GroupItem>20.00</GroupItem>
                         <GroupItem>21.00</GroupItem>
                     </ComboBox>
-                    <ComboBox x:Name="TableChoiceBox" MinWidth="80" HorizontalAlignment="Left" Margin="10 0 0 0">
+                    <ComboBox x:Name="genderChoiceBox" MinWidth="80" HorizontalAlignment="Left" Margin="10 0 0 0">
                         <GroupItem>Man</GroupItem>
                         <GroupItem>Kvinna</GroupItem>
                         <GroupItem>Annan</GroupItem>
