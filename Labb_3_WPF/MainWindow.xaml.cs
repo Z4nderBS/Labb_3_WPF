@@ -20,47 +20,19 @@ namespace Labb_3_WPF
     public partial class MainWindow : Window
     {
         public List<Booking> bookingList = new List<Booking>();
+        public List<CheckDateAndTime> datum = new List<CheckDateAndTime>();
 
 
         public MainWindow()
         {
-
+            // gör en lista med tider här och sen data binda dem
             InitializeComponent();
 
 
         }
 
 
-        public static bool CheckInputs(string förNamn, string efterNamn, string tid, string kön, string telefonNr)
-        {
-            string missingText = "";
-
-            List<string> missingInputs = new List<string>();
-
-            if (förNamn == "") { missingInputs.Add($"Namn: {förNamn}"); }
-            if (efterNamn == "") { missingInputs.Add($"Efternamn: {efterNamn}"); }
-            if (telefonNr == "") { missingInputs.Add($"Telefon nummer: {telefonNr}"); }
-            if (tid == "") { missingInputs.Add($"Tid: {tid}"); }
-            if (kön == "") { missingInputs.Add($"Bord: {kön}"); }
-
-            if (missingInputs.Count > 0)
-            {
-                for (int i = 0; i < missingInputs.Count; i++)
-                {
-                    missingText += $"{missingInputs[i]} Saknas\n";
-                }
-                MessageBox.Show($"Du har ej fyllt i alla rutor!\n{missingText}");
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-
-
-
-
-        }
+   
 
         private void BookingBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -128,8 +100,45 @@ namespace Labb_3_WPF
 
             
         }
+
+     
+
+
+
+        public static bool CheckInputs(string förNamn, string efterNamn, string tid, string kön, string telefonNr)
+        {
+            string missingText = "";
+
+            List<string> missingInputs = new List<string>();
+
+            if (förNamn == "") { missingInputs.Add($"Namn: {förNamn}"); }
+            if (efterNamn == "") { missingInputs.Add($"Efternamn: {efterNamn}"); }
+            if (telefonNr == "") { missingInputs.Add($"Telefon nummer: {telefonNr}"); }
+            if (tid == "") { missingInputs.Add($"Tid: {tid}"); }
+            if (kön == "") { missingInputs.Add($"Bord: {kön}"); }
+
+            if (missingInputs.Count > 0)
+            {
+                for (int i = 0; i < missingInputs.Count; i++)
+                {
+                    missingText += $"{missingInputs[i]} Saknas\n";
+                }
+                MessageBox.Show($"Du har ej fyllt i alla rutor!\n{missingText}");
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+
+
+
+        }
     }
+
 }
+
 
 
 
