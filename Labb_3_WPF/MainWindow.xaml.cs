@@ -231,6 +231,27 @@ namespace Labb_3_WPF
 
             return available ? true : false;
 
+            /*
+            if (tid.bordAvailable.Contains(" "))
+            {
+                for (int i = 0; i < tid.bordAvailable.Length; i++)
+                {
+                    if (tid.bordAvailable[i] == " ")
+                    {
+                        tid.bordAvailable[i] = "bokad";
+                        i = tid.bordAvailable.Length;
+                    }
+
+                }
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Denna tid är tyvärr fullbokad. prova en annnan.");
+                return false;
+            }
+            */
+
         }
 
 
