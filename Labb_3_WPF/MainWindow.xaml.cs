@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -32,15 +33,15 @@ namespace Labb_3_WPF
             // gör en lista med tider här och sen data binda dem
             AddDates(datumLista);
             InitializeComponent();
+
+        }
+
             
           
 
 
 
 
-
-
-        }
 
 
 
@@ -98,19 +99,40 @@ namespace Labb_3_WPF
         {
             listBx.Items.Clear();
             var DateFromCalendar = BookedDays.SelectedDate.Value.Date.ToShortDateString();
-            DateOnly datum = DateOnly.Parse(DateFromCalendar);
+            
 
             List<string> bokningar = GetTextsFile();
-            var regexDateIdentifier = new Regex(@$"({DateFromCalendar})");
+
+
+            var regexDateIdentifier = new Regex(@"Datum: " + DateFromCalendar);
+            var regexbordIdentifier = new Regex(@"Bord: [1-5]{1}");
 
             var queryText = from item in bokningar
                             where regexDateIdentifier.IsMatch(item)
-                            select item.ToString();
+                            where regexbordIdentifier.IsMatch(item)
+                            select new item = "hello";
 
             foreach (var item in queryText)
             {
                 listBx.Items.Add(item);
             }
+
+
+
+
+            
+            
+           
+
+
+            var queryText = from item in bokningar
+                            where regexDateIdentifier.IsMatch(item)
+                            where regexTimeIdentifier.IsMatch(item)
+                            where regexbordIdentifier.IsMatch(item)
+                            select item;
+
+
+
 
 
 
