@@ -91,6 +91,32 @@ namespace Labb_3_WPF
             }
         }
 
+        private void BookedDays_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            listBx.Items.Clear();
+            var DateFromCalendar = BookedDays.SelectedDate.Value.Date.ToShortDateString();
+            DateOnly datum = DateOnly.Parse(DateFromCalendar);
+
+            List<string> bokningar = GetTextsFile();
+            var regexDateIdentifier = new Regex(@$"({DateFromCalendar})");
+
+            var queryText = from item in bokningar
+                            where regexDateIdentifier.IsMatch(item)
+                            select item.ToString();
+
+            foreach (var item in queryText)
+            {
+                listBx.Items.Add(item);
+            }
+                
+       
+
+            
+
+
+
+        }
+
 
         public static void WriteFile(string text)
         {
@@ -102,8 +128,29 @@ namespace Labb_3_WPF
             }
         }
 
-
+        public static List<string> GetTextsFile()
+        {
+            List<string> texts = new List<string>();
            
+
+            string line = "";
+            using (StreamReader stream = new StreamReader("bokningar.log"))
+            {
+                while ((line = stream.ReadLine()) != null)
+                {
+                   texts.Add(line);
+                  
+                }
+            }
+           
+
+               
+
+            return texts;
+        }
+
+
+
 
 
 
@@ -189,21 +236,7 @@ namespace Labb_3_WPF
         }
 
 
-        private void BookedDays_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-            var date = BookedDays.SelectedDate.Value.Date.ToShortDateString();
-            var pickedDay = DateOnly.Parse(date);
-            foreach (var item in bookingList)
-            {
-                if (item.date == pickedDay)
-                {
-                    listBx.Items.Add(bookingList[0].text);
-                }
-            }
-
-
-        }
+       
 
         public static bool CheckInputs(string förNamn, string efterNamn, string tid, string kön, string telefonNr)
         {
