@@ -47,34 +47,38 @@
                 <TextBox x:Name="firstNameBox" MinWidth="320" HorizontalAlignment="Left"/>
                 <Label FontSize="16">Efternamn:</Label>
                 <TextBox x:Name="lastNameBox" MinWidth="320" HorizontalAlignment="Left"/>
-                    <StackPanel>
-                        <Label FontSize="16">Tid:</Label>
-                        <StackPanel Orientation="Horizontal">
-                            <ComboBox x:Name="TimeChoiceBox" MinWidth="150" HorizontalAlignment="Left">
-                                <GroupItem>16.00</GroupItem>
-                                <GroupItem>17.00</GroupItem>
-                                <GroupItem>18.00</GroupItem>
-                                <GroupItem>19.00</GroupItem>
-                                <GroupItem>20.00</GroupItem>
-                                <GroupItem>21.00</GroupItem>
-                            </ComboBox>
-                        </StackPanel>
-                        <Label FontSize="16">Bord:</Label>
-                        <ComboBox x:Name="TableChoiceBox" MinWidth="150" HorizontalAlignment="Left">
-                            <GroupItem>1 (2 personer)</GroupItem>
-                            <GroupItem>2 (2 personer)</GroupItem>
-                            <GroupItem>3 (4 personer)</GroupItem>
-                            <GroupItem>4 (4 personer)</GroupItem>
-                            <GroupItem>5 (8 personer)</GroupItem>
-                        </ComboBox>
-                    </StackPanel>
-                    <Button x:Name="BookingBtn" Content="Bekräfta bokning" Height="25" 
+                <Label FontSize="16">Telefonnummer:</Label>
+                <TextBox x:Name="phoneBox" MinWidth="320" HorizontalAlignment="Left"/>
+                <StackPanel Orientation="Horizontal">
+                    <Label FontSize="16">Tid:</Label>
+                    <Label FontSize="16" Margin="120 0 0 0">Kön:</Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <ComboBox x:Name="TimeChoiceBox" MinWidth="150" HorizontalAlignment="Left">
+                        <GroupItem>16.00</GroupItem>
+                        <GroupItem>17.00</GroupItem>
+                        <GroupItem>18.00</GroupItem>
+                        <GroupItem>19.00</GroupItem>
+                        <GroupItem>20.00</GroupItem>
+                        <GroupItem>21.00</GroupItem>
+                    </ComboBox>
+                    <ComboBox x:Name="TableChoiceBox" MinWidth="80" HorizontalAlignment="Left" Margin="10 0 0 0">
+                        <GroupItem>Man</GroupItem>
+                        <GroupItem>Kvinna</GroupItem>
+                        <GroupItem>Annan</GroupItem>
+                    </ComboBox>
+                </StackPanel>
+
+
+
+
+                <Button x:Name="BookingBtn" Content="Bekräfta bokning" Height="25" 
                             Margin="20,40,20,20" Background="Aqua" Click="BookingBtn_Click"/>
-            
-                           
-                
-                             
-                           
+
+
+
+
+
 
 
 
@@ -89,7 +93,7 @@
                     </Calendar.BlackoutDates>
                 </Calendar>
 
-               
+
             </StackPanel>
         </StackPanel>
 
@@ -107,12 +111,12 @@
                 <DatePicker x:Name="BookedDays" Margin="5,5, 5,5" SelectedDateChanged="BookedDays_SelectedDateChanged" />
             </StackPanel>
             <ListBox x:Name="listBx"  Margin="5,0,5,5" Grid.Row="1">
-                <Button x:Name="cancelBtn"  Content="Avboka" Margin="5,5,5,5" /> 
+                <Button x:Name="cancelBtn"  Content="Avboka" Margin="5,5,5,5" />
             </ListBox>
         </Grid>
-            
-                
-               
+
+
+
 
 
         <!-- Statusbar -->
@@ -121,3 +125,6 @@
         </StatusBar>
     </Grid>
 </Window>
+                           
+
+
