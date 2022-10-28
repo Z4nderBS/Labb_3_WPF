@@ -72,7 +72,7 @@ namespace Labb_3_WPF
                     Boka(bord, namn, kön, datum, tid, int.Parse(teleNr), text, datumLista, bookingList);
                     // gör en metod som kan lägga in variabler och gör det till en print text för listboxen
 
-                    WriteFile(text);
+                   
 
 
 
@@ -173,12 +173,13 @@ namespace Labb_3_WPF
                     {
                         if (item.Tider[i].tid == tid)
                         {
-                            checkTime = CheckTableAvailable(item.Tider[i], bord);
+                            checkTime = CheckTableAvailable(datum, item.Tider[i], bord);
 
                             if (checkTime == true)
                             {
                                 Booking bokning = new Booking(namn, kön, datum, tid, nr, text);
                                 bookingList.Add(bokning);
+                                WriteFile(text);
                                 MessageBox.Show("it works!");
                             }
                             else
@@ -192,13 +193,49 @@ namespace Labb_3_WPF
                 }
 
             }
-
-
-
-
-
-
         }
+
+
+        public static bool CheckTableAvailable(DateOnly datum, Time tid, int bord)
+        {
+
+            List<string> bokningar = GetTextsFile();
+           
+       
+            //var regexDateIdentifier = new Regex(@$"({datum})");
+            //var regexTimeIdentifier = new Regex(@$"({tid.tid})");
+            //var regexbordIdentifier = new Regex(@$"({bord})");
+
+
+            var regexDateIdentifier = new Regex(@"Datum: " + datum.ToString());
+            var regexTimeIdentifier = new Regex(@"Klockan: " + tid.tid);
+            var regexbordIdentifier = new Regex(@"Bord: " + bord.ToString());
+          
+
+            var queryText = from item in bokningar
+                            where regexDateIdentifier.IsMatch(item)
+                            where regexTimeIdentifier.IsMatch(item)
+                            where regexbordIdentifier.IsMatch(item)
+                            select item.ToString();
+
+                           
+            foreach (var item in queryText)
+            {
+                MessageBox.Show(item);
+            }
+
+
+
+            return true;
+        }
+
+
+
+
+
+
+  
+
 
         public static void AddDates(List<CheckDateAndTime> datumLista)
         {
@@ -215,44 +252,7 @@ namespace Labb_3_WPF
         }
 
 
-        public static bool CheckTableAvailable(Time tid, int bord)
-        {
-            bool available = true;
-            foreach (var item in tid.tables)
-            {
-                if (bord == item.num)
-                {
-                    if (item.available == true) { item.available = false; available = true; }
 
-                    else { MessageBox.Show("Denna bord är tyvärr bokad. prova en annnan."); available = false; }
-
-                }
-            }
-
-            return available ? true : false;
-
-            /*
-            if (tid.bordAvailable.Contains(" "))
-            {
-                for (int i = 0; i < tid.bordAvailable.Length; i++)
-                {
-                    if (tid.bordAvailable[i] == " ")
-                    {
-                        tid.bordAvailable[i] = "bokad";
-                        i = tid.bordAvailable.Length;
-                    }
-
-                }
-                return true;
-            }
-            else
-            {
-                MessageBox.Show("Denna tid är tyvärr fullbokad. prova en annnan.");
-                return false;
-            }
-            */
-
-        }
 
 
 
