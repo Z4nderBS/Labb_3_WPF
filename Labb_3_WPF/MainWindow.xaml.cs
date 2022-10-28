@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -62,53 +63,18 @@ namespace Labb_3_WPF
                 {
                     
                     
-                    //string newTid = tid.Replace('.', ',');
-                    //double RightTid = double.Parse(newTid);
-                    //int teleIntNr;
-                    //int.TryParse(teleNr, out teleIntNr);
+                 
 
                     string text = $"Namn: {namn}, Kön: {kön}, Telefonnummer: {teleNr}, Datum: {kalenderDatum}, Klockan: {tid}";
+                    string fileText = $"{namn},{kön},{teleNr},{kalenderDatum},{tid}";
 
                     Boka(namn,kön,datum,tid,int.Parse(teleNr),text,datumLista,bookingList);
-                    // gör en metod som kan lägga in variabler och gör det till en print text för lsitboxen
+                    // gör en metod som kan lägga in variabler och gör det till en print text för listboxen
 
+                    WriteFile(text);
                    
 
-                    //foreach (var item in datumLista)
-                    //{
-                    //    if (item.datum == datum)
-                    //    {
-                    //        for (int i = 0; i < item.Tider.Count; i++)
-                    //        {
-                    //            if (item.Tider[i].tid == tid)
-                    //            {
-                    //                checkTime = CheckTimeAvailable(item.Tider[i]);
-                    //                i = item.Tider.Count;
-                    //            }
-                    //        }
-                    //    }
-
-                    //}
-
-                    //if (checkTime == true)
-                    //{
-                    //    MessageBox.Show("it works!");
-                    //}
-                    //else
-                    //{
-                    //    MessageBox.Show("aww man :C");
-                    //}
-
-
-
-                    //var queryDate = from item in datumLista
-                    //                where item.datum == datum
-                    //                select item;
-
-
-                    //listBx.Items.Add(text);
-                    //Booking bokning = new Booking(namn, kön, datum, RightTid, teleIntNr, text);
-                    //bookingList.Add(bokning);
+               
 
                     firstNameBox.Text = "";
                     lastNameBox.Text = "";
@@ -124,6 +90,22 @@ namespace Labb_3_WPF
 
             }
         }
+
+
+        public static void WriteFile(string text)
+        {
+
+            using (StreamWriter writeOrder = new StreamWriter("bokningar.log", true))
+            {
+
+                writeOrder.WriteLine(text);
+            }
+        }
+
+
+           
+
+
 
 
         public static void Boka(string namn, string kön, DateOnly datum, string tid, int nr, string text, List<CheckDateAndTime> datumLista, List<Booking> bookingList)
@@ -184,20 +166,6 @@ namespace Labb_3_WPF
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         public static bool CheckTimeAvailable(Time tid)
         {
             if (tid.bordAvailable.Contains(" "))
@@ -234,12 +202,8 @@ namespace Labb_3_WPF
                 }
             }
 
-            
+
         }
-
-     
-
-
 
         public static bool CheckInputs(string förNamn, string efterNamn, string tid, string kön, string telefonNr)
         {
@@ -273,21 +237,29 @@ namespace Labb_3_WPF
         }
     }
 
+
 }
 
 
 
 
-//public static List<Booking> PrebookedList()
-//{
 
 
-//    Booking booking1 = new Booking("Alex", new DateOnly(2022, 09, 25), 22.00, 5);
-//    Booking booking2 = new Booking("Wilma", new DateOnly(2022, 09, 24), 21.00, 5);
 
-//    bookingList.Add(booking1);
-//    return bookingList;
-//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

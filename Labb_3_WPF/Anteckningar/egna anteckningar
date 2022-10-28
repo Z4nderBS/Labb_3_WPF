@@ -1,5 +1,7 @@
 ﻿
 
-[] ska endast gå att boka bord från 16.00-22. 
-[] ska bara Gå att boka bord från dagens datum(eller 15 november) till sista November .
-[] gör en Lista med datatypen DateOnly.
+[X] ska endast gå att boka bord från 16.00-22. 
+[X] ska bara Gå att boka bord från dagens datum(eller 15 november) till sista November .
+[X] gör en Lista med datatypen DateOnly.
+[] använd regex för att kolla att telefonnumret är nummer
+[] om tid finns för en egen custom messagebox
