@@ -184,7 +184,7 @@ namespace Labb_3_WPF
                             }
                             else
                             {
-                                MessageBox.Show("aww man :C");
+                                MessageBox.Show("Bordet är redan taget!");
                             }
 
                             i = item.Tider.Count;
@@ -198,7 +198,7 @@ namespace Labb_3_WPF
 
         public static bool CheckTableAvailable(DateOnly datum, Time tid, int bord)
         {
-
+            bool isAvailalbe = true;
             List<string> bokningar = GetTextsFile();
            
        
@@ -216,17 +216,20 @@ namespace Labb_3_WPF
                             where regexDateIdentifier.IsMatch(item)
                             where regexTimeIdentifier.IsMatch(item)
                             where regexbordIdentifier.IsMatch(item)
-                            select item.ToString();
+                            select item;
 
-                           
+
+
             foreach (var item in queryText)
             {
-                MessageBox.Show(item);
+
+                isAvailalbe = false;
             }
 
+            
+            return isAvailalbe;
 
-
-            return true;
+           
         }
 
 
