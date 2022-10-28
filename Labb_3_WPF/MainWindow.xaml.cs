@@ -30,8 +30,10 @@ namespace Labb_3_WPF
         {
 
             // gör en lista med tider här och sen data binda dem
-            InitializeComponent();
             AddDates(datumLista);
+            InitializeComponent();
+            
+          
 
 
 
