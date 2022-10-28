@@ -107,15 +107,17 @@ namespace Labb_3_WPF
             var regexDateIdentifier = new Regex(@"Datum: " + DateFromCalendar);
             var regexbordIdentifier = new Regex(@"Bord: [1-5]{1}");
 
-            var queryText = from item in bokningar
+            var queryTexts = from item in bokningar
                             where regexDateIdentifier.IsMatch(item)
                             where regexbordIdentifier.IsMatch(item)
-                            select new item = "hello";
+                            select $"" +
+                            $"{item.Substring(0, 7)} bokad" ;
 
-            foreach (var item in queryText)
+            foreach (var item in queryTexts)
             {
                 listBx.Items.Add(item);
             }
+               
 
 
 
@@ -124,12 +126,6 @@ namespace Labb_3_WPF
             
            
 
-
-            var queryText = from item in bokningar
-                            where regexDateIdentifier.IsMatch(item)
-                            where regexTimeIdentifier.IsMatch(item)
-                            where regexbordIdentifier.IsMatch(item)
-                            select item;
 
 
 
