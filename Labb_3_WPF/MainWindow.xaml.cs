@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Labb_3_WPF
 {
@@ -20,13 +21,20 @@ namespace Labb_3_WPF
     public partial class MainWindow : Window
     {
         public List<Booking> bookingList = new List<Booking>();
-        public List<CheckDateAndTime> datum = new List<CheckDateAndTime>();
+        public List<CheckDateAndTime> datumLista = new List<CheckDateAndTime>();
+       
 
 
         public MainWindow()
         {
+           
             // gör en lista med tider här och sen data binda dem
             InitializeComponent();
+            AddDates(datumLista);
+
+
+
+
 
 
         }
@@ -52,20 +60,55 @@ namespace Labb_3_WPF
 
                 if (CheckInputs(förNamn, efterNamn, tid, kön, teleNr) == true)
                 {
-                    // sparar första siffrar i bord boxen
                     
-                    string newTid = tid.Replace('.', ',');
-                    double RightTid = double.Parse(newTid);
-                    int teleIntNr;
-                    int.TryParse(teleNr, out teleIntNr);
+                    
+                    //string newTid = tid.Replace('.', ',');
+                    //double RightTid = double.Parse(newTid);
+                    //int teleIntNr;
+                    //int.TryParse(teleNr, out teleIntNr);
 
                     string text = $"Namn: {namn}, Kön: {kön}, Telefonnummer: {teleNr}, Datum: {kalenderDatum}, Klockan: {tid}";
+
+                    Boka(namn,kön,datum,tid,int.Parse(teleNr),text,datumLista,bookingList);
                     // gör en metod som kan lägga in variabler och gör det till en print text för lsitboxen
+
+                   
+
+                    //foreach (var item in datumLista)
+                    //{
+                    //    if (item.datum == datum)
+                    //    {
+                    //        for (int i = 0; i < item.Tider.Count; i++)
+                    //        {
+                    //            if (item.Tider[i].tid == tid)
+                    //            {
+                    //                checkTime = CheckTimeAvailable(item.Tider[i]);
+                    //                i = item.Tider.Count;
+                    //            }
+                    //        }
+                    //    }
+
+                    //}
+
+                    //if (checkTime == true)
+                    //{
+                    //    MessageBox.Show("it works!");
+                    //}
+                    //else
+                    //{
+                    //    MessageBox.Show("aww man :C");
+                    //}
+
+
+
+                    //var queryDate = from item in datumLista
+                    //                where item.datum == datum
+                    //                select item;
 
 
                     //listBx.Items.Add(text);
-                    Booking bokning = new Booking(namn, kön, datum, RightTid, teleIntNr ,text);
-                    bookingList.Add(bokning);
+                    //Booking bokning = new Booking(namn, kön, datum, RightTid, teleIntNr, text);
+                    //bookingList.Add(bokning);
 
                     firstNameBox.Text = "";
                     lastNameBox.Text = "";
@@ -81,8 +124,101 @@ namespace Labb_3_WPF
 
             }
         }
-                    
 
+
+        public static void Boka(string namn, string kön, DateOnly datum, string tid, int nr, string text, List<CheckDateAndTime> datumLista, List<Booking> bookingList)
+        {
+            Booking bokning = new Booking(namn, kön, datum, tid, nr, text);
+            bool checkTime;
+
+
+
+
+
+            foreach (var item in datumLista)
+            {
+                if (item.datum == datum)
+                {
+                    for (int i = 0; i < item.Tider.Count; i++)
+                    {
+                        if (item.Tider[i].tid == tid)
+                        {
+                            checkTime = CheckTimeAvailable(item.Tider[i]);
+
+                            if (checkTime == true)
+                            {
+                                bookingList.Add(bokning);
+                                MessageBox.Show("it works!");
+                            }
+                            else
+                            {
+                                MessageBox.Show("aww man :C");
+                            }
+
+                            i = item.Tider.Count;
+                        }
+                    }
+                }
+
+            }
+
+
+      
+
+
+
+        }
+
+        public static void AddDates(List<CheckDateAndTime> datumLista)
+        {
+            int daysToFill = 7;
+            int startday = 14;
+            int month = 11;
+            int year = 2022;
+            for (int i = 0; i < daysToFill; i++)
+            {
+                DateOnly date = new DateOnly(year, month, startday + i);
+                CheckDateAndTime addDay = new CheckDateAndTime(date);
+                datumLista.Add(addDay);
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public static bool CheckTimeAvailable(Time tid)
+        {
+            if (tid.bordAvailable.Contains(" "))
+            {
+                for (int i = 0; i < tid.bordAvailable.Length; i++)
+                {
+                    if (tid.bordAvailable[i] == " ")
+                    {
+                        tid.bordAvailable[i] = "bokad";
+                        i = tid.bordAvailable.Length;
+                    }
+
+                }
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Denna tid är tyvärr fullbokad. prova en annnan.");
+                return false;
+            }
+        }
 
 
         private void BookedDays_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
