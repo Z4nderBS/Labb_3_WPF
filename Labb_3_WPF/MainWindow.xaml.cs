@@ -69,7 +69,7 @@ namespace Labb_3_WPF
 
 
 
-                    string text = $"Bord: {bord} Namn: {namn}, Kön: {kön}, Telefonnummer: {teleNr}, Datum: {kalenderDatum}, Klockan: {tid}";
+                    string text = $"Bord: {bord}. Klockan: {tid}. Namn: {namn}. Kön: {kön}. Telefonnummer: {teleNr}. Datum: {kalenderDatum}.";
 
 
                     Boka(bord, namn, kön, datum, tid, int.Parse(teleNr), text, datumLista, bookingList);
@@ -111,7 +111,7 @@ namespace Labb_3_WPF
                             where regexDateIdentifier.IsMatch(item)
                             where regexbordIdentifier.IsMatch(item)
                             select $"" +
-                            $"{item.Substring(0, 7)} bokad" ;
+                            $"{item.Substring(18,6)} {item.Substring(0, 7)} bokad" ;
 
             foreach (var item in queryTexts)
             {
