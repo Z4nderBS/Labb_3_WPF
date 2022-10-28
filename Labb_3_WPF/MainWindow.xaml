@@ -52,6 +52,7 @@
                 <StackPanel Orientation="Horizontal">
                     <Label FontSize="16">Tid:</Label>
                     <Label FontSize="16" Margin="120 0 0 0">Kön:</Label>
+                    <Label FontSize="16" Margin="50 0 0 0">Bord:</Label>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <ComboBox x:Name="TimeChoiceBox" MinWidth="150" HorizontalAlignment="Left">
@@ -67,7 +68,16 @@
                         <GroupItem>Kvinna</GroupItem>
                         <GroupItem>Annan</GroupItem>
                     </ComboBox>
+                    <ComboBox x:Name="tableChoiceBox" MinWidth="80" HorizontalAlignment="Left" Margin="10 0 0 0">
+                        <GroupItem>1</GroupItem>
+                        <GroupItem>2</GroupItem>
+                        <GroupItem>3</GroupItem>
+                        <GroupItem>4</GroupItem>
+                        <GroupItem>5</GroupItem>
+                    </ComboBox>
                 </StackPanel>
+                        
+                       
 
 
 

@@ -23,12 +23,12 @@ namespace Labb_3_WPF
     {
         public List<Booking> bookingList = new List<Booking>();
         public List<CheckDateAndTime> datumLista = new List<CheckDateAndTime>();
-       
+
 
 
         public MainWindow()
         {
-           
+
             // gör en lista med tider här och sen data binda dem
             InitializeComponent();
             AddDates(datumLista);
@@ -41,7 +41,7 @@ namespace Labb_3_WPF
         }
 
 
-   
+
 
         private void BookingBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -55,26 +55,27 @@ namespace Labb_3_WPF
                 DateOnly datum = DateOnly.Parse(kalenderDatum);
                 var tid = TimeChoiceBox.Text.ToString();
                 var kön = genderChoiceBox.Text.ToString();
+                int bord = int.Parse(tableChoiceBox.Text.ToString());
 
 
 
 
                 if (CheckInputs(förNamn, efterNamn, tid, kön, teleNr) == true)
                 {
-                    
-                    
-                 
 
-                    string text = $"Namn: {namn}, Kön: {kön}, Telefonnummer: {teleNr}, Datum: {kalenderDatum}, Klockan: {tid}";
-                    string fileText = $"{namn},{kön},{teleNr},{kalenderDatum},{tid}";
 
-                    Boka(namn,kön,datum,tid,int.Parse(teleNr),text,datumLista,bookingList);
+
+
+                    string text = $"Bord: {bord} Namn: {namn}, Kön: {kön}, Telefonnummer: {teleNr}, Datum: {kalenderDatum}, Klockan: {tid}";
+
+
+                    Boka(bord, namn, kön, datum, tid, int.Parse(teleNr), text, datumLista, bookingList);
                     // gör en metod som kan lägga in variabler och gör det till en print text för listboxen
 
                     WriteFile(text);
-                   
 
-               
+
+
 
                     firstNameBox.Text = "";
                     lastNameBox.Text = "";
@@ -108,10 +109,10 @@ namespace Labb_3_WPF
             {
                 listBx.Items.Add(item);
             }
-                
-       
 
-            
+
+
+
 
 
 
@@ -131,20 +132,20 @@ namespace Labb_3_WPF
         public static List<string> GetTextsFile()
         {
             List<string> texts = new List<string>();
-           
+
 
             string line = "";
             using (StreamReader stream = new StreamReader("bokningar.log"))
             {
                 while ((line = stream.ReadLine()) != null)
                 {
-                   texts.Add(line);
-                  
+                    texts.Add(line);
+
                 }
             }
-           
 
-               
+
+
 
             return texts;
         }
@@ -155,9 +156,9 @@ namespace Labb_3_WPF
 
 
 
-        public static void Boka(string namn, string kön, DateOnly datum, string tid, int nr, string text, List<CheckDateAndTime> datumLista, List<Booking> bookingList)
+        public static void Boka(int bord, string namn, string kön, DateOnly datum, string tid, int nr, string text, List<CheckDateAndTime> datumLista, List<Booking> bookingList)
         {
-            Booking bokning = new Booking(namn, kön, datum, tid, nr, text);
+
             bool checkTime;
 
 
@@ -172,10 +173,11 @@ namespace Labb_3_WPF
                     {
                         if (item.Tider[i].tid == tid)
                         {
-                            checkTime = CheckTimeAvailable(item.Tider[i]);
+                            checkTime = CheckTableAvailable(item.Tider[i], bord);
 
                             if (checkTime == true)
                             {
+                                Booking bokning = new Booking(namn, kön, datum, tid, nr, text);
                                 bookingList.Add(bokning);
                                 MessageBox.Show("it works!");
                             }
@@ -192,7 +194,7 @@ namespace Labb_3_WPF
             }
 
 
-      
+
 
 
 
@@ -213,30 +215,33 @@ namespace Labb_3_WPF
         }
 
 
-        public static bool CheckTimeAvailable(Time tid)
+        public static bool CheckTableAvailable(Time tid, int bord)
         {
-            if (tid.bordAvailable.Contains(" "))
+            bool available = true;
+            foreach (var item in tid.tables)
             {
-                for (int i = 0; i < tid.bordAvailable.Length; i++)
+                if (bord == item.num)
                 {
-                    if (tid.bordAvailable[i] == " ")
-                    {
-                        tid.bordAvailable[i] = "bokad";
-                        i = tid.bordAvailable.Length;
-                    }
+                    if (item.available == true) { item.available = false; available = true; }
+
+                    else { MessageBox.Show("Denna bord är tyvärr bokad. prova en annnan."); available = false; }
 
                 }
-                return true;
             }
-            else
-            {
-                MessageBox.Show("Denna tid är tyvärr fullbokad. prova en annnan.");
-                return false;
-            }
+
+            return available ? true : false;
+
         }
 
 
-       
+
+
+
+
+
+
+
+
 
         public static bool CheckInputs(string förNamn, string efterNamn, string tid, string kön, string telefonNr)
         {
