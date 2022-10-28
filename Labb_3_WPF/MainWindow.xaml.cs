@@ -180,7 +180,7 @@ namespace Labb_3_WPF
                                 Booking bokning = new Booking(namn, kön, datum, tid, nr, text);
                                 bookingList.Add(bokning);
                                 WriteFile(text);
-                                MessageBox.Show("it works!");
+                                MessageBox.Show("Din bokning har nu registerats");
                             }
                             else
                             {
