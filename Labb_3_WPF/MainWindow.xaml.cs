@@ -31,9 +31,10 @@ namespace Labb_3_WPF
         public MainWindow()
         {
 
-            
+
 
             // gör en lista med tider här och sen data binda dem
+
             AddDates(datumLista);
             PreMadeBookings(datumLista);
             InitializeComponent();
@@ -137,10 +138,19 @@ namespace Labb_3_WPF
 
         public static List<string> GetTextsFile()
         {
+            if (File.Exists("bokningar.log") == false)
+            {
+                WriteFile("Bokningar 14 november till 20 november");
+            }
+
+
             List<string> texts = new List<string>();
 
 
             string line = "";
+
+
+
             using (StreamReader stream = new StreamReader("bokningar.log"))
             {
                 while ((line = stream.ReadLine()) != null)
@@ -150,12 +160,9 @@ namespace Labb_3_WPF
                 }
             }
 
-
-
-
             return texts;
-        }
 
+        }
 
 
 
@@ -186,6 +193,7 @@ namespace Labb_3_WPF
 
                                 WriteFile(text);
                                 MessageBox.Show("din bokning har registrerats");
+
 
                             }
                             else
@@ -342,7 +350,7 @@ namespace Labb_3_WPF
         {
             List<string> bokningar = GetTextsFile();
 
-            if (bokningar.Count == 0)
+            if (bokningar.Count == 1)
             {
                 List<Woman> kvinnor = new List<Woman>();
                 List<Man> män = new List<Man>();
@@ -392,7 +400,7 @@ namespace Labb_3_WPF
         {
             List<string> bokningar = GetTextsFile();
             listBx.Items.Clear();
-            
+
 
             var regexUserIdentifier = new Regex(@"(\*)");
 
@@ -404,24 +412,25 @@ namespace Labb_3_WPF
             {
                 CancelOrder.Visibility = Visibility.Visible;
                 listBx.Items.Add(item);
-              
+
             }
             if (listBx.Items.Count == 0)
             {
-                
+
                 MessageBox.Show("Du har inga registrerade bokningar.");
             }
         }
 
         private void CancelOrder_Click(object sender, RoutedEventArgs e)
         {
+
             string textToRemove = listBx.SelectedItem.ToString();
             var filePath = "bokningar.log";
 
             List<string> textToKeep = new List<string>();
 
             using (var sr = new StreamReader(filePath))
-         
+
             {
                 string line;
 
@@ -431,13 +440,13 @@ namespace Labb_3_WPF
                     {
                         textToKeep.Add(line);
                     }
-                        
+
                 }
             }
 
             File.Delete(filePath);
-    
-           
+
+
 
             foreach (var item in textToKeep)
             {
@@ -445,24 +454,26 @@ namespace Labb_3_WPF
             }
 
             MessageBox.Show("Din bokning har nu tagits bort");
+            CancelOrder.Visibility = Visibility.Collapsed;
             listBx.Items.Clear();
-            
+
+
         }
     }
 }
- 
-
-
-
-            
-
-            
 
 
 
 
 
-            
+
+
+
+
+
+
+
+
 
 
 
