@@ -22,8 +22,8 @@ namespace Labb_3_WPF
 
     public partial class MainWindow : Window
     {
-        public List<Booking> bookingList = new List<Booking>();
-        public List<CheckDateAndTime> datumLista = new List<CheckDateAndTime>();
+        public List<DateAndTime> datumLista = new List<DateAndTime>();
+       
 
 
 
@@ -52,6 +52,8 @@ namespace Labb_3_WPF
                 var kön = genderChoiceBox.Text.ToString();
                 var bord = tableChoiceBox.Text.ToString();
 
+                
+
 
 
 
@@ -61,11 +63,11 @@ namespace Labb_3_WPF
 
 
 
-                    string text = $"Bord: {bord}. Klockan: {tid}. Namn: {namn}. Kön: {kön}. Telefonnummer: {teleNr}. Datum: {kalenderDatum}.";
+                    string text = $"Bord: {bord}. Klockan: {tid}. Namn: {namn}. Kön: {kön}. Telefonnummer: {teleNr}. Datum: {kalenderDatum}.*"; // * markerar att det är din bokning
+                    Booking bokning = new Booking(namn, kön, datum, tid, teleNr, text);
 
-
-                    Boka(bord, namn, kön, datum, tid, int.Parse(teleNr), text, datumLista, bookingList);
-                    // gör en metod som kan lägga in variabler och gör det till en print text för listboxen
+                    Boka(bord, namn, kön, datum, tid, int.Parse(teleNr), text, datumLista);
+                    
 
                    
 
@@ -153,7 +155,7 @@ namespace Labb_3_WPF
 
 
 
-        public static void Boka(string bord, string namn, string kön, DateOnly datum, string tid, int nr, string text, List<CheckDateAndTime> datumLista, List<Booking> bookingList)
+        public static void Boka(string bord, string namn, string kön, DateOnly datum, string tid, int nr, string text, List<DateAndTime> datumLista)
         {
 
             bool checkTime;
@@ -174,10 +176,10 @@ namespace Labb_3_WPF
 
                             if (checkTime == true)
                             {
-                                Booking bokning = new Booking(namn, kön, datum, tid, nr, text);
-                                bookingList.Add(bokning);
+                               
                                 WriteFile(text);
                                 MessageBox.Show("Din bokning har nu registerats");
+                                
                             }
                             else
                             {
@@ -274,7 +276,7 @@ namespace Labb_3_WPF
         }
 
 
-        public static void AddDates(List<CheckDateAndTime> datumLista)
+        public static void AddDates(List<DateAndTime> datumLista)
         {
             int daysToFill = 7;
             int startday = 14;
@@ -283,7 +285,7 @@ namespace Labb_3_WPF
             for (int i = 0; i < daysToFill; i++)
             {
                 DateOnly date = new DateOnly(year, month, startday + i);
-                CheckDateAndTime addDay = new CheckDateAndTime(date);
+                DateAndTime addDay = new DateAndTime(date);
                 datumLista.Add(addDay);
             }
         }

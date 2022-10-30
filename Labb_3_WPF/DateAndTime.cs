@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Labb_3_WPF
 {
-    public class CheckDateAndTime
+    public class DateAndTime
     {
        
         public Time klockan_4 = new Time("16.00");
@@ -23,7 +23,7 @@ namespace Labb_3_WPF
         public bool fullbokad { get; set; }
 
 
-        public CheckDateAndTime(DateOnly datum)
+        public DateAndTime(DateOnly datum)
         {
             Tider.Add(klockan_4);
             Tider.Add(klockan_5);
