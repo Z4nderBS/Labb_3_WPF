@@ -110,7 +110,7 @@ namespace Labb_3_WPF
                              where regexbordIdentifier.IsMatch(item)
                              orderby item ascending
                              select $"" +
-                             $"{item.Substring(18, 6)} {item.Substring(0, 7)} bokad";
+                             $"{item.Substring(0, 7)} bokad {item.Substring(18, 6)} ";
 
             foreach (var item in queryTexts)
             {
@@ -158,7 +158,7 @@ namespace Labb_3_WPF
 
 
 
-        public static void Boka(string bord, string namn, string kön, DateOnly datum, string tid, string nr, string text, List<DateAndTime> datumLista)
+        public static void Boka(string bord, string namn, string kön, DateOnly datum, string tid, string nr, string text, List<DateAndTime> datumLista) // bokning för användaren
         {
 
             bool checkTime;
@@ -201,7 +201,7 @@ namespace Labb_3_WPF
         }
 
 
-        public static void Boka(string bord, string namn, string kön, DateOnly datum, string tid, string nr, string text, List<DateAndTime> datumLista, string custom)
+        public static void Boka(string bord, string namn, string kön, DateOnly datum, string tid, string nr, string text, List<DateAndTime> datumLista, string custom) // bokning för färdiga bokningar.
         {
 
             bool checkTime;
@@ -341,6 +341,7 @@ namespace Labb_3_WPF
             if (bokningar.Count == 0)
             {
                 List<Woman> kvinnor = new List<Woman>();
+                List<Man> män = new List<Man>();
 
 
                 Woman kvinna = new Woman("Alcicia Eriksson", new DateOnly(2022, 11, 15), "21.00", "0734058765", "1");
@@ -355,9 +356,25 @@ namespace Labb_3_WPF
                 kvinnor.Add(kvinna4);
                 kvinnor.Add(kvinna5);
 
+                Man man = new Man("Olaf Persson", new DateOnly(2022, 11, 15), "19.00", "0734058765", "1");
+                Man man2 = new Man("Olaf Persson", new DateOnly(2022, 11, 15), "19.00", "0734058765", "2");
+                Man man3 = new Man("Olaf Persson", new DateOnly(2022, 11, 15), "19.00", "0734058765", "3");
+                Man man4 = new Man("Olaf Persson", new DateOnly(2022, 11, 15), "19.00", "0734058765", "4");
+                Man man5 = new Man("Olaf Persson", new DateOnly(2022, 11, 15), "19.00", "0734058765", "5");
+
+                män.Add(man);
+                män.Add(man2);
+                män.Add(man3);
+                män.Add(man4);
+                män.Add(man);
 
 
                 foreach (var person in kvinnor)
+                {
+                    Boka(person.table, person.name, person.gender, person.date, person.time, person.phoneNr, person.text, datumLista, "custom");
+                }
+
+                foreach (var person in män)
                 {
                     Boka(person.table, person.name, person.gender, person.date, person.time, person.phoneNr, person.text, datumLista, "custom");
                 }
