@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -411,8 +412,51 @@ namespace Labb_3_WPF
                 MessageBox.Show("Du har inga registrerade bokningar.");
             }
         }
+
+        private void CancelOrder_Click(object sender, RoutedEventArgs e)
+        {
+            string textToRemove = listBx.SelectedItem.ToString();
+            var filePath = "bokningar.log";
+
+            List<string> textToKeep = new List<string>();
+
+            using (var sr = new StreamReader(filePath))
+         
+            {
+                string line;
+
+                while ((line = sr.ReadLine()) != null)
+                {
+                    if (line != textToRemove)
+                    {
+                        textToKeep.Add(line);
+                    }
+                        
+                }
+            }
+
+            File.Delete(filePath);
+    
+           
+
+            foreach (var item in textToKeep)
+            {
+                WriteFile(item);
+            }
+
+            MessageBox.Show("Din bokning har nu tagits bort");
+            listBx.Items.Clear();
+            
+        }
     }
 }
+ 
+
+
+
+            
+
+            
 
 
 
