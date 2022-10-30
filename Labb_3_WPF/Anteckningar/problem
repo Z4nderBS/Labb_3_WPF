@@ -1,4 +1,4 @@
 ﻿
 
 []om det inte går att boka så sparas det ändå.
-[]om filen inte är skapad så kraschar programet.
+[x]om filen inte är skapad så kraschar programet.
