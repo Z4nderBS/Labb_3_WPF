@@ -50,12 +50,12 @@ namespace Labb_3_WPF
                 DateOnly datum = DateOnly.Parse(kalenderDatum);
                 var tid = TimeChoiceBox.Text.ToString();
                 var kön = genderChoiceBox.Text.ToString();
-                int bord = int.Parse(tableChoiceBox.Text.ToString());
+                var bord = tableChoiceBox.Text.ToString();
 
 
 
 
-                if (CheckInputs(förNamn, efterNamn, tid, kön, teleNr) == true)
+                if (CheckInputs(förNamn, efterNamn, tid, kön, teleNr, bord) == true)
                 {
 
 
@@ -153,7 +153,7 @@ namespace Labb_3_WPF
 
 
 
-        public static void Boka(int bord, string namn, string kön, DateOnly datum, string tid, int nr, string text, List<CheckDateAndTime> datumLista, List<Booking> bookingList)
+        public static void Boka(string bord, string namn, string kön, DateOnly datum, string tid, int nr, string text, List<CheckDateAndTime> datumLista, List<Booking> bookingList)
         {
 
             bool checkTime;
@@ -195,7 +195,7 @@ namespace Labb_3_WPF
 
 
 
-        public static bool CheckTableAvailable(DateOnly datum, Time tid, int bord)
+        public static bool CheckTableAvailable(DateOnly datum, Time tid, string bord)
         {
             bool isAvailalbe = true;
             List<string> bokningar = GetTextsFile();
@@ -208,7 +208,7 @@ namespace Labb_3_WPF
 
             var regexDateIdentifier = new Regex(@"Datum: " + datum.ToString());
             var regexTimeIdentifier = new Regex(@"Klockan: " + tid.tid);
-            var regexbordIdentifier = new Regex(@"Bord: " + bord.ToString());
+            var regexbordIdentifier = new Regex(@"Bord: " + bord);
           
 
             var queryText = from item in bokningar
@@ -232,7 +232,7 @@ namespace Labb_3_WPF
         }
 
 
-        public static bool CheckInputs(string förNamn, string efterNamn, string tid, string kön, string telefonNr)
+        public static bool CheckInputs(string förNamn, string efterNamn, string tid, string kön, string telefonNr, string bord)
         {
             string missingText = "";
             var regexPhone = new Regex("^0[0-9]{9}"); // 0XX XXX XX XX 10 siffor om tid +46 också
@@ -244,12 +244,7 @@ namespace Labb_3_WPF
             if (telefonNr == "") { missingInputs.Add($"Telefon nummer:"); }
             if (tid == "") { missingInputs.Add($"Tid:"); }
             if (kön == "") { missingInputs.Add($"kön:"); }
-
-            if (regexPhone.IsMatch(telefonNr) != true)
-            {
-                MessageBox.Show("Inte skrivit ett riktigt mobilnummer. OBS kan ej starta med +46, använd 0 i starten");
-                return false;
-            }
+            if (bord == "") { missingInputs.Add("Bord:"); }
 
             if (missingInputs.Count > 0)
             {
@@ -260,6 +255,14 @@ namespace Labb_3_WPF
                 MessageBox.Show($"Du har ej fyllt i alla rutor!\n{missingText}");
                 return false;
             }
+
+            if (regexPhone.IsMatch(telefonNr) != true)
+            {
+                MessageBox.Show("Inte skrivit ett riktigt mobilnummer. OBS kan ej starta med +46, använd 0 i starten");
+                return false;
+            }
+
+          
             else
             {
                 return true;
