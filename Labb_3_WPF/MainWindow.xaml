@@ -43,16 +43,16 @@
         <!--Boka bord menyn-->
         <StackPanel Grid.Row="2" Grid.Column="1" Margin="10" Orientation="Horizontal">
             <StackPanel Margin="0 0 30 0">
-                <Label FontSize="16">Namn:</Label>
+                <Label FontSize="16">Namn: *</Label>
                 <TextBox x:Name="firstNameBox" MinWidth="320" HorizontalAlignment="Left"/>
-                <Label FontSize="16">Efternamn:</Label>
+                <Label FontSize="16">Efternamn: *</Label>
                 <TextBox x:Name="lastNameBox" MinWidth="320" HorizontalAlignment="Left"/>
-                <Label FontSize="16">Telefonnummer:</Label>
+                <Label FontSize="16">Telefonnummer: *</Label>
                 <TextBox x:Name="phoneBox" MinWidth="320" HorizontalAlignment="Left"/>
                 <StackPanel Orientation="Horizontal">
-                    <Label FontSize="16">Tid:</Label>
-                    <Label FontSize="16" Margin="120 0 0 0">Kön:</Label>
-                    <Label FontSize="16" Margin="50 0 0 0">Bord:</Label>
+                    <Label FontSize="16">Tid: * </Label>
+                    <Label FontSize="16" Margin="120 0 0 0">Kön: *</Label>
+                    <Label FontSize="16" Margin="50 0 0 0">Bord: *</Label>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <ComboBox x:Name="TimeChoiceBox" MinWidth="150" HorizontalAlignment="Left">
