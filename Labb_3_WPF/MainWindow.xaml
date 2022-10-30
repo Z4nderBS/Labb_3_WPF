@@ -103,6 +103,10 @@
                     </Calendar.BlackoutDates>
                 </Calendar>
                 <Button x:Name="Cancel" Content="Ta bort en bokning" Margin="20" Click="Cancel_Click"/>
+                <Button x:Name="CancelOrder" Content="Avboka" 
+                        Margin="0 0 20 0" Click="Cancel_Click" Width="80" HorizontalAlignment="Right"/>
+
+
 
 
             </StackPanel>

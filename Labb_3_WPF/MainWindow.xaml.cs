@@ -30,10 +30,13 @@ namespace Labb_3_WPF
         public MainWindow()
         {
 
+            
+
             // gör en lista med tider här och sen data binda dem
             AddDates(datumLista);
             PreMadeBookings(datumLista);
             InitializeComponent();
+            CancelOrder.Visibility = Visibility.Collapsed;
 
 
 
@@ -388,34 +391,37 @@ namespace Labb_3_WPF
         {
             List<string> bokningar = GetTextsFile();
             listBx.Items.Clear();
-
-
+            
 
             var regexUserIdentifier = new Regex(@"(\*)");
-
-
-            
 
             var queryText = from item in bokningar
                             where regexUserIdentifier.IsMatch(item)
                             select item.ToString();
 
-
-
             foreach (var item in queryText)
             {
+                CancelOrder.Visibility = Visibility.Visible;
                 listBx.Items.Add(item);
               
             }
             if (listBx.Items.Count == 0)
             {
+                
                 MessageBox.Show("Du har inga registrerade bokningar.");
             }
         }
     }
-
-
 }
+
+
+
+
+
+            
+
+
+
 
 
 
