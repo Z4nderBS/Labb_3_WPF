@@ -36,15 +36,6 @@ namespace Labb_3_WPF
 
         }
 
-            
-          
-
-
-
-
-
-
-
 
         private void BookingBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -53,7 +44,8 @@ namespace Labb_3_WPF
                 var förNamn = firstNameBox.Text;
                 var efterNamn = lastNameBox.Text;
                 var namn = $"{förNamn} {efterNamn}";
-                var teleNr = phoneBox.Text;
+                var InputTeleNr = phoneBox.Text;
+                var teleNr = Regex.Replace(InputTeleNr, @"\s+", "");
                 var kalenderDatum = MainCalendar.SelectedDate.Value.Date.ToShortDateString();
                 DateOnly datum = DateOnly.Parse(kalenderDatum);
                 var tid = TimeChoiceBox.Text.ToString();
@@ -106,10 +98,12 @@ namespace Labb_3_WPF
 
             var regexDateIdentifier = new Regex(@"Datum: " + DateFromCalendar);
             var regexbordIdentifier = new Regex(@"Bord: [1-5]{1}");
+         
 
             var queryTexts = from item in bokningar
                             where regexDateIdentifier.IsMatch(item)
                             where regexbordIdentifier.IsMatch(item)
+                            orderby item ascending
                             select $"" +
                             $"{item.Substring(18,6)} {item.Substring(0, 7)} bokad" ;
 
@@ -117,28 +111,11 @@ namespace Labb_3_WPF
             {
                 listBx.Items.Add(item);
             }
-               
-
-
-
-
-            
-            
-           
-
-
-
-
-
-
-
-
-
-
 
         }
+                           
 
-
+               
         public static void WriteFile(string text)
         {
 
@@ -216,6 +193,8 @@ namespace Labb_3_WPF
         }
 
 
+
+
         public static bool CheckTableAvailable(DateOnly datum, Time tid, int bord)
         {
             bool isAvailalbe = true;
@@ -253,51 +232,24 @@ namespace Labb_3_WPF
         }
 
 
-
-
-
-
-  
-
-
-        public static void AddDates(List<CheckDateAndTime> datumLista)
-        {
-            int daysToFill = 7;
-            int startday = 14;
-            int month = 11;
-            int year = 2022;
-            for (int i = 0; i < daysToFill; i++)
-            {
-                DateOnly date = new DateOnly(year, month, startday + i);
-                CheckDateAndTime addDay = new CheckDateAndTime(date);
-                datumLista.Add(addDay);
-            }
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         public static bool CheckInputs(string förNamn, string efterNamn, string tid, string kön, string telefonNr)
         {
             string missingText = "";
+            var regexPhone = new Regex("^0[0-9]{9}"); // 0XX XXX XX XX 10 siffor om tid +46 också
 
             List<string> missingInputs = new List<string>();
 
-            if (förNamn == "") { missingInputs.Add($"Namn: {förNamn}"); }
-            if (efterNamn == "") { missingInputs.Add($"Efternamn: {efterNamn}"); }
-            if (telefonNr == "") { missingInputs.Add($"Telefon nummer: {telefonNr}"); }
-            if (tid == "") { missingInputs.Add($"Tid: {tid}"); }
-            if (kön == "") { missingInputs.Add($"Bord: {kön}"); }
+            if (förNamn == "") { missingInputs.Add($"Namn:"); }
+            if (efterNamn == "") { missingInputs.Add($"Efternamn:"); }
+            if (telefonNr == "") { missingInputs.Add($"Telefon nummer:"); }
+            if (tid == "") { missingInputs.Add($"Tid:"); }
+            if (kön == "") { missingInputs.Add($"kön:"); }
+
+            if (regexPhone.IsMatch(telefonNr) != true)
+            {
+                MessageBox.Show("Inte skrivit ett riktigt mobilnummer. OBS kan ej starta med +46, använd 0 i starten");
+                return false;
+            }
 
             if (missingInputs.Count > 0)
             {
@@ -317,10 +269,71 @@ namespace Labb_3_WPF
 
 
         }
+
+
+        public static void AddDates(List<CheckDateAndTime> datumLista)
+        {
+            int daysToFill = 7;
+            int startday = 14;
+            int month = 11;
+            int year = 2022;
+            for (int i = 0; i < daysToFill; i++)
+            {
+                DateOnly date = new DateOnly(year, month, startday + i);
+                CheckDateAndTime addDay = new CheckDateAndTime(date);
+                datumLista.Add(addDay);
+            }
+        }
+
+
+
+
     }
 
 
 }
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+            
+          
+
+
+
+
+
+
+
+
+
+            
+            
+           
+
+
+
+
+
+
+
+
 
 
 
