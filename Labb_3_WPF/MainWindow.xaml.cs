@@ -336,26 +336,35 @@ namespace Labb_3_WPF
         }
         public static void PreMadeBookings(List<DateAndTime> datumLista)
         {
-            List<Woman> kvinnor = new List<Woman>();
+            List<string> bokningar = GetTextsFile();
 
-            Woman kvinna = new Woman("Alcicia Eriksson", new DateOnly(2022, 11, 15), "21.00", "0734058765", "1");
-            Woman kvinna2 = new Woman("Alcicia Eriksson", new DateOnly(2022, 11, 15), "21.00", "0734058765", "2");
-            Woman kvinna3 = new Woman("Alcicia Eriksson", new DateOnly(2022, 11, 15), "21.00", "0734058765", "3");
-            Woman kvinna4 = new Woman("Alcicia Eriksson", new DateOnly(2022, 11, 15), "21.00", "0734058765", "4");
-            Woman kvinna5 = new Woman("Alcicia Eriksson", new DateOnly(2022, 11, 15), "21.00", "0734058765", "5");
+            if (bokningar.Count == 0)
+            {
+                List<Woman> kvinnor = new List<Woman>();
 
-            kvinnor.Add(kvinna);
-            kvinnor.Add(kvinna2);
-            kvinnor.Add(kvinna3);
-            kvinnor.Add(kvinna4);
-            kvinnor.Add(kvinna5);
+
+                Woman kvinna = new Woman("Alcicia Eriksson", new DateOnly(2022, 11, 15), "21.00", "0734058765", "1");
+                Woman kvinna2 = new Woman("Birgitta Svensson", new DateOnly(2022, 11, 15), "21.00", "0734058765", "2");
+                Woman kvinna3 = new Woman("Anna Asklund", new DateOnly(2022, 11, 15), "21.00", "0734058765", "3");
+                Woman kvinna4 = new Woman("Magdalena Olofsson", new DateOnly(2022, 11, 15), "21.00", "0734058765", "4");
+                Woman kvinna5 = new Woman("Jessica Andersson", new DateOnly(2022, 11, 15), "21.00", "0734058765", "5");
+
+                kvinnor.Add(kvinna);
+                kvinnor.Add(kvinna2);
+                kvinnor.Add(kvinna3);
+                kvinnor.Add(kvinna4);
+                kvinnor.Add(kvinna5);
+
+
+
+                foreach (var person in kvinnor)
+                {
+                    Boka(person.table, person.name, person.gender, person.date, person.time, person.phoneNr, person.text, datumLista, "custom");
+                }
+            }
+
 
             
-
-            foreach (var person in kvinnor)
-            {
-                Boka(person.table, person.name, person.gender, person.date, person.time, person.phoneNr, person.text, datumLista, "custom");
-            }
         }
 
 
