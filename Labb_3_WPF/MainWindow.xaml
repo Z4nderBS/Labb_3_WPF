@@ -102,6 +102,7 @@
                         <CalendarDateRange Start="11.21.2022"/>
                     </Calendar.BlackoutDates>
                 </Calendar>
+                <Button x:Name="Cancel" Content="Ta bort en bokning" Margin="20" Click="Cancel_Click"/>
 
 
             </StackPanel>
@@ -120,9 +121,9 @@
                 <Label Content=" Visa Bokningar" VerticalAlignment="Center"/>
                 <DatePicker x:Name="BookedDays" Margin="5,5, 5,5" SelectedDateChanged="BookedDays_SelectedDateChanged" />
             </StackPanel>
-            <ListBox x:Name="listBx"  Margin="5,0,5,5" Grid.Row="1">
-                <Button x:Name="cancelBtn"  Content="Avboka" Margin="5,5,5,5" />
-            </ListBox>
+            <ListBox x:Name="listBx"  Margin="5,0,5,5" Grid.Row="1"/>
+                
+            
         </Grid>
 
 

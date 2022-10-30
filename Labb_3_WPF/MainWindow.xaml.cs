@@ -194,10 +194,10 @@ namespace Labb_3_WPF
                     }
                 }
 
-             
+
             }
 
-          
+
         }
 
 
@@ -224,12 +224,12 @@ namespace Labb_3_WPF
                             {
 
                                 WriteFile(text);
-                                
+
 
                             }
                             else
                             {
-                               
+
                             }
 
                             i = item.Tider.Count;
@@ -381,17 +381,45 @@ namespace Labb_3_WPF
             }
 
 
-            
+
         }
 
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            List<string> bokningar = GetTextsFile();
+            listBx.Items.Clear();
 
 
 
+            var regexUserIdentifier = new Regex(@"(\*)");
 
+
+            
+
+            var queryText = from item in bokningar
+                            where regexUserIdentifier.IsMatch(item)
+                            select item.ToString();
+
+
+
+            foreach (var item in queryText)
+            {
+                listBx.Items.Add(item);
+              
+            }
+            if (listBx.Items.Count == 0)
+            {
+                MessageBox.Show("Du har inga registrerade bokningar.");
+            }
+        }
     }
 
 
 }
+
+
+
+
 
 
 
