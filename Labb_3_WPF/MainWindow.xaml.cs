@@ -23,7 +23,7 @@ namespace Labb_3_WPF
     public partial class MainWindow : Window
     {
         public List<DateAndTime> datumLista = new List<DateAndTime>();
-       
+
 
 
 
@@ -32,7 +32,10 @@ namespace Labb_3_WPF
 
             // gör en lista med tider här och sen data binda dem
             AddDates(datumLista);
+            PreMadeBookings(datumLista);
             InitializeComponent();
+
+
 
         }
 
@@ -52,7 +55,7 @@ namespace Labb_3_WPF
                 var kön = genderChoiceBox.Text.ToString();
                 var bord = tableChoiceBox.Text.ToString();
 
-                
+
 
 
 
@@ -64,12 +67,12 @@ namespace Labb_3_WPF
 
 
                     string text = $"Bord: {bord}. Klockan: {tid}. Namn: {namn}. Kön: {kön}. Telefonnummer: {teleNr}. Datum: {kalenderDatum}.*"; // * markerar att det är din bokning
-                    Booking bokning = new Booking(namn, kön, datum, tid, teleNr, text);
 
-                    Boka(bord, namn, kön, datum, tid, int.Parse(teleNr), text, datumLista);
-                    
 
-                   
+                    Boka(bord, namn, kön, datum, tid, teleNr, text, datumLista);
+
+
+
 
 
 
@@ -93,21 +96,21 @@ namespace Labb_3_WPF
         {
             listBx.Items.Clear();
             var DateFromCalendar = BookedDays.SelectedDate.Value.Date.ToShortDateString();
-            
+
 
             List<string> bokningar = GetTextsFile();
 
 
             var regexDateIdentifier = new Regex(@"Datum: " + DateFromCalendar);
             var regexbordIdentifier = new Regex(@"Bord: [1-5]{1}");
-         
+
 
             var queryTexts = from item in bokningar
-                            where regexDateIdentifier.IsMatch(item)
-                            where regexbordIdentifier.IsMatch(item)
-                            orderby item ascending
-                            select $"" +
-                            $"{item.Substring(18,6)} {item.Substring(0, 7)} bokad" ;
+                             where regexDateIdentifier.IsMatch(item)
+                             where regexbordIdentifier.IsMatch(item)
+                             orderby item ascending
+                             select $"" +
+                             $"{item.Substring(18, 6)} {item.Substring(0, 7)} bokad";
 
             foreach (var item in queryTexts)
             {
@@ -115,9 +118,9 @@ namespace Labb_3_WPF
             }
 
         }
-                           
 
-               
+
+
         public static void WriteFile(string text)
         {
 
@@ -155,7 +158,7 @@ namespace Labb_3_WPF
 
 
 
-        public static void Boka(string bord, string namn, string kön, DateOnly datum, string tid, int nr, string text, List<DateAndTime> datumLista)
+        public static void Boka(string bord, string namn, string kön, DateOnly datum, string tid, string nr, string text, List<DateAndTime> datumLista)
         {
 
             bool checkTime;
@@ -176,10 +179,10 @@ namespace Labb_3_WPF
 
                             if (checkTime == true)
                             {
-                               
+
                                 WriteFile(text);
-                                MessageBox.Show("Din bokning har nu registerats");
-                                
+                                MessageBox.Show("din bokning har registrerats");
+
                             }
                             else
                             {
@@ -201,17 +204,12 @@ namespace Labb_3_WPF
         {
             bool isAvailalbe = true;
             List<string> bokningar = GetTextsFile();
-           
-       
-            //var regexDateIdentifier = new Regex(@$"({datum})");
-            //var regexTimeIdentifier = new Regex(@$"({tid.tid})");
-            //var regexbordIdentifier = new Regex(@$"({bord})");
 
 
             var regexDateIdentifier = new Regex(@"Datum: " + datum.ToString());
             var regexTimeIdentifier = new Regex(@"Klockan: " + tid.tid);
             var regexbordIdentifier = new Regex(@"Bord: " + bord);
-          
+
 
             var queryText = from item in bokningar
                             where regexDateIdentifier.IsMatch(item)
@@ -227,10 +225,10 @@ namespace Labb_3_WPF
                 isAvailalbe = false;
             }
 
-            
+
             return isAvailalbe;
 
-           
+
         }
 
 
@@ -264,7 +262,7 @@ namespace Labb_3_WPF
                 return false;
             }
 
-          
+
             else
             {
                 return true;
@@ -289,6 +287,19 @@ namespace Labb_3_WPF
                 datumLista.Add(addDay);
             }
         }
+        public static void PreMadeBookings(List<DateAndTime> datumLista)
+        {
+            
+
+            Woman kvinna = new Woman("Alcicia Eriksson", new DateOnly(2022, 11, 15), "21.00", "0734058765", "1");
+            Woman kvinna2 = new Woman("Alcicia Eriksson", new DateOnly(2022, 11, 15), "21.00", "0734058765", "2");
+            Woman kvinna3 = new Woman("Alcicia Eriksson", new DateOnly(2022, 11, 15), "21.00", "0734058765", "3");
+            Woman kvinna4 = new Woman("Alcicia Eriksson", new DateOnly(2022, 11, 15), "21.00", "0734058765", "4");
+            Woman kvinna5 = new Woman("Alcicia Eriksson", new DateOnly(2022, 11, 15), "21.00", "0734058765", "5");
+
+            WriteFile(kvinna.text);
+        }
+
 
 
 
@@ -307,7 +318,6 @@ namespace Labb_3_WPF
 
 
 
-  
 
 
 
@@ -317,8 +327,6 @@ namespace Labb_3_WPF
 
 
 
-            
-          
 
 
 
@@ -328,9 +336,12 @@ namespace Labb_3_WPF
 
 
 
-            
-            
-           
+
+
+
+
+
+
 
 
 

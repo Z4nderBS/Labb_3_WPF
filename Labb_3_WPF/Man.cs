@@ -6,18 +6,28 @@ using System.Threading.Tasks;
 
 namespace Labb_3_WPF
 {
-    public class Man : IPerson
+    public class Man : IBooking
     {
+        public string name { get; set; }
         public string gender { get; set; }
-        public string namn { get; set; }
-        public int phoneNumber { get; set; }
+        public DateOnly date { get; set; }
+        public string time { get; set; }
+        public string phoneNr { get; set; }
+        public string table { get; set; }
+        public string text { get; set; }
 
 
-        public Man(string namn, int age, int phoneNumber)
+        public Man(string name, DateOnly date, string time, string phoneNr, string table)
         {
             gender = "Man";
-            this.namn = namn;
-            this.phoneNumber = phoneNumber;
+            this.name = name;
+            this.date = date;
+            this.time = time;
+            this.phoneNr = phoneNr;
+            this.table = table;
+            text = $"Bord: {table}. Klockan: {time}. Namn: {name}. Kön: {gender}. Telefonnummer: {phoneNr}. Datum: {date}.";
+
+
         }
     }
 }
