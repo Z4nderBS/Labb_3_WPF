@@ -194,8 +194,55 @@ namespace Labb_3_WPF
                     }
                 }
 
+             
             }
+
+          
         }
+
+
+        public static void Boka(string bord, string namn, string kön, DateOnly datum, string tid, string nr, string text, List<DateAndTime> datumLista, string custom)
+        {
+
+            bool checkTime;
+
+
+
+
+
+            foreach (var item in datumLista)
+            {
+                if (item.datum == datum)
+                {
+                    for (int i = 0; i < item.Tider.Count; i++)
+                    {
+                        if (item.Tider[i].tid == tid)
+                        {
+                            checkTime = CheckTableAvailable(datum, item.Tider[i], bord);
+
+                            if (checkTime == true)
+                            {
+
+                                WriteFile(text);
+                                
+
+                            }
+                            else
+                            {
+                               
+                            }
+
+                            i = item.Tider.Count;
+                        }
+                    }
+                }
+
+
+            }
+
+
+        }
+
 
 
 
@@ -289,7 +336,7 @@ namespace Labb_3_WPF
         }
         public static void PreMadeBookings(List<DateAndTime> datumLista)
         {
-            
+            List<Woman> kvinnor = new List<Woman>();
 
             Woman kvinna = new Woman("Alcicia Eriksson", new DateOnly(2022, 11, 15), "21.00", "0734058765", "1");
             Woman kvinna2 = new Woman("Alcicia Eriksson", new DateOnly(2022, 11, 15), "21.00", "0734058765", "2");
@@ -297,7 +344,18 @@ namespace Labb_3_WPF
             Woman kvinna4 = new Woman("Alcicia Eriksson", new DateOnly(2022, 11, 15), "21.00", "0734058765", "4");
             Woman kvinna5 = new Woman("Alcicia Eriksson", new DateOnly(2022, 11, 15), "21.00", "0734058765", "5");
 
-            WriteFile(kvinna.text);
+            kvinnor.Add(kvinna);
+            kvinnor.Add(kvinna2);
+            kvinnor.Add(kvinna3);
+            kvinnor.Add(kvinna4);
+            kvinnor.Add(kvinna5);
+
+            
+
+            foreach (var person in kvinnor)
+            {
+                Boka(person.table, person.name, person.gender, person.date, person.time, person.phoneNr, person.text, datumLista, "custom");
+            }
         }
 
 
