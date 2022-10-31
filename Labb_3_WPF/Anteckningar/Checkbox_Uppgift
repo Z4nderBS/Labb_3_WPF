@@ -5,23 +5,24 @@ Restaurang.
 1-12 Godkänt
 13-17 Väl Godkänt
 
-1. [] Användaren kan ange datum, tid, namn och bordsnummer och
+1. [X] Användaren kan ange datum, tid, namn och bordsnummer och
 	  klicka på "Boka" för att skapa en bordsbokning. 
-2. [] Om det datum, tid och bord som ska bokas redan är bokat
+2. [X] Om det datum, tid och bord som ska bokas redan är bokat
 	  ska bokningen inte gå att genomföra. 
 	  ska meddelas om detta så att det går att försöka igen.
-3. [] Användaren ska meddelas om detta så att det går att försöka igen. 
+3. [X] Användaren ska meddelas om detta så att det går att försöka igen. 
 
-4. [] Användaren kan klicka på en ”Visa bokningar” för att lista alla
+4. [X] Användaren kan klicka på en ”Visa bokningar” för att lista alla
 	  bordsbokningar
 
-5. [] Användaren kan markera en bokning och klicka på avboka 
+5. [X] Användaren kan markera en bokning och klicka på avboka 
 	  för att avboka en bordsbokning. 
 
 	* Riktlinjer:
 
-6. []  När programmet startar ska det finnas ett antal bokningar 
+6. [X]  När programmet startar ska det finnas ett antal bokningar 
 	   lagrade redo att visas.
+
 7. [] Programmet ska hantera oförutsägbara fel.
 
 	* Överigt: Du väljer själv om programmet ska skriva till och läsa från fril
@@ -29,19 +30,19 @@ Restaurang.
 	* Krav för G
 
 8. [] Felhantering med try-catch alternativt TryParse eller liknande
-9. [] Klass/klasser 
-10.[] Metoder
-11.[] Iteration 
-12.[] Selektion 
+9. [X] Klass/klasser 
+10.[X] Metoder
+11.[X] Iteration 
+12.[X] Selektion 
 
 	* Krav för VG
 
-13.[] Endast 5 bord ska tillåtas vara bokade samma datum och tid. Till exempel:
+13.[X] Endast 5 bord ska tillåtas vara bokade samma datum och tid. Till exempel:
 Är 5 bord bokade 2022-10-28 kl. 21.00 ska inte ännu ett bord gå
 att boka 2022-10-28 kl. 21.00. Om ännu ett bord försöker bokas ska
 användaren meddelas om detta så att det går att försöka igen.
-14.[] LINQ
-15.[] Skalbar lösning med abstrakta klasser/interface
-16.[] Filhantering (uppdatera fil vid bokning och avbokning samt läsa från fil
+14.[X] LINQ
+15.[X] Skalbar lösning med abstrakta klasser/interface
+16.[X] Filhantering (uppdatera fil vid bokning och avbokning samt läsa från fil
 	  vid valet ”Visa bokningar”) 
 17.[] Asynkrona metoder.
