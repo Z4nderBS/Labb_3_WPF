@@ -33,7 +33,7 @@
         <Grid Grid.Row="1" Grid.ColumnSpan="4" Background="Aqua" >
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                 <Image Source="\images\Sharkwater.png" Width="100" Margin="3"/>
-                <TextBlock Text="Happy Shark Seafood" FontSize="30"
+                <TextBlock Text="Happy Shark Seafood" FontSize="36"
                        Foreground="White" VerticalAlignment="Center"/>
                 <TextBlock Text="Version 1.0" FontSize="16"
                        Foreground="#333333" VerticalAlignment="Bottom" Margin="10,0,0,22"/>
@@ -76,7 +76,7 @@
             <StackPanel>
                 <Label FontSize="16" HorizontalAlignment="Center">Datum:</Label>
                 <Calendar x:Name="MainCalendar" 
-                      HorizontalAlignment="Right" Margin="10" VerticalAlignment="Center">
+                      HorizontalAlignment="Right" Margin="5" VerticalAlignment="Center">
                     <Calendar.BlackoutDates>
                         <CalendarDateRange Start="01.01.2022" End="11.13.2022" />
                         <CalendarDateRange Start="11.21.2022"/>
@@ -110,6 +110,7 @@
 
 
 
+                        
         <!-- Statusbar -->
         <StatusBar Grid.Row="3" Grid.ColumnSpan="3">
             <StatusBarItem FontSize="20" Content=" (c) Happy Shark Seafood"/>
@@ -119,7 +120,6 @@
                            
 
 
-                        
                        
 
 
