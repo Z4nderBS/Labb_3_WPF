@@ -25,19 +25,23 @@ namespace Labb_3_WPF
     {
         public List<DateAndTime> datumLista = new List<DateAndTime>();
 
-
+        public List<string> tider { get; set; }
+        public List<string> tables { get; set; }
 
 
         public MainWindow()
         {
-
-
-
             // gör en lista med tider här och sen data binda dem
 
             AddDates(datumLista);
             PreMadeBookings(datumLista);
             InitializeComponent();
+
+            tider = new List<string>() { "16.00", "17.00", "18.00", "19.00", "20.00", "21.00"};
+            tables = new List<string>() {"1","2","3","4","5"};
+
+            this.DataContext = this;
+
             CancelOrder.Visibility = Visibility.Collapsed;
 
 

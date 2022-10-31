@@ -49,38 +49,30 @@
                 <TextBox x:Name="lastNameBox" MinWidth="320" HorizontalAlignment="Left"/>
                 <Label FontSize="16">Telefonnummer: *</Label>
                 <TextBox x:Name="phoneBox" MinWidth="320" HorizontalAlignment="Left"/>
+                
                 <StackPanel Orientation="Horizontal">
                     <Label FontSize="16">Tid: * </Label>
                     <Label FontSize="16" Margin="120 0 0 0">Kön: *</Label>
                     <Label FontSize="16" Margin="50 0 0 0">Bord: *</Label>
                 </StackPanel>
+                <!--Comboboxes Tid kön bord-->
                 <StackPanel Orientation="Horizontal">
-                    <ComboBox x:Name="TimeChoiceBox" MinWidth="150" HorizontalAlignment="Left">
-                        <GroupItem>16.00</GroupItem>
-                        <GroupItem>17.00</GroupItem>
-                        <GroupItem>18.00</GroupItem>
-                        <GroupItem>19.00</GroupItem>
-                        <GroupItem>20.00</GroupItem>
-                        <GroupItem>21.00</GroupItem>
-                    </ComboBox>
+                    <ComboBox x:Name="TimeChoiceBox" MinWidth="150" HorizontalAlignment="Left"
+                              ItemsSource="{Binding tider}"/>
                     <ComboBox x:Name="genderChoiceBox" MinWidth="80" HorizontalAlignment="Left" Margin="10 0 0 0">
                         <GroupItem>Man</GroupItem>
                         <GroupItem>Kvinna</GroupItem>
                     </ComboBox>
-                    <ComboBox x:Name="tableChoiceBox" MinWidth="80" HorizontalAlignment="Left" Margin="10 0 0 0">
-                        <GroupItem>1</GroupItem>
-                        <GroupItem>2</GroupItem>
-                        <GroupItem>3</GroupItem>
-                        <GroupItem>4</GroupItem>
-                        <GroupItem>5</GroupItem>
-                    </ComboBox>
+                    <ComboBox x:Name="tableChoiceBox" MinWidth="80" HorizontalAlignment="Left" Margin="10 0 0 0"
+                              ItemsSource="{Binding tables}"/>
                 </StackPanel>
-                        
 
                 <Button x:Name="BookingBtn" Content="Bekräfta bokning" Height="25" 
-                            Margin="20,40,20,20" Background="Aqua" Click="BookingBtn_Click"/>
 
+                            Margin="20,40,20,20" Background="Aqua" Click="BookingBtn_Click"/>
             </StackPanel>
+
+            <!--kalender och avboka buttons-->
             <StackPanel>
                 <Label FontSize="16" HorizontalAlignment="Center">Datum:</Label>
                 <Calendar x:Name="MainCalendar" 
@@ -93,26 +85,11 @@
                 <Button x:Name="Cancel" Content="Ta bort en bokning" Margin="20" Click="Cancel_Click"/>
                 <Button x:Name="CancelOrder" Content="Avboka" 
                         Margin="0 0 20 0" Click="CancelOrder_Click" Width="80" HorizontalAlignment="Right"/>
-
-
-
-
             </StackPanel>
         </StackPanel>
 
+
                         
-                       
-
-
-
-
-
-
-
-
-
-
-
 
 
         <!--Lista på bokningar-->
@@ -133,7 +110,6 @@
 
 
 
-
         <!-- Statusbar -->
         <StatusBar Grid.Row="3" Grid.ColumnSpan="3">
             <StatusBarItem FontSize="20" Content=" (c) Happy Shark Seafood"/>
@@ -141,5 +117,24 @@
     </Grid>
 </Window>
                            
+
+
+                        
+                       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
