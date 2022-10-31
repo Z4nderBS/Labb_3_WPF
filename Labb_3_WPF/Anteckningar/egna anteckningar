@@ -10,5 +10,6 @@
 
 * om tid finns 
 
+[] om ingen ledig bord finns på vald dag får användaren ett meddelande om det
 [] gör en egen custom messagebox
 [] generera random phone numbers.
