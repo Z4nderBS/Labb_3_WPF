@@ -350,55 +350,7 @@ namespace Labb_3_WPF
                 datumLista.Add(addDay);
             }
         }
-        public static void PreMadeBookings(List<DateAndTime> datumLista)
-        {
-            List<string> bokningar = GetTextsFile();
-
-            if (bokningar.Count == 1)
-            {
-                List<Woman> kvinnor = new List<Woman>();
-                List<Man> män = new List<Man>();
-
-
-                Woman kvinna = new Woman("Alcicia Eriksson", new DateOnly(2022, 11, 15), "21.00", "0734058765", "1");
-                Woman kvinna2 = new Woman("Birgitta Svensson", new DateOnly(2022, 11, 15), "21.00", "0734058765", "2");
-                Woman kvinna3 = new Woman("Anna Asklund", new DateOnly(2022, 11, 15), "21.00", "0734058765", "3");
-                Woman kvinna4 = new Woman("Magdalena Olofsson", new DateOnly(2022, 11, 15), "21.00", "0734058765", "4");
-                Woman kvinna5 = new Woman("Jessica Andersson", new DateOnly(2022, 11, 15), "21.00", "0734058765", "5");
-
-                kvinnor.Add(kvinna);
-                kvinnor.Add(kvinna2);
-                kvinnor.Add(kvinna3);
-                kvinnor.Add(kvinna4);
-                kvinnor.Add(kvinna5);
-
-                Man man = new Man("Olaf Persson", new DateOnly(2022, 11, 15), "19.00", "0734058765", "1");
-                Man man2 = new Man("Olaf Persson", new DateOnly(2022, 11, 15), "19.00", "0734058765", "2");
-                Man man3 = new Man("Olaf Persson", new DateOnly(2022, 11, 15), "19.00", "0734058765", "3");
-                Man man4 = new Man("Olaf Persson", new DateOnly(2022, 11, 15), "19.00", "0734058765", "4");
-                Man man5 = new Man("Olaf Persson", new DateOnly(2022, 11, 15), "19.00", "0734058765", "5");
-
-                män.Add(man);
-                män.Add(man2);
-                män.Add(man3);
-                män.Add(man4);
-                män.Add(man);
-
-
-                foreach (var person in kvinnor)
-                {
-                    Boka(person.table, person.name, person.gender, person.date, person.time, person.phoneNr, person.text, datumLista, "custom");
-                }
-
-                foreach (var person in män)
-                {
-                    Boka(person.table, person.name, person.gender, person.date, person.time, person.phoneNr, person.text, datumLista, "custom");
-                }
-            }
-
-
-
-        }
+       
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
@@ -460,6 +412,203 @@ namespace Labb_3_WPF
             MessageBox.Show("Din bokning har nu tagits bort");
             CancelOrder.Visibility = Visibility.Collapsed;
             listBx.Items.Clear();
+
+
+        }
+
+        public static void PreMadeBookings(List<DateAndTime> datumLista)
+        {
+            List<string> bokningar = GetTextsFile();
+
+            if (bokningar.Count == 1)
+            {
+                List<Woman> kvinnor = new List<Woman>();
+                List<Man> män = new List<Man>();
+
+                // olika namn att använda
+                string nameWoman_1 = "Alcicia Eriksson";
+                string nameWoman_2 = "Birgitta Svensson";
+                string nameWoman_3 = "Anna Asklund";
+                string nameWoman_4 = "Magdalena Olofsson";
+                string nameWoman_5 = "Jessica Andersson";
+
+                string nameMan_1 = "Olaf Persson";
+                string nameMan_2 = "Rickard Svensson";
+                string nameMan_3 = "Elias Ingmarsson";
+                string nameMan_4 = "Kevin Andersson";
+                string nameMan_5 = "Erik Samuelsson";
+
+                DateOnly nov_14 = new DateOnly(2022, 11, 14);
+                DateOnly nov_15 = new DateOnly(2022, 11, 15);
+                DateOnly nov_16 = new DateOnly(2022, 11, 16);
+                DateOnly nov_17 = new DateOnly(2022, 11, 17);
+                DateOnly nov_18 = new DateOnly(2022, 11, 18);
+                DateOnly nov_19 = new DateOnly(2022, 11, 19);
+                DateOnly nov_20 = new DateOnly(2022, 11, 20);
+
+                string time_16 = "16.00";
+                string time_17 = "17.00";
+                string time_18 = "18.00";
+                string time_19 = "19.00";
+                string time_20 = "20.00";
+                string time_21 = "21.00";
+
+                string phoneNr_1 = "0734058765";
+                string phoneNr_2 = "0737659215";
+                string phoneNr_3 = "0705678321";
+                string phoneNr_4 = "0750982543";
+                string phoneNr_5 = "0734078234";
+
+             
+
+
+
+                // 14 November 2022
+                kvinnor.Add(new Woman(nameWoman_1, nov_14, time_16, phoneNr_1, "1"));
+                kvinnor.Add(new Woman(nameWoman_2, nov_14, time_16, phoneNr_2, "2"));
+                kvinnor.Add(new Woman(nameWoman_3, nov_14, time_17, phoneNr_4, "1"));
+                kvinnor.Add(new Woman(nameWoman_4, nov_14, time_18, phoneNr_3, "2"));
+                kvinnor.Add(new Woman(nameWoman_5, nov_14, time_19, phoneNr_5, "1"));
+                kvinnor.Add(new Woman(nameWoman_3, nov_14, time_19, phoneNr_3, "2"));
+                kvinnor.Add(new Woman(nameWoman_2, nov_14, time_19, phoneNr_5, "4"));
+
+                män.Add(new Man(nameMan_1, nov_14, time_16, phoneNr_5, "3"));
+                män.Add(new Man(nameMan_2, nov_14, time_16, phoneNr_5, "4"));
+                män.Add(new Man(nameMan_3, nov_14, time_17, phoneNr_5, "3"));
+                män.Add(new Man(nameMan_1, nov_14, time_17, phoneNr_3, "5"));
+                män.Add(new Man(nameMan_4, nov_14, time_20, phoneNr_5, "4"));
+                män.Add(new Man(nameMan_5, nov_14, time_21, phoneNr_1, "1"));
+                män.Add(new Man(nameMan_2, nov_14, time_21, phoneNr_2, "2"));
+                män.Add(new Man(nameMan_3, nov_14, time_21, phoneNr_3, "5"));
+
+
+                // 15 November 2022
+                kvinnor.Add(new Woman(nameWoman_1, nov_15, time_16, phoneNr_1, "1"));
+                kvinnor.Add(new Woman(nameWoman_2, nov_15, time_16, phoneNr_2, "2"));
+                kvinnor.Add(new Woman(nameWoman_3, nov_15, time_17, phoneNr_4, "1"));
+                kvinnor.Add(new Woman(nameWoman_4, nov_15, time_18, phoneNr_3, "2"));
+                kvinnor.Add(new Woman(nameWoman_5, nov_15, time_19, phoneNr_5, "1"));
+                kvinnor.Add(new Woman(nameWoman_3, nov_15, time_19, phoneNr_3, "2"));
+                kvinnor.Add(new Woman(nameWoman_2, nov_15, time_19, phoneNr_5, "4"));
+
+                män.Add(new Man(nameMan_1, nov_15, time_16, phoneNr_5, "3"));
+                män.Add(new Man(nameMan_2, nov_15, time_16, phoneNr_5, "4"));
+                män.Add(new Man(nameMan_3, nov_15, time_17, phoneNr_5, "3"));
+                män.Add(new Man(nameMan_1, nov_15, time_17, phoneNr_3, "5"));
+                män.Add(new Man(nameMan_4, nov_15, time_20, phoneNr_5, "4"));
+                män.Add(new Man(nameMan_5, nov_15, time_21, phoneNr_1, "1"));
+                män.Add(new Man(nameMan_2, nov_15, time_21, phoneNr_2, "2"));
+                män.Add(new Man(nameMan_3, nov_15, time_21, phoneNr_3, "5"));
+
+                // 16 November 2022
+                kvinnor.Add(new Woman(nameWoman_1, nov_16, time_16, phoneNr_1, "1"));
+                kvinnor.Add(new Woman(nameWoman_2, nov_16, time_16, phoneNr_2, "2"));
+                kvinnor.Add(new Woman(nameWoman_3, nov_16, time_17, phoneNr_4, "1"));
+                kvinnor.Add(new Woman(nameWoman_4, nov_16, time_18, phoneNr_3, "2"));
+                kvinnor.Add(new Woman(nameWoman_5, nov_16, time_19, phoneNr_5, "1"));
+                kvinnor.Add(new Woman(nameWoman_3, nov_16, time_19, phoneNr_3, "2"));
+                kvinnor.Add(new Woman(nameWoman_2, nov_16, time_19, phoneNr_5, "4"));
+
+                män.Add(new Man(nameMan_1, nov_16, time_16, phoneNr_5, "3"));
+                män.Add(new Man(nameMan_2, nov_16, time_16, phoneNr_5, "4"));
+                män.Add(new Man(nameMan_3, nov_16, time_17, phoneNr_5, "3"));
+                män.Add(new Man(nameMan_1, nov_16, time_17, phoneNr_3, "5"));
+                män.Add(new Man(nameMan_4, nov_16, time_20, phoneNr_5, "4"));
+                män.Add(new Man(nameMan_5, nov_16, time_21, phoneNr_1, "1"));
+                män.Add(new Man(nameMan_2, nov_16, time_21, phoneNr_2, "2"));
+                män.Add(new Man(nameMan_3, nov_16, time_21, phoneNr_3, "5"));
+
+                // 17 November 2022
+                kvinnor.Add(new Woman(nameWoman_1, nov_17, time_16, phoneNr_1, "1"));
+                kvinnor.Add(new Woman(nameWoman_2, nov_17, time_16, phoneNr_2, "2"));
+                kvinnor.Add(new Woman(nameWoman_3, nov_17, time_17, phoneNr_4, "1"));
+                kvinnor.Add(new Woman(nameWoman_4, nov_17, time_18, phoneNr_3, "2"));
+                kvinnor.Add(new Woman(nameWoman_5, nov_17, time_19, phoneNr_5, "1"));
+                kvinnor.Add(new Woman(nameWoman_3, nov_17, time_19, phoneNr_3, "2"));
+                kvinnor.Add(new Woman(nameWoman_2, nov_17, time_19, phoneNr_5, "4"));
+
+                män.Add(new Man(nameMan_1, nov_17, time_16, phoneNr_5, "3"));
+                män.Add(new Man(nameMan_2, nov_17, time_16, phoneNr_5, "4"));
+                män.Add(new Man(nameMan_3, nov_17, time_17, phoneNr_5, "3"));
+                män.Add(new Man(nameMan_1, nov_17, time_17, phoneNr_3, "5"));
+                män.Add(new Man(nameMan_4, nov_17, time_20, phoneNr_5, "4"));
+                män.Add(new Man(nameMan_5, nov_17, time_21, phoneNr_1, "1"));
+                män.Add(new Man(nameMan_2, nov_17, time_21, phoneNr_2, "2"));
+                män.Add(new Man(nameMan_3, nov_17, time_21, phoneNr_3, "5"));
+
+                // 18 November 2022
+                kvinnor.Add(new Woman(nameWoman_1, nov_18, time_16, phoneNr_1, "1"));
+                kvinnor.Add(new Woman(nameWoman_2, nov_18, time_16, phoneNr_2, "2"));
+                kvinnor.Add(new Woman(nameWoman_3, nov_18, time_17, phoneNr_4, "1"));
+                kvinnor.Add(new Woman(nameWoman_4, nov_18, time_18, phoneNr_3, "2"));
+                kvinnor.Add(new Woman(nameWoman_5, nov_18, time_19, phoneNr_5, "1"));
+                kvinnor.Add(new Woman(nameWoman_3, nov_18, time_19, phoneNr_3, "2"));
+                kvinnor.Add(new Woman(nameWoman_2, nov_18, time_19, phoneNr_5, "4"));
+
+                män.Add(new Man(nameMan_1, nov_18, time_16, phoneNr_5, "3"));
+                män.Add(new Man(nameMan_2, nov_18, time_16, phoneNr_5, "4"));
+                män.Add(new Man(nameMan_3, nov_18, time_17, phoneNr_5, "3"));
+                män.Add(new Man(nameMan_1, nov_18, time_17, phoneNr_3, "5"));
+                män.Add(new Man(nameMan_4, nov_18, time_20, phoneNr_5, "4"));
+                män.Add(new Man(nameMan_5, nov_18, time_21, phoneNr_1, "1"));
+                män.Add(new Man(nameMan_2, nov_18, time_21, phoneNr_2, "2"));
+                män.Add(new Man(nameMan_3, nov_18, time_21, phoneNr_3, "5"));
+
+                // 19 November 2022
+                kvinnor.Add(new Woman(nameWoman_1, nov_19, time_16, phoneNr_1, "1"));
+                kvinnor.Add(new Woman(nameWoman_2, nov_19, time_16, phoneNr_2, "2"));
+                kvinnor.Add(new Woman(nameWoman_3, nov_19, time_17, phoneNr_4, "1"));
+                kvinnor.Add(new Woman(nameWoman_4, nov_19, time_18, phoneNr_3, "2"));
+                kvinnor.Add(new Woman(nameWoman_5, nov_19, time_19, phoneNr_5, "1"));
+                kvinnor.Add(new Woman(nameWoman_3, nov_19, time_19, phoneNr_3, "2"));
+                kvinnor.Add(new Woman(nameWoman_2, nov_19, time_19, phoneNr_5, "4"));
+
+                män.Add(new Man(nameMan_1, nov_19, time_16, phoneNr_5, "3"));
+                män.Add(new Man(nameMan_2, nov_19, time_16, phoneNr_5, "4"));
+                män.Add(new Man(nameMan_3, nov_19, time_17, phoneNr_5, "3"));
+                män.Add(new Man(nameMan_1, nov_19, time_17, phoneNr_3, "5"));
+                män.Add(new Man(nameMan_4, nov_19, time_20, phoneNr_5, "4"));
+                män.Add(new Man(nameMan_5, nov_19, time_21, phoneNr_1, "1"));
+                män.Add(new Man(nameMan_2, nov_19, time_21, phoneNr_2, "2"));
+                män.Add(new Man(nameMan_3, nov_19, time_21, phoneNr_3, "5"));
+
+                // 20 November 2022
+                kvinnor.Add(new Woman(nameWoman_1, nov_20, time_16, phoneNr_1, "1"));
+                kvinnor.Add(new Woman(nameWoman_2, nov_20, time_16, phoneNr_2, "2"));
+                kvinnor.Add(new Woman(nameWoman_3, nov_20, time_17, phoneNr_4, "1"));
+                kvinnor.Add(new Woman(nameWoman_4, nov_20, time_18, phoneNr_3, "2"));
+                kvinnor.Add(new Woman(nameWoman_5, nov_20, time_19, phoneNr_5, "1"));
+                kvinnor.Add(new Woman(nameWoman_3, nov_20, time_19, phoneNr_3, "2"));
+                kvinnor.Add(new Woman(nameWoman_2, nov_20, time_19, phoneNr_5, "4"));
+
+                män.Add(new Man(nameMan_1, nov_20, time_16, phoneNr_5, "3"));
+                män.Add(new Man(nameMan_2, nov_20, time_16, phoneNr_5, "4"));
+                män.Add(new Man(nameMan_3, nov_20, time_17, phoneNr_5, "3"));
+                män.Add(new Man(nameMan_1, nov_20, time_17, phoneNr_3, "5"));
+                män.Add(new Man(nameMan_4, nov_20, time_20, phoneNr_5, "4"));
+                män.Add(new Man(nameMan_5, nov_20, time_21, phoneNr_1, "1"));
+                män.Add(new Man(nameMan_2, nov_20, time_21, phoneNr_2, "2"));
+                män.Add(new Man(nameMan_3, nov_20, time_21, phoneNr_3, "5"));
+
+
+
+
+
+
+
+
+
+                foreach (var person in kvinnor)
+                {
+                    Boka(person.table, person.name, person.gender, person.date, person.time, person.phoneNr, person.text, datumLista, "custom");
+                }
+
+                foreach (var person in män)
+                {
+                    Boka(person.table, person.name, person.gender, person.date, person.time, person.phoneNr, person.text, datumLista, "custom");
+                }
+            }
+
 
 
         }
