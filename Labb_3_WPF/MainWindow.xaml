@@ -76,21 +76,9 @@
                     </ComboBox>
                 </StackPanel>
                         
-                        
-                       
-
-
-
 
                 <Button x:Name="BookingBtn" Content="Bekräfta bokning" Height="25" 
                             Margin="20,40,20,20" Background="Aqua" Click="BookingBtn_Click"/>
-
-
-
-
-
-
-
 
             </StackPanel>
             <StackPanel>
@@ -111,6 +99,18 @@
 
             </StackPanel>
         </StackPanel>
+
+                        
+                       
+
+
+
+
+
+
+
+
+
 
 
 
