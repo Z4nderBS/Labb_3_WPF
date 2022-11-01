@@ -116,7 +116,7 @@ namespace Labb_3_WPF
 
         private async void BookedDays_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            var watch = Stopwatch.StartNew();
+         
             listBx.Items.Clear();
             var DateFromCalendar = BookedDays.SelectedDate.Value.Date.ToShortDateString();
 
@@ -142,10 +142,7 @@ namespace Labb_3_WPF
 
 
 
-            watch.Stop();
-            var elapsedMs = watch.ElapsedMilliseconds.ToString();
-            MessageBox.Show(elapsedMs + "milisekunder");
-
+         
         }
 
 
