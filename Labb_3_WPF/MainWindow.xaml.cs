@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -32,10 +33,10 @@ namespace Labb_3_WPF
         public MainWindow()
         {
             // gör en lista med tider här och sen data binda dem
-
+            var watch = Stopwatch.StartNew();
             AddDates(datumLista);
-            PreMadeBookings(datumLista);
             InitializeComponent();
+            PreMadeBookings(datumLista);
 
             tider = new List<string>() { "16.00", "17.00", "18.00", "19.00", "20.00", "21.00"};
             tables = new List<string>() {"1","2","3","4","5"};
@@ -43,7 +44,11 @@ namespace Labb_3_WPF
             this.DataContext = this;
 
             CancelOrder.Visibility = Visibility.Collapsed;
+            watch.Stop();
+            var elapsedMs = watch.ElapsedMilliseconds.ToString();
+            MessageBox.Show(elapsedMs + "milisekunder");
 
+           
 
 
         }
@@ -176,14 +181,14 @@ namespace Labb_3_WPF
         }
 
 
-        public static async void Boka(string bord, string namn, string kön, DateOnly datum, string tid, string nr, string text, List<DateAndTime> datumLista, string custom) // bokning för färdiga bokningar.
+        public static async Task Boka(string bord, string namn, string kön, DateOnly datum, string tid, string nr, string text, List<DateAndTime> datumLista, string custom) // bokning för färdiga bokningar.
         {
 
             bool checkTime;
 
 
 
-
+            var watch = Stopwatch.StartNew();
 
             foreach (var item in datumLista)
             {
@@ -198,7 +203,7 @@ namespace Labb_3_WPF
                             if (checkTime == true)
                             {
 
-                                await Filehandler.WriteFile(text);
+                                await Filehandler.WriteFileAsync(text);
 
 
                             }
@@ -214,6 +219,10 @@ namespace Labb_3_WPF
 
 
             }
+
+            watch.Stop();
+            var ms = watch.ElapsedMilliseconds;
+            MessageBox.Show(ms.ToString());
 
 
         }
@@ -375,9 +384,9 @@ namespace Labb_3_WPF
 
         }
 
-        public static void PreMadeBookings(List<DateAndTime> datumLista)
+        public static async void PreMadeBookings(List<DateAndTime> datumLista)
         {
-            List<string> bokningar = Filehandler.GetTextsFile();
+            List<string> bokningar = await Filehandler.GetTextsFileAsync();
 
             if (bokningar.Count == 1)
             {
@@ -614,12 +623,12 @@ namespace Labb_3_WPF
 
                 foreach (var person in kvinnor)
                 {
-                    Boka(person.table, person.name, person.gender, person.date, person.time, person.phoneNr, person.text, datumLista, "custom");
+                    await Boka(person.table, person.name, person.gender, person.date, person.time, person.phoneNr, person.text, datumLista, "custom");
                 }
 
                 foreach (var person in män)
                 {
-                    Boka(person.table, person.name, person.gender, person.date, person.time, person.phoneNr, person.text, datumLista, "custom");
+                    await Boka(person.table, person.name, person.gender, person.date, person.time, person.phoneNr, person.text, datumLista, "custom");
                 }
             }
 
