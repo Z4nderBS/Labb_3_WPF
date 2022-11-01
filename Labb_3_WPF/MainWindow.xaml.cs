@@ -356,39 +356,50 @@ namespace Labb_3_WPF
 
         private async void CancelOrder_Click(object sender, RoutedEventArgs e)
         {
-
-            string textToRemove = listBx.SelectedItem.ToString();
-            var filePath = "bokningar.log";
-
-            List<string> textToKeep = new List<string>();
-
-            using (var sr = new StreamReader(filePath))
-
+            if (listBx.SelectedItem != null)
             {
-                string line;
 
-                while ((line = sr.ReadLine()) != null)
+
+
+                string textToRemove = listBx.SelectedItem.ToString();
+                var filePath = "bokningar.log";
+
+                List<string> textToKeep = new List<string>();
+
+                using (var sr = new StreamReader(filePath))
+
                 {
-                    if (line != textToRemove)
+                    string line;
+
+                    while ((line = sr.ReadLine()) != null)
                     {
-                        textToKeep.Add(line);
+                        if (line != textToRemove)
+                        {
+                            textToKeep.Add(line);
+                        }
+
                     }
-
                 }
+                File.Delete(filePath);
+
+                foreach (var item in textToKeep)
+                {
+                    Filehandler.WriteFile(item);
+                }
+
+                MessageBox.Show("Din bokning har nu tagits bort");
+                CancelOrder.Visibility = Visibility.Collapsed;
+                listBx.Items.Clear();
             }
-
-            File.Delete(filePath);
-
-
-
-            foreach (var item in textToKeep)
+            else
             {
-                Filehandler.WriteFile(item);
+                MessageBox.Show("du har inte valt en bokning att avboka");
             }
+           
 
-            MessageBox.Show("Din bokning har nu tagits bort");
-            CancelOrder.Visibility = Visibility.Collapsed;
-            listBx.Items.Clear();
+
+
+          
 
 
         }
