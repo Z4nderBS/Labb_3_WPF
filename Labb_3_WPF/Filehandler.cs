@@ -50,6 +50,7 @@ namespace Labb_3_WPF
 
         public static async Task<List<string>> GetTextsFileAsync()
         {
+           
             if (File.Exists("bokningar.log") == false)
             {
                 WriteFile("Bokningar 14 november till 20 november");
@@ -82,7 +83,7 @@ namespace Labb_3_WPF
             using (StreamWriter writeOrder = new StreamWriter("bokningar.log", true))
             {
 
-                writeOrder.WriteLine(text);
+                writeOrder.WriteLineAsync(text);
             }
         }
 

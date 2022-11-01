@@ -149,7 +149,7 @@ namespace Labb_3_WPF
 
 
 
-        public static void Boka(string bord, string namn, string kön, DateOnly datum, string tid, string nr, string text, List<DateAndTime> datumLista) // bokning för användaren
+        public static async Task Boka(string bord, string namn, string kön, DateOnly datum, string tid, string nr, string text, List<DateAndTime> datumLista) // bokning för användaren
         {
 
             bool checkTime;
@@ -166,7 +166,7 @@ namespace Labb_3_WPF
                     {
                         if (item.Tider[i].tid == tid)
                         {
-                            checkTime = CheckTableAvailable(datum, item.Tider[i], bord);
+                            checkTime = await CheckTableAvailable(datum, item.Tider[i], bord);
 
                             if (checkTime == true)
                             {
@@ -210,12 +210,12 @@ namespace Labb_3_WPF
                     {
                         if (item.Tider[i].tid == tid)
                         {
-                            checkTime = CheckTableAvailable(datum, item.Tider[i], bord);
+                            checkTime = await CheckTableAvailable(datum, item.Tider[i], bord);
 
                             if (checkTime == true)
                             {
 
-                                await Filehandler.WriteFileAsync(text);
+                                Filehandler.WriteFileAsync(text);
 
 
                             }
@@ -241,15 +241,15 @@ namespace Labb_3_WPF
 
 
 
-        public static bool CheckTableAvailable(DateOnly datum, Time tid, string bord)
+        public static async Task<bool> CheckTableAvailable(DateOnly datum, Time tid, string bord)
         {
             bool isAvailalbe = true;
-            List<string> bokningar = Filehandler.GetTextsFile();
-
-
             var regexDateIdentifier = new Regex(@"Datum: " + datum.ToString());
             var regexTimeIdentifier = new Regex(@"Klockan: " + tid.tid);
             var regexbordIdentifier = new Regex(@"Bord: " + bord);
+
+            List<string> bokningar = await Filehandler.GetTextsFileAsync();
+
 
 
             var queryText = from item in bokningar
@@ -394,7 +394,7 @@ namespace Labb_3_WPF
 
         }
 
-        public static async Task PreMadeBookings(List<DateAndTime> datumLista)
+        public static async void PreMadeBookings(List<DateAndTime> datumLista)
         {
             List<string> bokningar = await Filehandler.GetTextsFileAsync();
 
