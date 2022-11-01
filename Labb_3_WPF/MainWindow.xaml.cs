@@ -101,7 +101,7 @@ namespace Labb_3_WPF
 
                     tableChoiceBox.Text = "";
                     TimeChoiceBox.Text = "";
-                    genderChoiceBox.Text = "";
+                   
                    
 
                 }
@@ -329,9 +329,9 @@ namespace Labb_3_WPF
         }
        
 
-        private void Cancel_Click(object sender, RoutedEventArgs e)
+        private async void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            List<string> bokningar = Filehandler.GetTextsFile();
+            List<string> bokningar = await Filehandler.GetTextsFileAsync();
             listBx.Items.Clear();
 
 
