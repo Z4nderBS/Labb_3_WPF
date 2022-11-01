@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -32,7 +33,7 @@ namespace Labb_3_WPF
         public MainWindow()
         {
             // gör en lista med tider här och sen data binda dem
-
+            var watch = Stopwatch.StartNew();
             AddDates(datumLista);
             PreMadeBookings(datumLista);
             InitializeComponent();
@@ -43,6 +44,9 @@ namespace Labb_3_WPF
             this.DataContext = this;
 
             CancelOrder.Visibility = Visibility.Collapsed;
+            watch.Stop();
+            var ms = watch.ElapsedMilliseconds.ToString();
+            MessageBox.Show(ms + "milisekunder");
 
 
 
