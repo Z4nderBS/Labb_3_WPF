@@ -99,7 +99,7 @@ namespace Labb_3_WPF
 
 
 
-                   
+                    tableChoiceBox.Text = "";
                     TimeChoiceBox.Text = "";
                     genderChoiceBox.Text = "";
                    
