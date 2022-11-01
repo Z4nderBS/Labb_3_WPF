@@ -107,7 +107,7 @@ namespace Labb_3_WPF
             var DateFromCalendar = BookedDays.SelectedDate.Value.Date.ToShortDateString();
 
 
-            List<string> bokningar = GetTextsFile();
+            List<string> bokningar = Filehandler.GetTextsFile();
 
 
             var regexDateIdentifier = new Regex(@"Datum: " + DateFromCalendar);
@@ -127,47 +127,6 @@ namespace Labb_3_WPF
             }
 
         }
-
-
-
-        public static void WriteFile(string text)
-        {
-
-            using (StreamWriter writeOrder = new StreamWriter("bokningar.log", true))
-            {
-
-                writeOrder.WriteLine(text);
-            }
-        }
-
-        public static List<string> GetTextsFile()
-        {
-            if (File.Exists("bokningar.log") == false)
-            {
-                WriteFile("Bokningar 14 november till 20 november");
-            }
-
-
-            List<string> texts = new List<string>();
-
-
-            string line = "";
-
-
-
-            using (StreamReader stream = new StreamReader("bokningar.log"))
-            {
-                while ((line = stream.ReadLine()) != null)
-                {
-                    texts.Add(line);
-
-                }
-            }
-
-            return texts;
-
-        }
-
 
 
 
@@ -195,7 +154,7 @@ namespace Labb_3_WPF
                             if (checkTime == true)
                             {
 
-                                WriteFile(text);
+                                Filehandler.WriteFile(text);
                                 MessageBox.Show("din bokning har registrerats");
 
 
@@ -239,7 +198,7 @@ namespace Labb_3_WPF
                             if (checkTime == true)
                             {
 
-                                WriteFile(text);
+                                Filehandler.WriteFile(text);
 
 
                             }
@@ -266,7 +225,7 @@ namespace Labb_3_WPF
         public static bool CheckTableAvailable(DateOnly datum, Time tid, string bord)
         {
             bool isAvailalbe = true;
-            List<string> bokningar = GetTextsFile();
+            List<string> bokningar = Filehandler.GetTextsFile();
 
 
             var regexDateIdentifier = new Regex(@"Datum: " + datum.ToString());
@@ -354,7 +313,7 @@ namespace Labb_3_WPF
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            List<string> bokningar = GetTextsFile();
+            List<string> bokningar = Filehandler.GetTextsFile();
             listBx.Items.Clear();
 
 
@@ -406,7 +365,7 @@ namespace Labb_3_WPF
 
             foreach (var item in textToKeep)
             {
-                WriteFile(item);
+                Filehandler.WriteFile(item);
             }
 
             MessageBox.Show("Din bokning har nu tagits bort");
@@ -418,7 +377,7 @@ namespace Labb_3_WPF
 
         public static void PreMadeBookings(List<DateAndTime> datumLista)
         {
-            List<string> bokningar = GetTextsFile();
+            List<string> bokningar = Filehandler.GetTextsFile();
 
             if (bokningar.Count == 1)
             {
