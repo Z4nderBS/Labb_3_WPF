@@ -382,7 +382,7 @@ namespace Labb_3_WPF
 
         }
 
-        public static async void PreMadeBookings(List<DateAndTime> datumLista)
+        public static async Task PreMadeBookings(List<DateAndTime> datumLista)
         {
             List<string> bokningar = await Filehandler.GetTextsFileAsync();
 
