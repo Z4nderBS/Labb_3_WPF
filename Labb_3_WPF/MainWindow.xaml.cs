@@ -60,9 +60,9 @@ namespace Labb_3_WPF
 
  
 
-        private void BookingBtn_Click(object sender, RoutedEventArgs e)
+        private async void BookingBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            var watch = Stopwatch.StartNew();
 
             try
             {
@@ -82,7 +82,7 @@ namespace Labb_3_WPF
 
 
 
-                if (CheckInputs(förNamn, efterNamn, tid, kön, teleNr, bord) == true)
+                if (await CheckInputs(förNamn, efterNamn, tid, kön, teleNr, bord) == true)
                 {
 
 
@@ -112,11 +112,16 @@ namespace Labb_3_WPF
                 MessageBox.Show("Välj ett tillgängligt Datum");
 
             }
+
+            watch.Stop();
+            var elapsedMs = watch.ElapsedMilliseconds.ToString();
+            MessageBox.Show(elapsedMs + "milisekunder");
+
         }
 
         private async void BookedDays_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            var watch = Stopwatch.StartNew();
+            
             listBx.Items.Clear();
             var DateFromCalendar = BookedDays.SelectedDate.Value.Date.ToShortDateString();
 
@@ -142,10 +147,7 @@ namespace Labb_3_WPF
 
 
 
-            watch.Stop();
-            var elapsedMs = watch.ElapsedMilliseconds.ToString();
-            MessageBox.Show(elapsedMs + "milisekunder");
-
+          
         }
 
 
@@ -276,7 +278,7 @@ namespace Labb_3_WPF
         }
 
 
-        public static bool CheckInputs(string förNamn, string efterNamn, string tid, string kön, string telefonNr, string bord)
+        public static async Task<bool> CheckInputs(string förNamn, string efterNamn, string tid, string kön, string telefonNr, string bord)
         {
             string missingText = "";
             var regexPhone = new Regex("^0[0-9]{9}"); // 0XX XXX XX XX 10 siffor om tid +46 också
@@ -289,6 +291,7 @@ namespace Labb_3_WPF
             if (tid == "") { missingInputs.Add($"Tid:"); }
             if (kön == "") { missingInputs.Add($"kön:"); }
             if (bord == "") { missingInputs.Add("Bord:"); }
+
 
             if (missingInputs.Count > 0)
             {
