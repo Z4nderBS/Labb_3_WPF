@@ -355,7 +355,7 @@ namespace Labb_3_WPF
             }
         }
 
-        private void CancelOrder_Click(object sender, RoutedEventArgs e)
+        private async void CancelOrder_Click(object sender, RoutedEventArgs e)
         {
 
             string textToRemove = listBx.SelectedItem.ToString();
