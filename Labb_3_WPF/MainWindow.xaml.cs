@@ -188,7 +188,7 @@ namespace Labb_3_WPF
 
 
 
-            var watch = Stopwatch.StartNew();
+         
 
             foreach (var item in datumLista)
             {
@@ -220,9 +220,7 @@ namespace Labb_3_WPF
 
             }
 
-            watch.Stop();
-            var ms = watch.ElapsedMilliseconds;
-            MessageBox.Show(ms.ToString());
+     
 
 
         }
