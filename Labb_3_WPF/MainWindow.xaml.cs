@@ -33,10 +33,15 @@ namespace Labb_3_WPF
         public MainWindow()
         {
             // gör en lista med tider här och sen data binda dem
-            var watch = Stopwatch.StartNew();
+            
             AddDates(datumLista);
-            InitializeComponent();
+            var watch = Stopwatch.StartNew();
             PreMadeBookings(datumLista);
+            watch.Stop();
+            var elapsedMs = watch.ElapsedMilliseconds.ToString();
+            MessageBox.Show(elapsedMs + "milisekunder");
+            InitializeComponent();
+            
 
             tider = new List<string>() { "16.00", "17.00", "18.00", "19.00", "20.00", "21.00"};
             tables = new List<string>() {"1","2","3","4","5"};
@@ -44,9 +49,7 @@ namespace Labb_3_WPF
             this.DataContext = this;
 
             CancelOrder.Visibility = Visibility.Collapsed;
-            watch.Stop();
-            var elapsedMs = watch.ElapsedMilliseconds.ToString();
-            MessageBox.Show(elapsedMs + "milisekunder");
+           
 
            
 
@@ -633,6 +636,8 @@ namespace Labb_3_WPF
 
 
         }
+
+
     }
 }
 
