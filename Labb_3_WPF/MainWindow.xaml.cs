@@ -33,15 +33,17 @@ namespace Labb_3_WPF
         public MainWindow()
         {
             // gör en lista med tider här och sen data binda dem
-            
-            AddDates(datumLista);
+
             var watch = Stopwatch.StartNew();
-            PreMadeBookings(datumLista);
+            InitializeComponent();
             watch.Stop();
             var elapsedMs = watch.ElapsedMilliseconds.ToString();
             MessageBox.Show(elapsedMs + "milisekunder");
-            InitializeComponent();
-            
+            AddDates(datumLista);
+          
+            PreMadeBookings(datumLista);
+           
+
 
             tider = new List<string>() { "16.00", "17.00", "18.00", "19.00", "20.00", "21.00"};
             tables = new List<string>() {"1","2","3","4","5"};
@@ -57,8 +59,13 @@ namespace Labb_3_WPF
         }
 
 
+
+ 
+
         private void BookingBtn_Click(object sender, RoutedEventArgs e)
         {
+
+
             try
             {
                 var förNamn = firstNameBox.Text;
