@@ -33,15 +33,15 @@ namespace Labb_3_WPF
         public MainWindow()
         {
             // gör en lista med tider här och sen data binda dem
-          
-            AddDates(datumLista);
-            var watch = Stopwatch.StartNew();
-            PreMadeBookings(datumLista);
-            watch.Stop();
-            var ms = watch.ElapsedMilliseconds.ToString();
-            MessageBox.Show(ms + "milisekunder");
 
+            
             InitializeComponent();
+         
+            AddDates(datumLista);
+          
+            PreMadeBookings(datumLista);
+           
+
 
             tider = new List<string>() { "16.00", "17.00", "18.00", "19.00", "20.00", "21.00"};
             tables = new List<string>() {"1","2","3","4","5"};
@@ -49,14 +49,21 @@ namespace Labb_3_WPF
             this.DataContext = this;
 
             CancelOrder.Visibility = Visibility.Collapsed;
-          
+           
+
+           
 
 
         }
 
 
+
+ 
+
         private void BookingBtn_Click(object sender, RoutedEventArgs e)
         {
+
+
             try
             {
                 var förNamn = firstNameBox.Text;
@@ -107,17 +114,16 @@ namespace Labb_3_WPF
             }
         }
 
-        private void BookedDays_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        private async void BookedDays_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
+         
             listBx.Items.Clear();
             var DateFromCalendar = BookedDays.SelectedDate.Value.Date.ToShortDateString();
 
-
-            List<string> bokningar = Filehandler.GetTextsFile();
-
-
             var regexDateIdentifier = new Regex(@"Datum: " + DateFromCalendar);
             var regexbordIdentifier = new Regex(@"Bord: [1-5]{1}");
+
+            List<string> bokningar = await Filehandler.GetTextsFileAsync();
 
 
             var queryTexts = from item in bokningar
@@ -131,14 +137,19 @@ namespace Labb_3_WPF
             {
                 listBx.Items.Add(item);
             }
+           
 
+
+
+
+         
         }
 
 
 
 
 
-        public static void Boka(string bord, string namn, string kön, DateOnly datum, string tid, string nr, string text, List<DateAndTime> datumLista) // bokning för användaren
+        public static async void Boka(string bord, string namn, string kön, DateOnly datum, string tid, string nr, string text, List<DateAndTime> datumLista) // bokning för användaren
         {
 
             bool checkTime;
@@ -155,7 +166,7 @@ namespace Labb_3_WPF
                     {
                         if (item.Tider[i].tid == tid)
                         {
-                            checkTime = CheckTableAvailable(datum, item.Tider[i], bord);
+                            checkTime = await CheckTableAvailable(datum, item.Tider[i], bord);
 
                             if (checkTime == true)
                             {
@@ -182,14 +193,14 @@ namespace Labb_3_WPF
         }
 
 
-        public static void Boka(string bord, string namn, string kön, DateOnly datum, string tid, string nr, string text, List<DateAndTime> datumLista, string custom) // bokning för färdiga bokningar.
+        public static async void Boka(string bord, string namn, string kön, DateOnly datum, string tid, string nr, string text, List<DateAndTime> datumLista, string custom) // bokning för färdiga bokningar.
         {
 
             bool checkTime;
 
 
 
-
+         
 
             foreach (var item in datumLista)
             {
@@ -199,12 +210,12 @@ namespace Labb_3_WPF
                     {
                         if (item.Tider[i].tid == tid)
                         {
-                            checkTime = CheckTableAvailable(datum, item.Tider[i], bord);
+                            checkTime = await CheckTableAvailable(datum, item.Tider[i], bord);
 
                             if (checkTime == true)
                             {
 
-                                Filehandler.WriteFile(text);
+                                Filehandler.WriteFileAsync(text);
 
 
                             }
@@ -221,6 +232,8 @@ namespace Labb_3_WPF
 
             }
 
+     
+
 
         }
 
@@ -228,15 +241,15 @@ namespace Labb_3_WPF
 
 
 
-        public static bool CheckTableAvailable(DateOnly datum, Time tid, string bord)
+        public static async Task<bool> CheckTableAvailable(DateOnly datum, Time tid, string bord)
         {
             bool isAvailalbe = true;
-            List<string> bokningar = Filehandler.GetTextsFile();
-
-
             var regexDateIdentifier = new Regex(@"Datum: " + datum.ToString());
             var regexTimeIdentifier = new Regex(@"Klockan: " + tid.tid);
             var regexbordIdentifier = new Regex(@"Bord: " + bord);
+
+            List<string> bokningar = await Filehandler.GetTextsFileAsync();
+
 
 
             var queryText = from item in bokningar
@@ -342,7 +355,7 @@ namespace Labb_3_WPF
             }
         }
 
-        private void CancelOrder_Click(object sender, RoutedEventArgs e)
+        private async void CancelOrder_Click(object sender, RoutedEventArgs e)
         {
 
             string textToRemove = listBx.SelectedItem.ToString();
@@ -381,9 +394,9 @@ namespace Labb_3_WPF
 
         }
 
-        public static void PreMadeBookings(List<DateAndTime> datumLista)
+        public static async void PreMadeBookings(List<DateAndTime> datumLista)
         {
-            List<string> bokningar = Filehandler.GetTextsFile();
+            List<string> bokningar = await Filehandler.GetTextsFileAsync();
 
             if (bokningar.Count == 1)
             {
@@ -590,7 +603,6 @@ namespace Labb_3_WPF
              
 
                 // 20 November 2022
-            
                 män.Add(new Man(nameMan_1, nov_20, time_16, phoneNr_5, "3"));
                 män.Add(new Man(nameMan_2, nov_20, time_16, phoneNr_5, "4"));
                 kvinnor.Add(new Woman(nameWoman_3, nov_20, time_17, phoneNr_4, "1"));
@@ -607,6 +619,7 @@ namespace Labb_3_WPF
                 män.Add(new Man(nameMan_5, nov_20, time_21, phoneNr_1, "1"));
             
 
+            
              
        
 
@@ -632,6 +645,8 @@ namespace Labb_3_WPF
 
 
         }
+
+
     }
 }
 
