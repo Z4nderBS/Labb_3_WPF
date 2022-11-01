@@ -149,7 +149,7 @@ namespace Labb_3_WPF
 
 
 
-        public static async Task Boka(string bord, string namn, string kön, DateOnly datum, string tid, string nr, string text, List<DateAndTime> datumLista) // bokning för användaren
+        public static async void Boka(string bord, string namn, string kön, DateOnly datum, string tid, string nr, string text, List<DateAndTime> datumLista) // bokning för användaren
         {
 
             bool checkTime;
@@ -193,7 +193,7 @@ namespace Labb_3_WPF
         }
 
 
-        public static async Task Boka(string bord, string namn, string kön, DateOnly datum, string tid, string nr, string text, List<DateAndTime> datumLista, string custom) // bokning för färdiga bokningar.
+        public static async void Boka(string bord, string namn, string kön, DateOnly datum, string tid, string nr, string text, List<DateAndTime> datumLista, string custom) // bokning för färdiga bokningar.
         {
 
             bool checkTime;
@@ -633,12 +633,12 @@ namespace Labb_3_WPF
 
                 foreach (var person in kvinnor)
                 {
-                    await Boka(person.table, person.name, person.gender, person.date, person.time, person.phoneNr, person.text, datumLista, "custom");
+                    Boka(person.table, person.name, person.gender, person.date, person.time, person.phoneNr, person.text, datumLista, "custom");
                 }
 
                 foreach (var person in män)
                 {
-                    await Boka(person.table, person.name, person.gender, person.date, person.time, person.phoneNr, person.text, datumLista, "custom");
+                    Boka(person.table, person.name, person.gender, person.date, person.time, person.phoneNr, person.text, datumLista, "custom");
                 }
             }
 
