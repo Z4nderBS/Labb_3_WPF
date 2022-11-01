@@ -10,7 +10,7 @@ namespace Labb_3_WPF
     public class Filehandler
     {
 
-        public static void WriteFile(string text)
+        public static async Task WriteFile(string text)
         {
 
             using (StreamWriter writeOrder = new StreamWriter("bokningar.log", true))
@@ -35,7 +35,7 @@ namespace Labb_3_WPF
 
 
 
-            using (StreamReader stream = new StreamReader("bokningar.log"))
+           using (StreamReader stream = new StreamReader("bokningar.log"))
             {
                 while ((line = stream.ReadLine()) != null)
                 {

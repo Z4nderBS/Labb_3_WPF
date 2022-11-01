@@ -176,7 +176,7 @@ namespace Labb_3_WPF
         }
 
 
-        public static void Boka(string bord, string namn, string kön, DateOnly datum, string tid, string nr, string text, List<DateAndTime> datumLista, string custom) // bokning för färdiga bokningar.
+        public static async void Boka(string bord, string namn, string kön, DateOnly datum, string tid, string nr, string text, List<DateAndTime> datumLista, string custom) // bokning för färdiga bokningar.
         {
 
             bool checkTime;
@@ -198,7 +198,7 @@ namespace Labb_3_WPF
                             if (checkTime == true)
                             {
 
-                                Filehandler.WriteFile(text);
+                                await Filehandler.WriteFile(text);
 
 
                             }
@@ -584,7 +584,6 @@ namespace Labb_3_WPF
              
 
                 // 20 November 2022
-            
                 män.Add(new Man(nameMan_1, nov_20, time_16, phoneNr_5, "3"));
                 män.Add(new Man(nameMan_2, nov_20, time_16, phoneNr_5, "4"));
                 kvinnor.Add(new Woman(nameWoman_3, nov_20, time_17, phoneNr_4, "1"));
@@ -601,6 +600,7 @@ namespace Labb_3_WPF
                 män.Add(new Man(nameMan_5, nov_20, time_21, phoneNr_1, "1"));
             
 
+            
              
        
 
