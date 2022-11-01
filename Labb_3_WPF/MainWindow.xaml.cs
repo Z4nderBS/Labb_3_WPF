@@ -99,11 +99,10 @@ namespace Labb_3_WPF
 
 
 
-                    firstNameBox.Text = "";
-                    lastNameBox.Text = "";
+                   
                     TimeChoiceBox.Text = "";
                     genderChoiceBox.Text = "";
-                    phoneBox.Text = " ";
+                   
 
                 }
             }
