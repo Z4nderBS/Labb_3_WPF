@@ -144,7 +144,80 @@ namespace Labb_3_WPF
          
         }
 
+        private async void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            List<string> bokningar = await Filehandler.GetTextsFileAsync();
+            listBx.Items.Clear();
 
+
+            var regexUserIdentifier = new Regex(@"(\*)");
+
+            var queryText = from item in bokningar
+                            where regexUserIdentifier.IsMatch(item)
+                            select item.ToString();
+
+            foreach (var item in queryText)
+            {
+                CancelOrder.Visibility = Visibility.Visible;
+                listBx.Items.Add(item);
+
+            }
+            if (listBx.Items.Count == 0)
+            {
+
+                MessageBox.Show("Du har inga registrerade bokningar.");
+            }
+        }
+
+        private async void CancelOrder_Click(object sender, RoutedEventArgs e)
+        {
+            if (listBx.SelectedItem != null)
+            {
+
+
+
+                string textToRemove = listBx.SelectedItem.ToString();
+                var filePath = "bokningar.log";
+
+                List<string> textToKeep = new List<string>();
+
+                using (var sr = new StreamReader(filePath))
+
+                {
+                    string line;
+
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        if (line != textToRemove)
+                        {
+                            textToKeep.Add(line);
+                        }
+
+                    }
+                }
+                File.Delete(filePath);
+
+                foreach (var item in textToKeep)
+                {
+                    Filehandler.WriteFile(item);
+                }
+
+                MessageBox.Show("Din bokning har nu tagits bort");
+                CancelOrder.Visibility = Visibility.Collapsed;
+                listBx.Items.Clear();
+            }
+            else
+            {
+                MessageBox.Show("du har inte valt en bokning att avboka");
+            }
+
+
+
+
+
+
+
+        }
 
 
 
@@ -328,81 +401,6 @@ namespace Labb_3_WPF
             }
         }
        
-
-        private async void Cancel_Click(object sender, RoutedEventArgs e)
-        {
-            List<string> bokningar = await Filehandler.GetTextsFileAsync();
-            listBx.Items.Clear();
-
-
-            var regexUserIdentifier = new Regex(@"(\*)");
-
-            var queryText = from item in bokningar
-                            where regexUserIdentifier.IsMatch(item)
-                            select item.ToString();
-
-            foreach (var item in queryText)
-            {
-                CancelOrder.Visibility = Visibility.Visible;
-                listBx.Items.Add(item);
-
-            }
-            if (listBx.Items.Count == 0)
-            {
-
-                MessageBox.Show("Du har inga registrerade bokningar.");
-            }
-        }
-
-        private async void CancelOrder_Click(object sender, RoutedEventArgs e)
-        {
-            if (listBx.SelectedItem != null)
-            {
-
-
-
-                string textToRemove = listBx.SelectedItem.ToString();
-                var filePath = "bokningar.log";
-
-                List<string> textToKeep = new List<string>();
-
-                using (var sr = new StreamReader(filePath))
-
-                {
-                    string line;
-
-                    while ((line = sr.ReadLine()) != null)
-                    {
-                        if (line != textToRemove)
-                        {
-                            textToKeep.Add(line);
-                        }
-
-                    }
-                }
-                File.Delete(filePath);
-
-                foreach (var item in textToKeep)
-                {
-                    Filehandler.WriteFile(item);
-                }
-
-                MessageBox.Show("Din bokning har nu tagits bort");
-                CancelOrder.Visibility = Visibility.Collapsed;
-                listBx.Items.Clear();
-            }
-            else
-            {
-                MessageBox.Show("du har inte valt en bokning att avboka");
-            }
-           
-
-
-
-          
-
-
-        }
 
         public static async void PreMadeBookings(List<DateAndTime> datumLista)
         {
@@ -705,10 +703,12 @@ namespace Labb_3_WPF
 
 
         }
-
-
+   
     }
 }
+
+
+
 
 
 
