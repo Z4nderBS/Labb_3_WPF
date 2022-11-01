@@ -1,5 +1,5 @@
 ﻿
 
-[]om det inte går att boka så sparas det ändå.
+[X]om det inte går att boka så sparas det ändå.
 [x]om filen inte är skapad så kraschar programet.
 [] om det inte går att boka så tas allt bort och man måste börja om boknignen.
