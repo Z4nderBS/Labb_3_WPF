@@ -34,11 +34,9 @@ namespace Labb_3_WPF
         {
             // gör en lista med tider här och sen data binda dem
 
-            var watch = Stopwatch.StartNew();
+            
             InitializeComponent();
-            watch.Stop();
-            var elapsedMs = watch.ElapsedMilliseconds.ToString();
-            MessageBox.Show(elapsedMs + "milisekunder");
+         
             AddDates(datumLista);
           
             PreMadeBookings(datumLista);
@@ -116,17 +114,16 @@ namespace Labb_3_WPF
             }
         }
 
-        private void BookedDays_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        private async void BookedDays_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
+            var watch = Stopwatch.StartNew();
             listBx.Items.Clear();
             var DateFromCalendar = BookedDays.SelectedDate.Value.Date.ToShortDateString();
 
-
-            List<string> bokningar = Filehandler.GetTextsFile();
-
-
             var regexDateIdentifier = new Regex(@"Datum: " + DateFromCalendar);
             var regexbordIdentifier = new Regex(@"Bord: [1-5]{1}");
+
+            List<string> bokningar = await Filehandler.GetTextsFileAsync();
 
 
             var queryTexts = from item in bokningar
@@ -140,6 +137,14 @@ namespace Labb_3_WPF
             {
                 listBx.Items.Add(item);
             }
+           
+
+
+
+
+            watch.Stop();
+            var elapsedMs = watch.ElapsedMilliseconds.ToString();
+            MessageBox.Show(elapsedMs + "milisekunder");
 
         }
 
