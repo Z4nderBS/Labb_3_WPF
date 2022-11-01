@@ -442,20 +442,27 @@ namespace Labb_3_WPF
 
 
                 // 14 November 2022
+
+                //16.00
                 kvinnor.Add(new Woman(nameWoman_1, nov_14, time_16, phoneNr_1, "1"));
                 män.Add(new Man(nameMan_1, nov_14, time_16, phoneNr_5, "3"));
                 män.Add(new Man(nameMan_2, nov_14, time_16, phoneNr_5, "4"));
+                //17.00
                 kvinnor.Add(new Woman(nameWoman_3, nov_14, time_17, phoneNr_4, "1"));
                 män.Add(new Man(nameMan_4, nov_14, time_17, phoneNr_5, "2"));
                 män.Add(new Man(nameMan_3, nov_14, time_17, phoneNr_5, "3"));
-                män.Add(new Man(nameMan_1, nov_14, time_18, phoneNr_3, "5"));
+                //18.00
                 kvinnor.Add(new Woman(nameWoman_4, nov_14, time_18, phoneNr_3, "2"));
+                män.Add(new Man(nameMan_1, nov_14, time_18, phoneNr_3, "5"));
                 män.Add(new Man(nameMan_4, nov_14, time_18, phoneNr_5, "4"));
+                //19.00
                 kvinnor.Add(new Woman(nameWoman_5, nov_14, time_19, phoneNr_5, "1"));
                 kvinnor.Add(new Woman(nameWoman_3, nov_14, time_19, phoneNr_3, "3"));
                 kvinnor.Add(new Woman(nameWoman_2, nov_14, time_19, phoneNr_5, "4"));
+                //20.00
                 män.Add(new Man(nameMan_4, nov_14, time_20, phoneNr_5, "4"));
                 kvinnor.Add(new Woman(nameWoman_3, nov_14, time_20, phoneNr_3, "1"));
+                //21.00
                 kvinnor.Add(new Woman(nameWoman_3, nov_14, time_21, phoneNr_3, "3"));
                 män.Add(new Man(nameMan_5, nov_14, time_21, phoneNr_1, "1"));
                 män.Add(new Man(nameMan_2, nov_14, time_21, phoneNr_2, "2"));
@@ -471,22 +478,29 @@ namespace Labb_3_WPF
 
 
                 // 15 November 2022
+
+                //16.00
                 kvinnor.Add(new Woman(nameWoman_1, nov_15, time_16, phoneNr_1, "1"));
+                //17.00
                 kvinnor.Add(new Woman(nameWoman_3, nov_15, time_17, phoneNr_4, "1"));
                 kvinnor.Add(new Woman(nameWoman_2, nov_15, time_17, phoneNr_2, "2"));
                 kvinnor.Add(new Woman(nameWoman_4, nov_15, time_17, phoneNr_3, "3"));
                 män.Add(new Man(nameMan_3, nov_15, time_17, phoneNr_5, "4"));
                 män.Add(new Man(nameMan_1, nov_15, time_17, phoneNr_3, "5"));
+                //18.00
                 kvinnor.Add(new Woman(nameWoman_4, nov_15, time_18, phoneNr_3, "1"));
                 män.Add(new Man(nameMan_4, nov_15, time_18, phoneNr_5, "2"));
                 män.Add(new Man(nameMan_2, nov_15, time_18, phoneNr_2, "3"));
                 män.Add(new Man(nameMan_3, nov_15, time_18, phoneNr_3, "4"));
                 män.Add(new Man(nameMan_5, nov_15, time_18, phoneNr_1, "5"));
+                //19.00
                 kvinnor.Add(new Woman(nameWoman_3, nov_15, time_19, phoneNr_3, "2"));
                 kvinnor.Add(new Woman(nameWoman_2, nov_15, time_19, phoneNr_5, "4"));
+                //20.00
                 män.Add(new Man(nameMan_4, nov_15, time_20, phoneNr_5, "1"));
                 män.Add(new Man(nameMan_2, nov_15, time_20, phoneNr_2, "2"));
                 män.Add(new Man(nameMan_3, nov_15, time_20, phoneNr_3, "4"));
+                //21.00
                 män.Add(new Man(nameMan_5, nov_15, time_21, phoneNr_1, "1"));
          
                
@@ -498,101 +512,130 @@ namespace Labb_3_WPF
 
 
                 // 16 November 2022
+
+                // 16.00
                 kvinnor.Add(new Woman(nameWoman_2, nov_16, time_16, phoneNr_2, "5"));
+                kvinnor.Add(new Woman(nameWoman_2, nov_16, time_16, phoneNr_5, "4"));
+                // 17.00
                 kvinnor.Add(new Woman(nameWoman_3, nov_16, time_17, phoneNr_4, "1"));
                 män.Add(new Man(nameMan_3, nov_16, time_17, phoneNr_5, "3"));
                 män.Add(new Man(nameMan_1, nov_16, time_17, phoneNr_3, "5"));
+                // 18.00
                 kvinnor.Add(new Woman(nameWoman_4, nov_16, time_18, phoneNr_3, "2"));
                 kvinnor.Add(new Woman(nameWoman_3, nov_16, time_18, phoneNr_3, "3"));
                 kvinnor.Add(new Woman(nameWoman_3, nov_16, time_18, phoneNr_3, "4"));
                 män.Add(new Man(nameMan_3, nov_16, time_18, phoneNr_5, "5"));
+                // 19.00
                 kvinnor.Add(new Woman(nameWoman_5, nov_16, time_19, phoneNr_5, "1"));
                 kvinnor.Add(new Woman(nameWoman_3, nov_16, time_19, phoneNr_3, "2"));
                 kvinnor.Add(new Woman(nameWoman_2, nov_16, time_19, phoneNr_5, "4"));
+                // 20.00
                 män.Add(new Man(nameMan_4, nov_16, time_20, phoneNr_5, "4"));
+                // 21.00
                 kvinnor.Add(new Woman(nameWoman_1, nov_16, time_21, phoneNr_1, "1"));
                 män.Add(new Man(nameMan_5, nov_16, time_21, phoneNr_1, "2"));
                 män.Add(new Man(nameMan_2, nov_16, time_21, phoneNr_2, "4"));
                 män.Add(new Man(nameMan_3, nov_16, time_21, phoneNr_3, "5"));
-              
-       
-              
 
-     
+
+
+
+
 
                 // 17 November 2022
+
+                // 16.00
                 kvinnor.Add(new Woman(nameWoman_1, nov_17, time_16, phoneNr_1, "1"));
                 kvinnor.Add(new Woman(nameWoman_2, nov_17, time_16, phoneNr_2, "2"));
                 kvinnor.Add(new Woman(nameWoman_5, nov_17, time_16, phoneNr_5, "3"));
                 kvinnor.Add(new Woman(nameWoman_3, nov_17, time_16, phoneNr_3, "4"));
                 män.Add(new Man(nameMan_1, nov_17, time_16, phoneNr_5, "3"));
+                // 17.00
                 kvinnor.Add(new Woman(nameWoman_3, nov_17, time_17, phoneNr_4, "1"));
                 kvinnor.Add(new Woman(nameWoman_1, nov_17, time_17, phoneNr_1, "2"));
                 kvinnor.Add(new Woman(nameWoman_2, nov_17, time_17, phoneNr_2, "3"));
                 män.Add(new Man(nameMan_3, nov_17, time_17, phoneNr_5, "4"));
                 män.Add(new Man(nameMan_1, nov_17, time_17, phoneNr_3, "5"));
+                // 18.00
                 kvinnor.Add(new Woman(nameWoman_4, nov_17, time_18, phoneNr_3, "1"));
                 män.Add(new Man(nameMan_2, nov_17, time_18, phoneNr_2, "2"));
                 män.Add(new Man(nameMan_3, nov_17, time_18, phoneNr_3, "5"));
+                // 19.00
                 kvinnor.Add(new Woman(nameWoman_5, nov_17, time_19, phoneNr_5, "1"));
                 kvinnor.Add(new Woman(nameWoman_3, nov_17, time_19, phoneNr_3, "2"));
                 kvinnor.Add(new Woman(nameWoman_2, nov_17, time_19, phoneNr_5, "4"));
+                // 20.00
                 män.Add(new Man(nameMan_4, nov_17, time_20, phoneNr_5, "4"));
+                // 21.00
                 män.Add(new Man(nameMan_5, nov_17, time_21, phoneNr_1, "1"));
                 män.Add(new Man(nameMan_2, nov_17, time_21, phoneNr_2, "2"));
                 män.Add(new Man(nameMan_3, nov_17, time_21, phoneNr_3, "5"));
-              
+
 
 
 
 
 
                 // 18 November 2022
+
+                // 16.00
                 kvinnor.Add(new Woman(nameWoman_1, nov_18, time_16, phoneNr_1, "1"));
                 kvinnor.Add(new Woman(nameWoman_2, nov_18, time_16, phoneNr_2, "2"));
                 män.Add(new Man(nameMan_1, nov_18, time_16, phoneNr_5, "3"));
                 män.Add(new Man(nameMan_2, nov_18, time_16, phoneNr_5, "4"));
                 män.Add(new Man(nameMan_3, nov_18, time_16, phoneNr_3, "5"));
+                // 17.00
                 kvinnor.Add(new Woman(nameWoman_3, nov_18, time_17, phoneNr_4, "1"));
                 kvinnor.Add(new Woman(nameWoman_3, nov_18, time_17, phoneNr_3, "2"));
                 kvinnor.Add(new Woman(nameWoman_2, nov_18, time_17, phoneNr_5, "4"));
                 män.Add(new Man(nameMan_3, nov_18, time_17, phoneNr_5, "3"));
                 män.Add(new Man(nameMan_1, nov_18, time_17, phoneNr_3, "5"));
+                // 18.00
                 kvinnor.Add(new Woman(nameWoman_4, nov_18, time_18, phoneNr_3, "1"));
                 kvinnor.Add(new Woman(nameWoman_3, nov_18, time_18, phoneNr_1, "2"));
                 kvinnor.Add(new Woman(nameWoman_2, nov_18, time_18, phoneNr_2, "4"));
+                // 19.00
                 kvinnor.Add(new Woman(nameWoman_5, nov_18, time_19, phoneNr_5, "1"));
                 kvinnor.Add(new Woman(nameWoman_3, nov_18, time_19, phoneNr_3, "2"));
                 kvinnor.Add(new Woman(nameWoman_2, nov_18, time_19, phoneNr_5, "4"));
+                // 20.00
                 kvinnor.Add(new Woman(nameWoman_1, nov_18, time_20, phoneNr_5, "1"));
                 kvinnor.Add(new Woman(nameWoman_3, nov_18, time_20, phoneNr_3, "2"));
                 män.Add(new Man(nameMan_4, nov_18, time_20, phoneNr_5, "3"));
                 män.Add(new Man(nameMan_2, nov_18, time_20, phoneNr_2, "5"));
+                // 21.00
                 kvinnor.Add(new Woman(nameWoman_5, nov_18, time_21, phoneNr_5, "1"));
                 kvinnor.Add(new Woman(nameWoman_3, nov_18, time_21, phoneNr_3, "2"));
                 män.Add(new Man(nameMan_5, nov_18, time_21, phoneNr_1, "3"));
                 män.Add(new Man(nameMan_2, nov_18, time_21, phoneNr_2, "4"));
                 män.Add(new Man(nameMan_3, nov_18, time_21, phoneNr_3, "5"));
 
-              
-               
+
+
 
                 // 19 November 2022
+
+                // 16.00
                 kvinnor.Add(new Woman(nameWoman_1, nov_19, time_16, phoneNr_1, "1"));
                 kvinnor.Add(new Woman(nameWoman_2, nov_19, time_16, phoneNr_2, "2"));
                 män.Add(new Man(nameMan_1, nov_19, time_16, phoneNr_5, "3"));
+                // 17.00
                 kvinnor.Add(new Woman(nameWoman_3, nov_19, time_17, phoneNr_4, "1"));
                 män.Add(new Man(nameMan_2, nov_19, time_17, phoneNr_5, "4"));
                 män.Add(new Man(nameMan_3, nov_19, time_17, phoneNr_5, "3"));
                 män.Add(new Man(nameMan_1, nov_19, time_17, phoneNr_3, "5"));
+                // 18.00
                 kvinnor.Add(new Woman(nameWoman_4, nov_19, time_18, phoneNr_3, "1"));
                 män.Add(new Man(nameMan_2, nov_19, time_18, phoneNr_2, "2"));
                 män.Add(new Man(nameMan_3, nov_19, time_18, phoneNr_3, "5"));
+                // 19.00
                 kvinnor.Add(new Woman(nameWoman_5, nov_19, time_19, phoneNr_5, "1"));
                 kvinnor.Add(new Woman(nameWoman_3, nov_19, time_19, phoneNr_3, "2"));
                 kvinnor.Add(new Woman(nameWoman_2, nov_19, time_19, phoneNr_5, "4"));
+                // 20.00
                 kvinnor.Add(new Woman(nameWoman_1, nov_19, time_20, phoneNr_1, "1"));
                 män.Add(new Man(nameMan_4, nov_19, time_20, phoneNr_5, "4"));
+                // 21.00
                 kvinnor.Add(new Woman(nameWoman_3, nov_19, time_21, phoneNr_3, "3"));
                 kvinnor.Add(new Woman(nameWoman_2, nov_19, time_21, phoneNr_5, "4"));
                 män.Add(new Man(nameMan_5, nov_19, time_21, phoneNr_1, "1"));
@@ -600,21 +643,28 @@ namespace Labb_3_WPF
                 män.Add(new Man(nameMan_3, nov_19, time_21, phoneNr_3, "5"));
 
 
-             
+
 
                 // 20 November 2022
+
+                // 16.00
                 män.Add(new Man(nameMan_1, nov_20, time_16, phoneNr_5, "3"));
                 män.Add(new Man(nameMan_2, nov_20, time_16, phoneNr_5, "4"));
+                // 17.00
                 kvinnor.Add(new Woman(nameWoman_3, nov_20, time_17, phoneNr_4, "1"));
                 män.Add(new Man(nameMan_3, nov_20, time_17, phoneNr_5, "3"));
                 män.Add(new Man(nameMan_1, nov_20, time_17, phoneNr_3, "5"));
+                // 18.00
                 kvinnor.Add(new Woman(nameWoman_1, nov_20, time_18, phoneNr_1, "1"));
                 kvinnor.Add(new Woman(nameWoman_2, nov_20, time_18, phoneNr_2, "2"));
                 kvinnor.Add(new Woman(nameWoman_4, nov_20, time_18, phoneNr_3, "3"));
+                // 19.00
                 kvinnor.Add(new Woman(nameWoman_5, nov_20, time_19, phoneNr_5, "1"));
                 kvinnor.Add(new Woman(nameWoman_3, nov_20, time_19, phoneNr_3, "2"));
                 kvinnor.Add(new Woman(nameWoman_2, nov_20, time_19, phoneNr_5, "4"));
+                // 20.00
                 män.Add(new Man(nameMan_4, nov_20, time_20, phoneNr_5, "4"));
+                // 21.00
                 kvinnor.Add(new Woman(nameWoman_3, nov_20, time_21, phoneNr_3, "5"));
                 män.Add(new Man(nameMan_5, nov_20, time_21, phoneNr_1, "1"));
             
