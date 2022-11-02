@@ -704,7 +704,24 @@ namespace Labb_3_WPF
 
 
         }
-   
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            string MenuText = "~~~~Dagens meny~~~~";
+            string food_1 = "Sushi";
+            string food_2 = "Räkor";
+            string food_3 = "Pizza";
+            string food_4 = "Bläckfisk";
+
+            MessageBox.Show($"{MenuText}\n" +
+                $"1. {food_1}\n" +
+                $"2. {food_2}\n" +
+                $"3. {food_3}\n" +
+                $"4. {food_4}");
+
+
+            
+        }
     }
 }
 

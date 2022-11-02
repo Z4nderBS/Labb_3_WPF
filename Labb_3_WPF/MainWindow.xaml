@@ -23,7 +23,7 @@
 
         <!-- Main menu -->
         <Menu Grid.ColumnSpan="4" FontSize="20">
-            <MenuItem Header="_Visa">
+            <MenuItem Header="_Visa" Click="MenuItem_Click">
                 <MenuItem x:Name="showMenu" Header="_Meny"/>
             </MenuItem>
         </Menu>
