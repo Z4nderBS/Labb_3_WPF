@@ -24,9 +24,9 @@ namespace Labb_3_WPF
 
     public partial class MainWindow : Window
     {
-        public List<DateAndTime> datumLista = new List<DateAndTime>();
+        public List<DateAndTime> dates = new List<DateAndTime>();
 
-        public List<string> tider { get; set; }
+        public List<string> times { get; set; }
         public List<string> tables { get; set; }
 
 
@@ -37,19 +37,19 @@ namespace Labb_3_WPF
             
             InitializeComponent();
          
-            AddDates(datumLista);
+            AddDates(dates);
           
-            PreMadeBookings(datumLista);
-           
-            
+            PreMadeBookings(dates);
 
 
-            tider = new List<string>() { "16.00", "17.00", "18.00", "19.00", "20.00", "21.00"};
+
+            CancelOrder.Visibility = Visibility.Collapsed;
+            times = new List<string>() { "16.00", "17.00", "18.00", "19.00", "20.00", "21.00"};
             tables = new List<string>() {"1","2","3","4","5"};
 
             this.DataContext = this;
 
-            CancelOrder.Visibility = Visibility.Collapsed;
+            
            
         }
 
@@ -67,32 +67,32 @@ namespace Labb_3_WPF
 
             try
             {
-                var förNamn = firstNameBox.Text;
-                var efterNamn = lastNameBox.Text;
-                var namn = $"{förNamn} {efterNamn}";
-                var InputTeleNr = phoneBox.Text;
-                var teleNr = Regex.Replace(InputTeleNr, @"\s+", "");
-                var kalenderDatum = MainCalendar.SelectedDate.Value.Date.ToShortDateString();
-                DateOnly datum = DateOnly.Parse(kalenderDatum);
-                var tid = TimeChoiceBox.Text.ToString();
-                var kön = genderChoiceBox.Text.ToString();
-                var bord = tableChoiceBox.Text.ToString();
+                var firstName = firstNameBox.Text;
+                var lastName = lastNameBox.Text;
+                var fullName = $"{firstName} {lastName}";
+                var getPhoneNr = phoneBox.Text;
+                var phoneNr = Regex.Replace(getPhoneNr, @"\s+", "");
+                var getDate = MainCalendar.SelectedDate.Value.Date.ToShortDateString();
+                DateOnly date = DateOnly.Parse(getDate);
+                var time = TimeChoiceBox.Text.ToString();
+                var gender = genderChoiceBox.Text.ToString();
+                var table = tableChoiceBox.Text.ToString();
 
 
 
 
 
 
-                if (CheckInputs(förNamn, efterNamn, tid, kön, teleNr, bord) == true)
+                if (CheckInputs(firstName, lastName, time, gender, phoneNr, table) == true)
                 {
 
 
 
 
-                    string text = $"Bord: {bord}. Klockan: {tid}. Namn: {namn}. Kön: {kön}. Telefonnummer: {teleNr}. Datum: {kalenderDatum}.*"; // * markerar att det är din bokning
+                    string text = $"Bord: {table}. Klockan: {time}. Namn: {fullName}. Kön: {gender}. Telefonnummer: {phoneNr}. Datum: {getDate}.*"; // * markerar att det är din bokning
 
 
-                    Boka(bord, namn, kön, datum, tid, teleNr, text, datumLista);
+                    ReservTable(table, fullName, gender, date, time, phoneNr, text, dates);
 
 
 
@@ -118,24 +118,24 @@ namespace Labb_3_WPF
         {
          
             listBx.Items.Clear();
-            var DateFromCalendar = BookedDays.SelectedDate.Value.Date.ToShortDateString();
+            var getDate = BookedDays.SelectedDate.Value.Date.ToShortDateString();
 
-            var regexDateIdentifier = new Regex(@"Datum: " + DateFromCalendar);
+            var regexDateIdentifier = new Regex(@"Datum: " + getDate);
             var regexbordIdentifier = new Regex(@"Bord: [1-5]{1}");
 
             List<string> bokningar = Filehandler.GetTextsFile();
 
 
-            var queryTexts = from item in bokningar
-                             where regexDateIdentifier.IsMatch(item)
-                             where regexbordIdentifier.IsMatch(item)
-                             orderby item ascending
+            var queryMatchedText = from text in bokningar
+                             where regexDateIdentifier.IsMatch(text)
+                             where regexbordIdentifier.IsMatch(text)
+                             orderby text ascending
                              select $"" +
-                             $"{item.Substring(0, 7)} bokad {item.Substring(18, 6)} ";
+                             $"{text.Substring(0, 7)} bokad {text.Substring(18, 6)} ";
 
-            foreach (var item in queryTexts)
+            foreach (var queryText in queryMatchedText)
             {
-                listBx.Items.Add(item);
+                listBx.Items.Add(queryText);
             }
            
 
@@ -147,20 +147,20 @@ namespace Labb_3_WPF
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            List<string> bokningar = Filehandler.GetTextsFile();
+            List<string> reservations = Filehandler.GetTextsFile();
             listBx.Items.Clear();
 
 
             var regexUserIdentifier = new Regex(@"(\*)");
 
-            var queryText = from item in bokningar
-                            where regexUserIdentifier.IsMatch(item)
-                            select item.ToString();
+            var queryMatchedText = from text in reservations
+                            where regexUserIdentifier.IsMatch(text)
+                            select text.ToString();
 
-            foreach (var item in queryText)
+            foreach (var queryText in queryMatchedText)
             {
                 CancelOrder.Visibility = Visibility.Visible;
-                listBx.Items.Add(item);
+                listBx.Items.Add(queryText);
 
             }
             if (listBx.Items.Count == 0)
@@ -198,9 +198,9 @@ namespace Labb_3_WPF
                 }
                 File.Delete(filePath);
 
-                foreach (var item in textToKeep)
+                foreach (var text in textToKeep)
                 {
-                    Filehandler.WriteFile(item);
+                    Filehandler.WriteFile(text);
                 }
 
                 MessageBox.Show("Din bokning har nu tagits bort");
@@ -222,7 +222,7 @@ namespace Labb_3_WPF
 
 
 
-        public static async Task Boka(string bord, string namn, string kön, DateOnly datum, string tid, string nr, string text, List<DateAndTime> datumLista) // bokning för användaren
+        public static async Task ReservTable(string table, string fullName, string gender, DateOnly dateToCheck, string time, string nr, string text, List<DateAndTime> dates) // bokning för användaren
         {
 
             bool checkTime;
@@ -231,15 +231,15 @@ namespace Labb_3_WPF
 
 
 
-            foreach (var item in datumLista)
+            foreach (var date in dates)
             {
-                if (item.datum == datum)
+                if (date.datum == dateToCheck)
                 {
-                    for (int i = 0; i < item.Tider.Count; i++)
+                    for (int i = 0; i < date.Tider.Count; i++)
                     {
-                        if (item.Tider[i].tid == tid)
+                        if (date.Tider[i].tid == time)
                         {
-                            checkTime = await CheckTableAvailable(datum, item.Tider[i], bord);
+                            checkTime = await CheckTableAvailable(dateToCheck, date.Tider[i], table);
 
                             if (checkTime == true)
                             {
@@ -254,7 +254,7 @@ namespace Labb_3_WPF
                                 MessageBox.Show("Bordet är redan taget!");
                             }
 
-                            i = item.Tider.Count;
+                            i = date.Tider.Count;
                         }
                     }
                 }
@@ -266,7 +266,7 @@ namespace Labb_3_WPF
         }
 
 
-        public static async Task Boka(string bord, string namn, string kön, DateOnly datum, string tid, string nr, string text, List<DateAndTime> datumLista, string custom) // bokning för färdiga bokningar.
+        public static async Task ReserveTable(string table, string fullName, string gender, DateOnly dateToCheck, string time, string nr, string text, List<DateAndTime> dates, string custom) // bokning för färdiga bokningar.
         {
 
             bool checkTime;
@@ -275,15 +275,15 @@ namespace Labb_3_WPF
 
          
 
-            foreach (var item in datumLista)
+            foreach (var item in dates)
             {
-                if (item.datum == datum)
+                if (item.datum == dateToCheck)
                 {
                     for (int i = 0; i < item.Tider.Count; i++)
                     {
-                        if (item.Tider[i].tid == tid)
+                        if (item.Tider[i].tid == time)
                         {
-                            checkTime = await CheckTableAvailable(datum, item.Tider[i], bord);
+                            checkTime = await CheckTableAvailable(dateToCheck, item.Tider[i], table);
 
                             if (checkTime == true)
                             {
@@ -314,26 +314,26 @@ namespace Labb_3_WPF
 
 
 
-        public static async Task<bool> CheckTableAvailable(DateOnly datum, Time tid, string bord)
+        public static async Task<bool> CheckTableAvailable(DateOnly date, Time time, string table)
         {
             bool isAvailalbe = true;
-            var regexDateIdentifier = new Regex(@"Datum: " + datum.ToString());
-            var regexTimeIdentifier = new Regex(@"Klockan: " + tid.tid);
-            var regexbordIdentifier = new Regex(@"Bord: " + bord);
+            var regexDateIdentifier = new Regex(@"Datum: " + date.ToString());
+            var regexTimeIdentifier = new Regex(@"Klockan: " + time.tid);
+            var regexbordIdentifier = new Regex(@"Bord: " + table);
 
-            List<string> bokningar = await Filehandler.GetTextsFileAsync();
-
-
-
-            var queryText = from item in bokningar
-                            where regexDateIdentifier.IsMatch(item)
-                            where regexTimeIdentifier.IsMatch(item)
-                            where regexbordIdentifier.IsMatch(item)
-                            select item;
+            List<string> reservations = await Filehandler.GetTextsFileAsync();
 
 
 
-            foreach (var item in queryText)
+            var queryMatchText = from text in reservations
+                            where regexDateIdentifier.IsMatch(text)
+                            where regexTimeIdentifier.IsMatch(text)
+                            where regexbordIdentifier.IsMatch(text)
+                            select text;
+
+
+
+            foreach (var queryText in queryMatchText)
             {
 
                 isAvailalbe = false;
@@ -346,19 +346,19 @@ namespace Labb_3_WPF
         }
 
 
-        public static bool CheckInputs(string förNamn, string efterNamn, string tid, string kön, string telefonNr, string bord)
+        public static bool CheckInputs(string firstName, string lastName, string time, string gender, string phoneNr, string table)
         {
             string missingText = "";
             var regexPhone = new Regex("^0[0-9]{9}"); // 0XX XXX XX XX 10 siffor om tid +46 också
 
             List<string> missingInputs = new List<string>();
 
-            if (förNamn == "") { missingInputs.Add($"Namn:"); }
-            if (efterNamn == "") { missingInputs.Add($"Efternamn:"); }
-            if (telefonNr == "") { missingInputs.Add($"Telefon nummer:"); }
-            if (tid == "") { missingInputs.Add($"Tid:"); }
-            if (kön == "") { missingInputs.Add($"kön:"); }
-            if (bord == "") { missingInputs.Add("Bord:"); }
+            if (firstName == "") { missingInputs.Add($"Namn:"); }
+            if (lastName == "") { missingInputs.Add($"Efternamn:"); }
+            if (phoneNr == "") { missingInputs.Add($"Telefon nummer:"); }
+            if (time == "") { missingInputs.Add($"Tid:"); }
+            if (gender == "") { missingInputs.Add($"kön:"); }
+            if (table == "") { missingInputs.Add("Bord:"); }
 
             if (missingInputs.Count > 0)
             {
@@ -370,7 +370,7 @@ namespace Labb_3_WPF
                 return false;
             }
 
-            if (regexPhone.IsMatch(telefonNr) != true)
+            if (regexPhone.IsMatch(phoneNr) != true)
             {
                 MessageBox.Show("Inte skrivit ett riktigt mobilnummer. OBS kan ej starta med +46, använd 0 i starten");
                 return false;
@@ -388,7 +388,7 @@ namespace Labb_3_WPF
         }
 
 
-        public static void AddDates(List<DateAndTime> datumLista)
+        public static void AddDates(List<DateAndTime> dates)
         {
             int daysToFill = 7;
             int startday = 14;
@@ -398,19 +398,19 @@ namespace Labb_3_WPF
             {
                 DateOnly date = new DateOnly(year, month, startday + i);
                 DateAndTime addDay = new DateAndTime(date);
-                datumLista.Add(addDay);
+                dates.Add(addDay);
             }
         }
        
 
-        public static void PreMadeBookings(List<DateAndTime> datumLista)
+        public static void PreMadeBookings(List<DateAndTime> dates)
         {
-            List<string> bokningar = Filehandler.GetTextsFile();
+            List<string> reservations = Filehandler.GetTextsFile();
 
-            if (bokningar.Count == 1)
+            if (reservations.Count == 1)
             {
-                List<Woman> kvinnor = new List<Woman>();
-                List<Man> män = new List<Man>();
+                List<Woman> woman = new List<Woman>();
+                List<Man> men = new List<Man>();
 
                 // olika namn att använda
                 string nameWoman_1 = "Alcicia Eriksson";
@@ -453,29 +453,29 @@ namespace Labb_3_WPF
                 // 14 November 2022
 
                 //16.00
-                kvinnor.Add(new Woman(nameWoman_1, nov_14, time_16, phoneNr_1, "1"));
-                män.Add(new Man(nameMan_1, nov_14, time_16, phoneNr_5, "3"));
-                män.Add(new Man(nameMan_2, nov_14, time_16, phoneNr_5, "4"));
+                woman.Add(new Woman(nameWoman_1, nov_14, time_16, phoneNr_1, "1"));
+                men.Add(new Man(nameMan_1, nov_14, time_16, phoneNr_5, "3"));
+                men.Add(new Man(nameMan_2, nov_14, time_16, phoneNr_5, "4"));
                 //17.00
-                kvinnor.Add(new Woman(nameWoman_3, nov_14, time_17, phoneNr_4, "1"));
-                män.Add(new Man(nameMan_4, nov_14, time_17, phoneNr_5, "2"));
-                män.Add(new Man(nameMan_3, nov_14, time_17, phoneNr_5, "3"));
+                woman.Add(new Woman(nameWoman_3, nov_14, time_17, phoneNr_4, "1"));
+                men.Add(new Man(nameMan_4, nov_14, time_17, phoneNr_5, "2"));
+                men.Add(new Man(nameMan_3, nov_14, time_17, phoneNr_5, "3"));
                 //18.00
-                kvinnor.Add(new Woman(nameWoman_4, nov_14, time_18, phoneNr_3, "2"));
-                män.Add(new Man(nameMan_1, nov_14, time_18, phoneNr_3, "5"));
-                män.Add(new Man(nameMan_4, nov_14, time_18, phoneNr_5, "4"));
+                woman.Add(new Woman(nameWoman_4, nov_14, time_18, phoneNr_3, "2"));
+                men.Add(new Man(nameMan_1, nov_14, time_18, phoneNr_3, "5"));
+                men.Add(new Man(nameMan_4, nov_14, time_18, phoneNr_5, "4"));
                 //19.00
-                kvinnor.Add(new Woman(nameWoman_5, nov_14, time_19, phoneNr_5, "1"));
-                kvinnor.Add(new Woman(nameWoman_3, nov_14, time_19, phoneNr_3, "3"));
-                kvinnor.Add(new Woman(nameWoman_2, nov_14, time_19, phoneNr_5, "4"));
+                woman.Add(new Woman(nameWoman_5, nov_14, time_19, phoneNr_5, "1"));
+                woman.Add(new Woman(nameWoman_3, nov_14, time_19, phoneNr_3, "3"));
+                woman.Add(new Woman(nameWoman_2, nov_14, time_19, phoneNr_5, "4"));
                 //20.00
-                män.Add(new Man(nameMan_4, nov_14, time_20, phoneNr_5, "4"));
-                kvinnor.Add(new Woman(nameWoman_3, nov_14, time_20, phoneNr_3, "1"));
+                men.Add(new Man(nameMan_4, nov_14, time_20, phoneNr_5, "4"));
+                woman.Add(new Woman(nameWoman_3, nov_14, time_20, phoneNr_3, "1"));
                 //21.00
-                kvinnor.Add(new Woman(nameWoman_3, nov_14, time_21, phoneNr_3, "3"));
-                män.Add(new Man(nameMan_5, nov_14, time_21, phoneNr_1, "1"));
-                män.Add(new Man(nameMan_2, nov_14, time_21, phoneNr_2, "2"));
-                män.Add(new Man(nameMan_3, nov_14, time_21, phoneNr_3, "5"));
+                woman.Add(new Woman(nameWoman_3, nov_14, time_21, phoneNr_3, "3"));
+                men.Add(new Man(nameMan_5, nov_14, time_21, phoneNr_1, "1"));
+                men.Add(new Man(nameMan_2, nov_14, time_21, phoneNr_2, "2"));
+                men.Add(new Man(nameMan_3, nov_14, time_21, phoneNr_3, "5"));
              
                
 
@@ -489,28 +489,28 @@ namespace Labb_3_WPF
                 // 15 November 2022
 
                 //16.00
-                kvinnor.Add(new Woman(nameWoman_1, nov_15, time_16, phoneNr_1, "1"));
+                woman.Add(new Woman(nameWoman_1, nov_15, time_16, phoneNr_1, "1"));
                 //17.00
-                kvinnor.Add(new Woman(nameWoman_3, nov_15, time_17, phoneNr_4, "1"));
-                kvinnor.Add(new Woman(nameWoman_2, nov_15, time_17, phoneNr_2, "2"));
-                kvinnor.Add(new Woman(nameWoman_4, nov_15, time_17, phoneNr_3, "3"));
-                män.Add(new Man(nameMan_3, nov_15, time_17, phoneNr_5, "4"));
-                män.Add(new Man(nameMan_1, nov_15, time_17, phoneNr_3, "5"));
+                woman.Add(new Woman(nameWoman_3, nov_15, time_17, phoneNr_4, "1"));
+                woman.Add(new Woman(nameWoman_2, nov_15, time_17, phoneNr_2, "2"));
+                woman.Add(new Woman(nameWoman_4, nov_15, time_17, phoneNr_3, "3"));
+                men.Add(new Man(nameMan_3, nov_15, time_17, phoneNr_5, "4"));
+                men.Add(new Man(nameMan_1, nov_15, time_17, phoneNr_3, "5"));
                 //18.00
-                kvinnor.Add(new Woman(nameWoman_4, nov_15, time_18, phoneNr_3, "1"));
-                män.Add(new Man(nameMan_4, nov_15, time_18, phoneNr_5, "2"));
-                män.Add(new Man(nameMan_2, nov_15, time_18, phoneNr_2, "3"));
-                män.Add(new Man(nameMan_3, nov_15, time_18, phoneNr_3, "4"));
-                män.Add(new Man(nameMan_5, nov_15, time_18, phoneNr_1, "5"));
+                woman.Add(new Woman(nameWoman_4, nov_15, time_18, phoneNr_3, "1"));
+                men.Add(new Man(nameMan_4, nov_15, time_18, phoneNr_5, "2"));
+                men.Add(new Man(nameMan_2, nov_15, time_18, phoneNr_2, "3"));
+                men.Add(new Man(nameMan_3, nov_15, time_18, phoneNr_3, "4"));
+                men.Add(new Man(nameMan_5, nov_15, time_18, phoneNr_1, "5"));
                 //19.00
-                kvinnor.Add(new Woman(nameWoman_3, nov_15, time_19, phoneNr_3, "2"));
-                kvinnor.Add(new Woman(nameWoman_2, nov_15, time_19, phoneNr_5, "4"));
+                woman.Add(new Woman(nameWoman_3, nov_15, time_19, phoneNr_3, "2"));
+                woman.Add(new Woman(nameWoman_2, nov_15, time_19, phoneNr_5, "4"));
                 //20.00
-                män.Add(new Man(nameMan_4, nov_15, time_20, phoneNr_5, "1"));
-                män.Add(new Man(nameMan_2, nov_15, time_20, phoneNr_2, "2"));
-                män.Add(new Man(nameMan_3, nov_15, time_20, phoneNr_3, "4"));
+                men.Add(new Man(nameMan_4, nov_15, time_20, phoneNr_5, "1"));
+                men.Add(new Man(nameMan_2, nov_15, time_20, phoneNr_2, "2"));
+                men.Add(new Man(nameMan_3, nov_15, time_20, phoneNr_3, "4"));
                 //21.00
-                män.Add(new Man(nameMan_5, nov_15, time_21, phoneNr_1, "1"));
+                men.Add(new Man(nameMan_5, nov_15, time_21, phoneNr_1, "1"));
          
                
             
@@ -523,28 +523,28 @@ namespace Labb_3_WPF
                 // 16 November 2022
 
                 // 16.00
-                kvinnor.Add(new Woman(nameWoman_2, nov_16, time_16, phoneNr_2, "5"));
-                kvinnor.Add(new Woman(nameWoman_2, nov_16, time_16, phoneNr_5, "4"));
+                woman.Add(new Woman(nameWoman_2, nov_16, time_16, phoneNr_2, "5"));
+                woman.Add(new Woman(nameWoman_2, nov_16, time_16, phoneNr_5, "4"));
                 // 17.00
-                kvinnor.Add(new Woman(nameWoman_3, nov_16, time_17, phoneNr_4, "1"));
-                män.Add(new Man(nameMan_3, nov_16, time_17, phoneNr_5, "3"));
-                män.Add(new Man(nameMan_1, nov_16, time_17, phoneNr_3, "5"));
+                woman.Add(new Woman(nameWoman_3, nov_16, time_17, phoneNr_4, "1"));
+                men.Add(new Man(nameMan_3, nov_16, time_17, phoneNr_5, "3"));
+                men.Add(new Man(nameMan_1, nov_16, time_17, phoneNr_3, "5"));
                 // 18.00
-                kvinnor.Add(new Woman(nameWoman_4, nov_16, time_18, phoneNr_3, "2"));
-                kvinnor.Add(new Woman(nameWoman_3, nov_16, time_18, phoneNr_3, "3"));
-                kvinnor.Add(new Woman(nameWoman_3, nov_16, time_18, phoneNr_3, "4"));
-                män.Add(new Man(nameMan_3, nov_16, time_18, phoneNr_5, "5"));
+                woman.Add(new Woman(nameWoman_4, nov_16, time_18, phoneNr_3, "2"));
+                woman.Add(new Woman(nameWoman_3, nov_16, time_18, phoneNr_3, "3"));
+                woman.Add(new Woman(nameWoman_3, nov_16, time_18, phoneNr_3, "4"));
+                men.Add(new Man(nameMan_3, nov_16, time_18, phoneNr_5, "5"));
                 // 19.00
-                kvinnor.Add(new Woman(nameWoman_5, nov_16, time_19, phoneNr_5, "1"));
-                kvinnor.Add(new Woman(nameWoman_3, nov_16, time_19, phoneNr_3, "2"));
-                kvinnor.Add(new Woman(nameWoman_2, nov_16, time_19, phoneNr_5, "4"));
+                woman.Add(new Woman(nameWoman_5, nov_16, time_19, phoneNr_5, "1"));
+                woman.Add(new Woman(nameWoman_3, nov_16, time_19, phoneNr_3, "2"));
+                woman.Add(new Woman(nameWoman_2, nov_16, time_19, phoneNr_5, "4"));
                 // 20.00
-                män.Add(new Man(nameMan_4, nov_16, time_20, phoneNr_5, "4"));
+                men.Add(new Man(nameMan_4, nov_16, time_20, phoneNr_5, "4"));
                 // 21.00
-                kvinnor.Add(new Woman(nameWoman_1, nov_16, time_21, phoneNr_1, "1"));
-                män.Add(new Man(nameMan_5, nov_16, time_21, phoneNr_1, "2"));
-                män.Add(new Man(nameMan_2, nov_16, time_21, phoneNr_2, "4"));
-                män.Add(new Man(nameMan_3, nov_16, time_21, phoneNr_3, "5"));
+                woman.Add(new Woman(nameWoman_1, nov_16, time_21, phoneNr_1, "1"));
+                men.Add(new Man(nameMan_5, nov_16, time_21, phoneNr_1, "2"));
+                men.Add(new Man(nameMan_2, nov_16, time_21, phoneNr_2, "4"));
+                men.Add(new Man(nameMan_3, nov_16, time_21, phoneNr_3, "5"));
 
 
 
@@ -554,31 +554,31 @@ namespace Labb_3_WPF
                 // 17 November 2022
 
                 // 16.00
-                kvinnor.Add(new Woman(nameWoman_1, nov_17, time_16, phoneNr_1, "1"));
-                kvinnor.Add(new Woman(nameWoman_2, nov_17, time_16, phoneNr_2, "2"));
-                kvinnor.Add(new Woman(nameWoman_5, nov_17, time_16, phoneNr_5, "3"));
-                kvinnor.Add(new Woman(nameWoman_3, nov_17, time_16, phoneNr_3, "4"));
-                män.Add(new Man(nameMan_1, nov_17, time_16, phoneNr_5, "3"));
+                woman.Add(new Woman(nameWoman_1, nov_17, time_16, phoneNr_1, "1"));
+                woman.Add(new Woman(nameWoman_2, nov_17, time_16, phoneNr_2, "2"));
+                woman.Add(new Woman(nameWoman_5, nov_17, time_16, phoneNr_5, "3"));
+                woman.Add(new Woman(nameWoman_3, nov_17, time_16, phoneNr_3, "4"));
+                men.Add(new Man(nameMan_1, nov_17, time_16, phoneNr_5, "3"));
                 // 17.00
-                kvinnor.Add(new Woman(nameWoman_3, nov_17, time_17, phoneNr_4, "1"));
-                kvinnor.Add(new Woman(nameWoman_1, nov_17, time_17, phoneNr_1, "2"));
-                kvinnor.Add(new Woman(nameWoman_2, nov_17, time_17, phoneNr_2, "3"));
-                män.Add(new Man(nameMan_3, nov_17, time_17, phoneNr_5, "4"));
-                män.Add(new Man(nameMan_1, nov_17, time_17, phoneNr_3, "5"));
+                woman.Add(new Woman(nameWoman_3, nov_17, time_17, phoneNr_4, "1"));
+                woman.Add(new Woman(nameWoman_1, nov_17, time_17, phoneNr_1, "2"));
+                woman.Add(new Woman(nameWoman_2, nov_17, time_17, phoneNr_2, "3"));
+                men.Add(new Man(nameMan_3, nov_17, time_17, phoneNr_5, "4"));
+                men.Add(new Man(nameMan_1, nov_17, time_17, phoneNr_3, "5"));
                 // 18.00
-                kvinnor.Add(new Woman(nameWoman_4, nov_17, time_18, phoneNr_3, "1"));
-                män.Add(new Man(nameMan_2, nov_17, time_18, phoneNr_2, "2"));
-                män.Add(new Man(nameMan_3, nov_17, time_18, phoneNr_3, "5"));
+                woman.Add(new Woman(nameWoman_4, nov_17, time_18, phoneNr_3, "1"));
+                men.Add(new Man(nameMan_2, nov_17, time_18, phoneNr_2, "2"));
+                men.Add(new Man(nameMan_3, nov_17, time_18, phoneNr_3, "5"));
                 // 19.00
-                kvinnor.Add(new Woman(nameWoman_5, nov_17, time_19, phoneNr_5, "1"));
-                kvinnor.Add(new Woman(nameWoman_3, nov_17, time_19, phoneNr_3, "2"));
-                kvinnor.Add(new Woman(nameWoman_2, nov_17, time_19, phoneNr_5, "4"));
+                woman.Add(new Woman(nameWoman_5, nov_17, time_19, phoneNr_5, "1"));
+                woman.Add(new Woman(nameWoman_3, nov_17, time_19, phoneNr_3, "2"));
+                woman.Add(new Woman(nameWoman_2, nov_17, time_19, phoneNr_5, "4"));
                 // 20.00
-                män.Add(new Man(nameMan_4, nov_17, time_20, phoneNr_5, "4"));
+                men.Add(new Man(nameMan_4, nov_17, time_20, phoneNr_5, "4"));
                 // 21.00
-                män.Add(new Man(nameMan_5, nov_17, time_21, phoneNr_1, "1"));
-                män.Add(new Man(nameMan_2, nov_17, time_21, phoneNr_2, "2"));
-                män.Add(new Man(nameMan_3, nov_17, time_21, phoneNr_3, "5"));
+                men.Add(new Man(nameMan_5, nov_17, time_21, phoneNr_1, "1"));
+                men.Add(new Man(nameMan_2, nov_17, time_21, phoneNr_2, "2"));
+                men.Add(new Man(nameMan_3, nov_17, time_21, phoneNr_3, "5"));
 
 
 
@@ -588,36 +588,36 @@ namespace Labb_3_WPF
                 // 18 November 2022
 
                 // 16.00
-                kvinnor.Add(new Woman(nameWoman_1, nov_18, time_16, phoneNr_1, "1"));
-                kvinnor.Add(new Woman(nameWoman_2, nov_18, time_16, phoneNr_2, "2"));
-                män.Add(new Man(nameMan_1, nov_18, time_16, phoneNr_5, "3"));
-                män.Add(new Man(nameMan_2, nov_18, time_16, phoneNr_5, "4"));
-                män.Add(new Man(nameMan_3, nov_18, time_16, phoneNr_3, "5"));
+                woman.Add(new Woman(nameWoman_1, nov_18, time_16, phoneNr_1, "1"));
+                woman.Add(new Woman(nameWoman_2, nov_18, time_16, phoneNr_2, "2"));
+                men.Add(new Man(nameMan_1, nov_18, time_16, phoneNr_5, "3"));
+                men.Add(new Man(nameMan_2, nov_18, time_16, phoneNr_5, "4"));
+                men.Add(new Man(nameMan_3, nov_18, time_16, phoneNr_3, "5"));
                 // 17.00
-                kvinnor.Add(new Woman(nameWoman_3, nov_18, time_17, phoneNr_4, "1"));
-                kvinnor.Add(new Woman(nameWoman_3, nov_18, time_17, phoneNr_3, "2"));
-                kvinnor.Add(new Woman(nameWoman_2, nov_18, time_17, phoneNr_5, "4"));
-                män.Add(new Man(nameMan_3, nov_18, time_17, phoneNr_5, "3"));
-                män.Add(new Man(nameMan_1, nov_18, time_17, phoneNr_3, "5"));
+                woman.Add(new Woman(nameWoman_3, nov_18, time_17, phoneNr_4, "1"));
+                woman.Add(new Woman(nameWoman_3, nov_18, time_17, phoneNr_3, "2"));
+                woman.Add(new Woman(nameWoman_2, nov_18, time_17, phoneNr_5, "4"));
+                men.Add(new Man(nameMan_3, nov_18, time_17, phoneNr_5, "3"));
+                men.Add(new Man(nameMan_1, nov_18, time_17, phoneNr_3, "5"));
                 // 18.00
-                kvinnor.Add(new Woman(nameWoman_4, nov_18, time_18, phoneNr_3, "1"));
-                kvinnor.Add(new Woman(nameWoman_3, nov_18, time_18, phoneNr_1, "2"));
-                kvinnor.Add(new Woman(nameWoman_2, nov_18, time_18, phoneNr_2, "4"));
+                woman.Add(new Woman(nameWoman_4, nov_18, time_18, phoneNr_3, "1"));
+                woman.Add(new Woman(nameWoman_3, nov_18, time_18, phoneNr_1, "2"));
+                woman.Add(new Woman(nameWoman_2, nov_18, time_18, phoneNr_2, "4"));
                 // 19.00
-                kvinnor.Add(new Woman(nameWoman_5, nov_18, time_19, phoneNr_5, "1"));
-                kvinnor.Add(new Woman(nameWoman_3, nov_18, time_19, phoneNr_3, "2"));
-                kvinnor.Add(new Woman(nameWoman_2, nov_18, time_19, phoneNr_5, "4"));
+                woman.Add(new Woman(nameWoman_5, nov_18, time_19, phoneNr_5, "1"));
+                woman.Add(new Woman(nameWoman_3, nov_18, time_19, phoneNr_3, "2"));
+                woman.Add(new Woman(nameWoman_2, nov_18, time_19, phoneNr_5, "4"));
                 // 20.00
-                kvinnor.Add(new Woman(nameWoman_1, nov_18, time_20, phoneNr_5, "1"));
-                kvinnor.Add(new Woman(nameWoman_3, nov_18, time_20, phoneNr_3, "2"));
-                män.Add(new Man(nameMan_4, nov_18, time_20, phoneNr_5, "3"));
-                män.Add(new Man(nameMan_2, nov_18, time_20, phoneNr_2, "5"));
+                woman.Add(new Woman(nameWoman_1, nov_18, time_20, phoneNr_5, "1"));
+                woman.Add(new Woman(nameWoman_3, nov_18, time_20, phoneNr_3, "2"));
+                men.Add(new Man(nameMan_4, nov_18, time_20, phoneNr_5, "3"));
+                men.Add(new Man(nameMan_2, nov_18, time_20, phoneNr_2, "5"));
                 // 21.00
-                kvinnor.Add(new Woman(nameWoman_5, nov_18, time_21, phoneNr_5, "1"));
-                kvinnor.Add(new Woman(nameWoman_3, nov_18, time_21, phoneNr_3, "2"));
-                män.Add(new Man(nameMan_5, nov_18, time_21, phoneNr_1, "3"));
-                män.Add(new Man(nameMan_2, nov_18, time_21, phoneNr_2, "4"));
-                män.Add(new Man(nameMan_3, nov_18, time_21, phoneNr_3, "5"));
+                woman.Add(new Woman(nameWoman_5, nov_18, time_21, phoneNr_5, "1"));
+                woman.Add(new Woman(nameWoman_3, nov_18, time_21, phoneNr_3, "2"));
+                men.Add(new Man(nameMan_5, nov_18, time_21, phoneNr_1, "3"));
+                men.Add(new Man(nameMan_2, nov_18, time_21, phoneNr_2, "4"));
+                men.Add(new Man(nameMan_3, nov_18, time_21, phoneNr_3, "5"));
 
 
 
@@ -625,31 +625,31 @@ namespace Labb_3_WPF
                 // 19 November 2022
 
                 // 16.00
-                kvinnor.Add(new Woman(nameWoman_1, nov_19, time_16, phoneNr_1, "1"));
-                kvinnor.Add(new Woman(nameWoman_2, nov_19, time_16, phoneNr_2, "2"));
-                män.Add(new Man(nameMan_1, nov_19, time_16, phoneNr_5, "3"));
+                woman.Add(new Woman(nameWoman_1, nov_19, time_16, phoneNr_1, "1"));
+                woman.Add(new Woman(nameWoman_2, nov_19, time_16, phoneNr_2, "2"));
+                men.Add(new Man(nameMan_1, nov_19, time_16, phoneNr_5, "3"));
                 // 17.00
-                kvinnor.Add(new Woman(nameWoman_3, nov_19, time_17, phoneNr_4, "1"));
-                män.Add(new Man(nameMan_2, nov_19, time_17, phoneNr_5, "4"));
-                män.Add(new Man(nameMan_3, nov_19, time_17, phoneNr_5, "3"));
-                män.Add(new Man(nameMan_1, nov_19, time_17, phoneNr_3, "5"));
+                woman.Add(new Woman(nameWoman_3, nov_19, time_17, phoneNr_4, "1"));
+                men.Add(new Man(nameMan_2, nov_19, time_17, phoneNr_5, "4"));
+                men.Add(new Man(nameMan_3, nov_19, time_17, phoneNr_5, "3"));
+                men.Add(new Man(nameMan_1, nov_19, time_17, phoneNr_3, "5"));
                 // 18.00
-                kvinnor.Add(new Woman(nameWoman_4, nov_19, time_18, phoneNr_3, "1"));
-                män.Add(new Man(nameMan_2, nov_19, time_18, phoneNr_2, "2"));
-                män.Add(new Man(nameMan_3, nov_19, time_18, phoneNr_3, "5"));
+                woman.Add(new Woman(nameWoman_4, nov_19, time_18, phoneNr_3, "1"));
+                men.Add(new Man(nameMan_2, nov_19, time_18, phoneNr_2, "2"));
+                men.Add(new Man(nameMan_3, nov_19, time_18, phoneNr_3, "5"));
                 // 19.00
-                kvinnor.Add(new Woman(nameWoman_5, nov_19, time_19, phoneNr_5, "1"));
-                kvinnor.Add(new Woman(nameWoman_3, nov_19, time_19, phoneNr_3, "2"));
-                kvinnor.Add(new Woman(nameWoman_2, nov_19, time_19, phoneNr_5, "4"));
+                woman.Add(new Woman(nameWoman_5, nov_19, time_19, phoneNr_5, "1"));
+                woman.Add(new Woman(nameWoman_3, nov_19, time_19, phoneNr_3, "2"));
+                woman.Add(new Woman(nameWoman_2, nov_19, time_19, phoneNr_5, "4"));
                 // 20.00
-                kvinnor.Add(new Woman(nameWoman_1, nov_19, time_20, phoneNr_1, "1"));
-                män.Add(new Man(nameMan_4, nov_19, time_20, phoneNr_5, "4"));
+                woman.Add(new Woman(nameWoman_1, nov_19, time_20, phoneNr_1, "1"));
+                men.Add(new Man(nameMan_4, nov_19, time_20, phoneNr_5, "4"));
                 // 21.00
-                kvinnor.Add(new Woman(nameWoman_3, nov_19, time_21, phoneNr_3, "3"));
-                kvinnor.Add(new Woman(nameWoman_2, nov_19, time_21, phoneNr_5, "4"));
-                män.Add(new Man(nameMan_5, nov_19, time_21, phoneNr_1, "1"));
-                män.Add(new Man(nameMan_2, nov_19, time_21, phoneNr_2, "2"));
-                män.Add(new Man(nameMan_3, nov_19, time_21, phoneNr_3, "5"));
+                woman.Add(new Woman(nameWoman_3, nov_19, time_21, phoneNr_3, "3"));
+                woman.Add(new Woman(nameWoman_2, nov_19, time_21, phoneNr_5, "4"));
+                men.Add(new Man(nameMan_5, nov_19, time_21, phoneNr_1, "1"));
+                men.Add(new Man(nameMan_2, nov_19, time_21, phoneNr_2, "2"));
+                men.Add(new Man(nameMan_3, nov_19, time_21, phoneNr_3, "5"));
 
 
 
@@ -657,25 +657,25 @@ namespace Labb_3_WPF
                 // 20 November 2022
 
                 // 16.00
-                män.Add(new Man(nameMan_1, nov_20, time_16, phoneNr_5, "3"));
-                män.Add(new Man(nameMan_2, nov_20, time_16, phoneNr_5, "4"));
+                men.Add(new Man(nameMan_1, nov_20, time_16, phoneNr_5, "3"));
+                men.Add(new Man(nameMan_2, nov_20, time_16, phoneNr_5, "4"));
                 // 17.00
-                kvinnor.Add(new Woman(nameWoman_3, nov_20, time_17, phoneNr_4, "1"));
-                män.Add(new Man(nameMan_3, nov_20, time_17, phoneNr_5, "3"));
-                män.Add(new Man(nameMan_1, nov_20, time_17, phoneNr_3, "5"));
+                woman.Add(new Woman(nameWoman_3, nov_20, time_17, phoneNr_4, "1"));
+                men.Add(new Man(nameMan_3, nov_20, time_17, phoneNr_5, "3"));
+                men.Add(new Man(nameMan_1, nov_20, time_17, phoneNr_3, "5"));
                 // 18.00
-                kvinnor.Add(new Woman(nameWoman_1, nov_20, time_18, phoneNr_1, "1"));
-                kvinnor.Add(new Woman(nameWoman_2, nov_20, time_18, phoneNr_2, "2"));
-                kvinnor.Add(new Woman(nameWoman_4, nov_20, time_18, phoneNr_3, "3"));
+                woman.Add(new Woman(nameWoman_1, nov_20, time_18, phoneNr_1, "1"));
+                woman.Add(new Woman(nameWoman_2, nov_20, time_18, phoneNr_2, "2"));
+                woman.Add(new Woman(nameWoman_4, nov_20, time_18, phoneNr_3, "3"));
                 // 19.00
-                kvinnor.Add(new Woman(nameWoman_5, nov_20, time_19, phoneNr_5, "1"));
-                kvinnor.Add(new Woman(nameWoman_3, nov_20, time_19, phoneNr_3, "2"));
-                kvinnor.Add(new Woman(nameWoman_2, nov_20, time_19, phoneNr_5, "4"));
+                woman.Add(new Woman(nameWoman_5, nov_20, time_19, phoneNr_5, "1"));
+                woman.Add(new Woman(nameWoman_3, nov_20, time_19, phoneNr_3, "2"));
+                woman.Add(new Woman(nameWoman_2, nov_20, time_19, phoneNr_5, "4"));
                 // 20.00
-                män.Add(new Man(nameMan_4, nov_20, time_20, phoneNr_5, "4"));
+                men.Add(new Man(nameMan_4, nov_20, time_20, phoneNr_5, "4"));
                 // 21.00
-                kvinnor.Add(new Woman(nameWoman_3, nov_20, time_21, phoneNr_3, "5"));
-                män.Add(new Man(nameMan_5, nov_20, time_21, phoneNr_1, "1"));
+                woman.Add(new Woman(nameWoman_3, nov_20, time_21, phoneNr_3, "5"));
+                men.Add(new Man(nameMan_5, nov_20, time_21, phoneNr_1, "1"));
             
 
             
@@ -690,14 +690,14 @@ namespace Labb_3_WPF
 
 
 
-                foreach (var person in kvinnor)
+                foreach (var person in woman)
                 {
-                    Boka(person.table, person.name, person.gender, person.date, person.time, person.phoneNr, person.text, datumLista, "custom");
+                    ReserveTable(person.table, person.name, person.gender, person.date, person.time, person.phoneNr, person.text, dates, "custom");
                 }
 
-                foreach (var person in män)
+                foreach (var person in men)
                 {
-                    Boka(person.table, person.name, person.gender, person.date, person.time, person.phoneNr, person.text, datumLista, "custom");
+                    ReserveTable(person.table, person.name, person.gender, person.date, person.time, person.phoneNr, person.text, dates, "custom");
                 }
             }
 

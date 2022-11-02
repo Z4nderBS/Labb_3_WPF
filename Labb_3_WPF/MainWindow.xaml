@@ -58,7 +58,7 @@
                 <!--Comboboxes Tid kön bord-->
                 <StackPanel Orientation="Horizontal">
                     <ComboBox x:Name="TimeChoiceBox" MinWidth="150" HorizontalAlignment="Left"
-                              ItemsSource="{Binding tider}"/>
+                              ItemsSource="{Binding times}"/>
                     <ComboBox x:Name="genderChoiceBox" MinWidth="80" HorizontalAlignment="Left" Margin="10 0 0 0">
                         <GroupItem>Man</GroupItem>
                         <GroupItem>Kvinna</GroupItem>
