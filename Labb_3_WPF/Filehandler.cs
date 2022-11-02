@@ -77,7 +77,7 @@ namespace Labb_3_WPF
 
         }
 
-        public static async void WriteFileAsync(string text)
+        public static async Task WriteFileAsync(string text)
         {
 
             using (StreamWriter writeOrder = new StreamWriter("bokningar.log", true))

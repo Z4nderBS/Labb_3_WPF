@@ -114,7 +114,7 @@ namespace Labb_3_WPF
             }
         }
 
-        private async void BookedDays_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        private void BookedDays_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
          
             listBx.Items.Clear();
@@ -145,7 +145,7 @@ namespace Labb_3_WPF
          
         }
 
-        private async void Cancel_Click(object sender, RoutedEventArgs e)
+        private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             List<string> bokningar = await Filehandler.GetTextsFileAsync();
             listBx.Items.Clear();
@@ -170,7 +170,7 @@ namespace Labb_3_WPF
             }
         }
 
-        private async void CancelOrder_Click(object sender, RoutedEventArgs e)
+        private void CancelOrder_Click(object sender, RoutedEventArgs e)
         {
             if (listBx.SelectedItem != null)
             {
@@ -222,7 +222,7 @@ namespace Labb_3_WPF
 
 
 
-        public static async void Boka(string bord, string namn, string kön, DateOnly datum, string tid, string nr, string text, List<DateAndTime> datumLista) // bokning för användaren
+        public static async Task Boka(string bord, string namn, string kön, DateOnly datum, string tid, string nr, string text, List<DateAndTime> datumLista) // bokning för användaren
         {
 
             bool checkTime;
@@ -266,7 +266,7 @@ namespace Labb_3_WPF
         }
 
 
-        public static async void Boka(string bord, string namn, string kön, DateOnly datum, string tid, string nr, string text, List<DateAndTime> datumLista, string custom) // bokning för färdiga bokningar.
+        public static async Task Boka(string bord, string namn, string kön, DateOnly datum, string tid, string nr, string text, List<DateAndTime> datumLista, string custom) // bokning för färdiga bokningar.
         {
 
             bool checkTime;
@@ -403,7 +403,7 @@ namespace Labb_3_WPF
         }
        
 
-        public static async void PreMadeBookings(List<DateAndTime> datumLista)
+        public static void PreMadeBookings(List<DateAndTime> datumLista)
         {
             List<string> bokningar = await Filehandler.GetTextsFileAsync();
 
