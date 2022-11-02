@@ -123,7 +123,7 @@ namespace Labb_3_WPF
             var regexDateIdentifier = new Regex(@"Datum: " + DateFromCalendar);
             var regexbordIdentifier = new Regex(@"Bord: [1-5]{1}");
 
-            List<string> bokningar = await Filehandler.GetTextsFileAsync();
+            List<string> bokningar = Filehandler.GetTextsFile();
 
 
             var queryTexts = from item in bokningar
@@ -147,7 +147,7 @@ namespace Labb_3_WPF
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            List<string> bokningar = await Filehandler.GetTextsFileAsync();
+            List<string> bokningar = Filehandler.GetTextsFile();
             listBx.Items.Clear();
 
 
@@ -288,7 +288,7 @@ namespace Labb_3_WPF
                             if (checkTime == true)
                             {
 
-                                Filehandler.WriteFileAsync(text);
+                                Filehandler.WriteFile(text);
 
 
                             }
@@ -405,7 +405,7 @@ namespace Labb_3_WPF
 
         public static void PreMadeBookings(List<DateAndTime> datumLista)
         {
-            List<string> bokningar = await Filehandler.GetTextsFileAsync();
+            List<string> bokningar = Filehandler.GetTextsFile();
 
             if (bokningar.Count == 1)
             {
