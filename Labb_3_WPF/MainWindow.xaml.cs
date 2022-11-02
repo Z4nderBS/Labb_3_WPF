@@ -39,7 +39,7 @@ namespace Labb_3_WPF
          
             AddDates(dates);
           
-            PreMadeBookings(dates);
+            PreMadeReservations(dates);
 
 
 
@@ -403,7 +403,7 @@ namespace Labb_3_WPF
         }
        
 
-        public static void PreMadeBookings(List<DateAndTime> dates)
+        public static void PreMadeReservations(List<DateAndTime> dates)
         {
             List<string> reservations = Filehandler.GetTextsFile();
 
