@@ -82,9 +82,9 @@
                         <CalendarDateRange Start="11.21.2022"/>
                     </Calendar.BlackoutDates>
                 </Calendar>
-                <Button x:Name="Cancel" Content="Ta bort en bokning" Margin="20" Click="Cancel_Click"/>
+                <Button x:Name="Cancel" Content="Ta bort en bokning" Margin="20" Click="CancelReservation_Click"/>
                 <Button x:Name="CancelOrder" Content="Avboka" 
-                        Margin="0 0 20 0" Click="CancelOrder_Click" Width="80" HorizontalAlignment="Right"/>
+                        Margin="0 0 20 0" Click="ConfirmCancel_Click" Width="80" HorizontalAlignment="Right"/>
             </StackPanel>
         </StackPanel>
 

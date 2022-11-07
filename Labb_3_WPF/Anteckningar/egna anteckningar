@@ -1,16 +1,7 @@
 ﻿
 
 [X] ska endast gå att boka bord från 16.00-22. 
-[X] ska bara Gå att boka bord från dagens datum(eller 15 november) till sista November .
+[X] ska bara Gå att boka bord från 15 november till 20 november.
 [X] gör en Lista med datatypen DateOnly.
 [X] använd regex för att kolla att telefonnumret är nummer
-[] lägg metoderna
 
-
-
-
-* om tid finns 
-
-[] om ingen ledig bord finns på vald dag får användaren ett meddelande om det
-[] gör en egen custom messagebox
-[] generera random phone numbers.

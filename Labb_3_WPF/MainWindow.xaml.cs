@@ -32,7 +32,7 @@ namespace Labb_3_WPF
 
         public MainWindow()
         {
-            // gör en lista med tider här och sen data binda dem
+          
 
             
             InitializeComponent();
@@ -145,7 +145,7 @@ namespace Labb_3_WPF
          
         }
 
-        private void Cancel_Click(object sender, RoutedEventArgs e)
+        private void CancelReservation_Click(object sender, RoutedEventArgs e)
         {
             List<string> reservations = Filehandler.GetTextsFile();
             listBx.Items.Clear();
@@ -170,7 +170,7 @@ namespace Labb_3_WPF
             }
         }
 
-        private void CancelOrder_Click(object sender, RoutedEventArgs e)
+        private void ConfirmCancel_Click(object sender, RoutedEventArgs e)
         {
             if (listBx.SelectedItem != null)
             {
@@ -349,7 +349,7 @@ namespace Labb_3_WPF
         public static bool CheckInputs(string firstName, string lastName, string time, string gender, string phoneNr, string table)
         {
             string missingText = "";
-            var regexPhone = new Regex("^0[0-9]{9}"); // 0XX XXX XX XX 10 siffor om tid +46 också
+            var regexPhone = new Regex("^0[0-9]{9}"); // 0XX XXX XX XX 10 siffor 
 
             List<string> missingInputs = new List<string>();
 

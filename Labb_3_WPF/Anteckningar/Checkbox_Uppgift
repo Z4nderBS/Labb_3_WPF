@@ -23,13 +23,13 @@ Restaurang.
 6. [X]  När programmet startar ska det finnas ett antal bokningar 
 	   lagrade redo att visas.
 
-7. [] Programmet ska hantera oförutsägbara fel.
+7. [X] Programmet ska hantera oförutsägbara fel.
 
 	* Överigt: Du väljer själv om programmet ska skriva till och läsa från fril
 
 	* Krav för G
 
-8. [] Felhantering med try-catch alternativt TryParse eller liknande
+8. [X] Felhantering med try-catch alternativt TryParse eller liknande
 9. [X] Klass/klasser 
 10.[X] Metoder
 11.[X] Iteration 
@@ -45,4 +45,4 @@ användaren meddelas om detta så att det går att försöka igen.
 15.[X] Skalbar lösning med abstrakta klasser/interface
 16.[X] Filhantering (uppdatera fil vid bokning och avbokning samt läsa från fil
 	  vid valet ”Visa bokningar”) 
-17.[] Asynkrona metoder.
+17.[X] Asynkrona metoder.
