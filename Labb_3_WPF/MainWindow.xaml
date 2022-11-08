@@ -52,7 +52,7 @@
                 
                 <StackPanel Orientation="Horizontal">
                     <Label FontSize="16">Tid: * </Label>
-                    <Label FontSize="16" Margin="120 0 0 0">Kön: *</Label>
+                    <Label FontSize="16" Margin="110 0 0 0">Kön: </Label>
                     <Label FontSize="16" Margin="50 0 0 0">Bord: *</Label>
                 </StackPanel>
                 <!--Comboboxes Tid kön bord-->
@@ -62,6 +62,7 @@
                     <ComboBox x:Name="genderChoiceBox" MinWidth="80" HorizontalAlignment="Left" Margin="10 0 0 0">
                         <GroupItem>Man</GroupItem>
                         <GroupItem>Kvinna</GroupItem>
+                        <GroupItem>Annan</GroupItem>
                     </ComboBox>
                     <ComboBox x:Name="tableChoiceBox" MinWidth="80" HorizontalAlignment="Left" Margin="10 0 0 0"
                               ItemsSource="{Binding tables}"/>

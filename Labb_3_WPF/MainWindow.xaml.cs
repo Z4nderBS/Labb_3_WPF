@@ -75,7 +75,8 @@ namespace Labb_3_WPF
                 var getDate = MainCalendar.SelectedDate.Value.Date.ToShortDateString();
                 DateOnly date = DateOnly.Parse(getDate);
                 var time = TimeChoiceBox.Text.ToString();
-                var gender = genderChoiceBox.Text.ToString();
+                var genderInput = genderChoiceBox.Text.ToString();
+                var gender = genderInput == "" ? "ej vald" : genderInput;
                 var table = tableChoiceBox.Text.ToString();
 
 
@@ -83,7 +84,7 @@ namespace Labb_3_WPF
 
 
 
-                if (CheckInputs(firstName, lastName, time, gender, phoneNr, table) == true)
+                if (CheckInputs(firstName, lastName, time, phoneNr, table) == true)
                 {
 
 
@@ -99,7 +100,7 @@ namespace Labb_3_WPF
 
 
 
-
+                    genderChoiceBox.Text = "";
                     tableChoiceBox.Text = "";
                     TimeChoiceBox.Text = "";
                    
@@ -346,7 +347,7 @@ namespace Labb_3_WPF
         }
 
 
-        public static bool CheckInputs(string firstName, string lastName, string time, string gender, string phoneNr, string table)
+        public static bool CheckInputs(string firstName, string lastName, string time, string phoneNr, string table)
         {
             string missingText = "";
             var regexPhone = new Regex("^0[0-9]{9}"); // 0XX XXX XX XX 10 siffor 
@@ -357,8 +358,8 @@ namespace Labb_3_WPF
             if (lastName == "") { missingInputs.Add($"Efternamn:"); }
             if (phoneNr == "") { missingInputs.Add($"Telefon nummer:"); }
             if (time == "") { missingInputs.Add($"Tid:"); }
-            if (gender == "") { missingInputs.Add($"kön:"); }
             if (table == "") { missingInputs.Add("Bord:"); }
+            
 
             if (missingInputs.Count > 0)
             {
