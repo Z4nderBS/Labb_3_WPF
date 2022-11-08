@@ -1,6 +1,6 @@
 ﻿
 
-[]om det inte går att boka så sparas det ändå.
-[x]om filen inte är skapad så kraschar programet.
-[] om det inte går att boka så tas allt bort och man måste börja om boknignen.
-[] filne får ej vara tom
+om det inte går att boka så sparas det ändå.[fixat]
+om filen inte är skapad så kraschar programet.[fixat]
+om det inte går att boka så tas allt bort och man måste börja om boknignen.[fixat]
+filen får ej vara tom[fixat]
