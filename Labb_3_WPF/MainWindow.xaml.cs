@@ -221,6 +221,49 @@ namespace Labb_3_WPF
 
         }
 
+        public static bool CheckInputs(string firstName, string lastName, string time, string phoneNr, string table)
+        {
+            string missingText = "";
+            var regexPhone = new Regex("^0[0-9]{9}"); // 0XX XXX XX XX 10 siffor 
+
+            List<string> missingInputs = new List<string>();
+
+            if (firstName == "") { missingInputs.Add($"Namn:"); }
+            if (lastName == "") { missingInputs.Add($"Efternamn:"); }
+            if (phoneNr == "") { missingInputs.Add($"Telefon nummer:"); }
+            if (time == "") { missingInputs.Add($"Tid:"); }
+            if (table == "") { missingInputs.Add("Bord:"); }
+
+
+            if (missingInputs.Count > 0)
+            {
+                for (int i = 0; i < missingInputs.Count; i++)
+                {
+                    missingText += $"{missingInputs[i]} Saknas\n";
+                }
+                MessageBox.Show($"Du har ej fyllt i alla rutor!\n{missingText}");
+                return false;
+            }
+
+            if (regexPhone.IsMatch(phoneNr) != true)
+            {
+                MessageBox.Show("Inte skrivit ett riktigt mobilnummer. OBS kan ej starta med +46, använd 0 i starten");
+                return false;
+            }
+
+
+            else
+            {
+                return true;
+            }
+
+
+
+
+        }
+
+
+
 
 
         public static async Task ReservTable(string table, string fullName, string gender, DateOnly dateToCheck, string time, string nr, string text, List<DateAndTime> dates) // bokning för användaren
@@ -347,48 +390,7 @@ namespace Labb_3_WPF
         }
 
 
-        public static bool CheckInputs(string firstName, string lastName, string time, string phoneNr, string table)
-        {
-            string missingText = "";
-            var regexPhone = new Regex("^0[0-9]{9}"); // 0XX XXX XX XX 10 siffor 
-
-            List<string> missingInputs = new List<string>();
-
-            if (firstName == "") { missingInputs.Add($"Namn:"); }
-            if (lastName == "") { missingInputs.Add($"Efternamn:"); }
-            if (phoneNr == "") { missingInputs.Add($"Telefon nummer:"); }
-            if (time == "") { missingInputs.Add($"Tid:"); }
-            if (table == "") { missingInputs.Add("Bord:"); }
-            
-
-            if (missingInputs.Count > 0)
-            {
-                for (int i = 0; i < missingInputs.Count; i++)
-                {
-                    missingText += $"{missingInputs[i]} Saknas\n";
-                }
-                MessageBox.Show($"Du har ej fyllt i alla rutor!\n{missingText}");
-                return false;
-            }
-
-            if (regexPhone.IsMatch(phoneNr) != true)
-            {
-                MessageBox.Show("Inte skrivit ett riktigt mobilnummer. OBS kan ej starta med +46, använd 0 i starten");
-                return false;
-            }
-
-
-            else
-            {
-                return true;
-            }
-
-
-
-
-        }
-
-
+       
         public static void AddDates(List<DateAndTime> dates)
         {
             int daysToFill = 7;
